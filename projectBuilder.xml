@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ComAn.release" default="release" basedir=".">
+	
+	<property name="src.dir" location="src"/>
+	<property name="libs.dir" location="libs"/>
+	<property name="scripts.dir" location="scripts"/>
+	<property name="build.dir" location="build"/>
+	<property name="docs.dir" location="docs"/>
+	<property name="release.dir" location ="release"/>
+	
+	<property name="jar.filename" value="ComAn.jar"/>
+	<property name="release.filename" value="ComAn-Tools.zip"/>
+	
+	<!-- Delete existing build, docs, and release directory -->
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+		<delete dir="${docs.dir}"/>
+		<delete dir="${release.dir}"/>
+	</target>
+	
+	<!-- Create build, docs, and release directory -->
+	<target name="makedir">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${docs.dir}"/>
+		<mkdir dir="${release.dir}"/>
+	</target>
+	
+	<!-- Compile java code to build directory -->
+	<target name="compile" depends="clean, makedir">
+		<javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.dir}">
+			<classpath>
+				<fileset dir="${libs.dir}"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<!-- Generate Javadoc to docs directory -->
+	<target name="docs" depends="compile">
+		<javadoc packagenames="src" sourcepath="${src.dir}" destdir="${docs.dir}">
+			<!-- Include all ComAn files / directories -->
+			<fileset dir="${src.dir}">
+				<include name="**"/>
+			</fileset>
+			<!-- Include all external libaries -->
+			<classpath>
+				<fileset dir="${libs.dir}"/>
+			</classpath>
+		</javadoc>
+	</target>
+	
+    <!-- Create deployable jar file -->
+    <target name="jar" depends="compile">
+    	<jar destfile="${release.dir}\${jar.filename}" basedir="${build.dir}">
+    		<manifest>
+    			<attribute name="Main-Class" value="main.Main" />
+    		</manifest>
+    		<zipgroupfileset dir="${libs.dir}" includes="*.jar"/>
+    	</jar>
+    </target>
+	
+	<!-- Create full release archive -->
+	<target name="zip" depends="jar">
+		<zip destfile="${release.dir}/${release.filename}">
+			<!-- Include the deployable ComAn.jar -->
+			<fileset dir="${release.dir}" includes="${jar.filename}"/>
+			<!-- Include the bash scripts -->
+			<fileset dir="${scripts.dir}" includes="*.sh"/>
+			<!-- Include the R-scripts -->
+			<fileset dir="${scripts.dir}/r" includes="*.R"/>
+			<!-- Include the readme.txt file -->
+			<fileset dir="." includes="readme.txt"/>
+		</zip>
+	</target>
+	
+	<!-- Main (start) target -->
+	<target name ="release" depends="compile, jar, docs, zip">
+		<description>Create full release</description>
+	</target>
+</project>

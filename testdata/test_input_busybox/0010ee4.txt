@@ -1,0 +1,8252 @@
+2000-07-21 15:10:57 +0000
+diff --git a/applets/usage.c b/applets/usage.c
+index a3d302e..1031f24 100644
+--- a/applets/usage.c
++++ b/applets/usage.c
+@@ -1,1296 +1,1296 @@
+ #include "internal.h"
+ 
+ #if defined BB_AR
+ const char ar_usage[] =
+ 	"ar [optxvV] archive [filenames] \n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nExtract or list files from an ar archive.\n\n"
+ 	"Options:\n"
+ 	"\to\t\tpreserve original dates\n"
+ 	"\tp\t\textract to stdout\n"
+ 	"\tt\t\tlist\n"
+ 	"\tx\t\textract\n"
+ 	"\tv\t\tverbosely list files processed\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_BASENAME
+ const char basename_usage[] =
+ 	"basename FILE [SUFFIX]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nStrips directory path and suffixes from FILE.\n"
+ 	"If specified, also removes any trailing SUFFIX.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CAT
+ const char cat_usage[] =
+ 	"cat [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nConcatenates FILE(s) and prints them to stdout.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CHMOD_CHOWN_CHGRP
+ const char chgrp_usage[] =
+ 	"chgrp [OPTION]... GROUP FILE...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nChange the group membership of each FILE to GROUP.\n"
+ 	"\nOptions:\n\t-R\tChanges files and directories recursively.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CHMOD_CHOWN_CHGRP
+ const char chmod_usage[] =
+ 	"chmod [-R] MODE[,MODE]... FILE...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nEach MODE is one or more of the letters ugoa, one of the symbols +-= and\n"
+ 	"one or more of the letters rwxst.\n\n"
+ 	"\nOptions:\n\t-R\tChanges files and directories recursively.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CHMOD_CHOWN_CHGRP
+ const char chown_usage[] =
+ 	"chown [OPTION]...  OWNER[<.|:>[GROUP] FILE...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nChange the owner and/or group of each FILE to OWNER and/or GROUP.\n"
+ 	"\nOptions:\n\t-R\tChanges files and directories recursively.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CHROOT
+ const char chroot_usage[] =
+ 	"chroot NEWROOT [COMMAND...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nRun COMMAND with root directory set to NEWROOT.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CHVT
+ const char chvt_usage[] =
+ 	"chvt N\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nChanges the foreground virtual terminal to /dev/ttyN\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CLEAR
+ const char clear_usage[] =
+ 	"clear\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nClear screen.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CP_MV
+ const char cp_usage[] =
+ 	"cp [OPTION]... SOURCE DEST\n"
+ 	"   or: cp [OPTION]... SOURCE... DIRECTORY\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCopies SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.\n"
+ 	"\n"
+ 	"\t-a\tSame as -dpR\n"
+ 	"\t-d\tPreserves links\n"
+ 	"\t-p\tPreserves file attributes if possible\n"
+ 	"\t-f\tforce (implied; ignored) - always set\n"
+ 	"\t-R\tCopies directories recursively\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CUT
+ const char cut_usage[] =
+ 	"cut [OPTION]... [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints selected fields from each input FILE to standard output.\n\n"
+ 	"Options:\n"
+ 	"\t-b LIST\tOutput only bytes from LIST\n"
+ 	"\t-c LIST\tOutput only characters from LIST\n"
+ 	"\t-d CHAR\tUse CHAR instead of tab as the field delimiter\n"
+-	"\t-s\tOnly output Lines if the include DELIM\n"
++	"\t-s\tOutput only the lines containing delimiter\n"
+ 	"\t-f N\tPrint only these fields\n"
+ 	"\t-n\tIgnored\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DATE
+ const char date_usage[] =
+ 	"date [OPTION]... [+FORMAT]\n"
+ 	"  or:  date [OPTION] [MMDDhhmm[[CC]YY][.ss]]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nDisplays the current time in the given FORMAT, or sets the system date.\n"
+ 	"\nOptions:\n\t-R\tOutputs RFC-822 compliant date string\n"
+ 	"\t-s\tSets time described by STRING\n"
+ 	"\t-u\tPrints or sets Coordinated Universal Time\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DC
+ const char dc_usage[] =
+ 	"dc expression ...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nThis is a Tiny RPN calculator that understands the\n"
+ 	"following operations: +, -, /, *, and, or, not, eor.\n"
+ 	"i.e. 'dc 2 2 add' -> 4, and 'dc 8 8 \\* 2 2 + /' -> 16\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DD
+ const char dd_usage[] =
+ 	"dd [if=FILE] [of=FILE] [bs=N] [count=N] [skip=N] [seek=N]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCopy a file, converting and formatting according to options\n\n"
+ 	"\tif=FILE\tread from FILE instead of stdin\n"
+ 	"\tof=FILE\twrite to FILE instead of stdout\n"
+ 	"\tbs=N\tread and write N bytes at a time\n"
+ 	"\tcount=N\tcopy only N input blocks\n"
+ 	"\tskip=N\tskip N input blocks\n"
+ 	"\tseek=N\tskip N output blocks\n"
+ 	"\n"
+ 	"Numbers may be suffixed by w (x2), k (x1024), b (x512), or M (x1024^2)\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DEALLOCVT
+ const char deallocvt_usage[] =
+ 	"deallocvt N\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	 "\nDeallocate unused virtual terminal /dev/ttyN\n"
+ #endif
+ 	 ;
+ #endif
+ 
+ #if defined BB_DF
+ const char df_usage[] =
+ 	"df [filesystem ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint the filesystem space used and space available.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DIRNAME
+ const char dirname_usage[] =
+ 	"dirname [FILENAME ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nStrips non-directory suffix from FILENAME\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DMESG
+ const char dmesg_usage[] =
+ 	"dmesg [-c] [-n LEVEL] [-s SIZE]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints or controls the kernel ring buffer\n\n"
+ 	"Options:\n"
+ 	"\t-c\t\tClears the ring buffer's contents after printing\n"
+ 	"\t-n LEVEL\tSets console logging level\n"
+ 	"\t-s SIZE\t\tUse a buffer of size SIZE\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DU
+ const char du_usage[] =
+ 	"du [OPTION]... [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSummarizes disk space used for each FILE and/or directory.\n"
+ 	"Disk space is printed in units of 1024 bytes.\n\n"
+ 	"Options:\n"
+ 	"\t-l\tcount sizes many times if hard linked\n"
+ 	"\t-s\tdisplay only a total for each argument\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DUMPKMAP
+ const char dumpkmap_usage[] =
+ 	"dumpkmap\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints out a binary keyboard translation table to standard input.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DUTMP
+ const char dutmp_usage[] =
+ 	"dutmp [FILE]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nDump utmp file format (pipe delimited) from FILE\n"
+ 	"or stdin to stdout.  (i.e. 'dutmp /var/run/utmp')\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_ECHO
+ const char echo_usage[] =
+ 	"echo [-neE] [ARG ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints the specified ARGs to stdout\n\n"
+ 	"Options:\n"
+ 	"\t-n\tsuppress trailing newline\n"
+ 	"\t-e\tinterpret backslash-escaped characters (i.e. \\t=tab etc)\n"
+ 	"\t-E\tdisable interpretation of backslash-escaped characters\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TRUE_FALSE
+ const char false_usage[] =
+ 	"false\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nReturn an exit code of FALSE (1).\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_FDFLUSH
+ const char fdflush_usage[] =
+ 	"fdflush DEVICE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nForces floppy disk drive to detect disk change\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_FIND
+ const char find_usage[] =
+ 	"find [PATH...] [EXPRESSION]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSearch for files in a directory hierarchy.  The default PATH is\n"
+ 	"the current directory; default EXPRESSION is '-print'\n\n"
+ 	"\nEXPRESSION may consist of:\n"
+ 	"\t-follow\t\tDereference symbolic links.\n"
+ 	"\t-name PATTERN\tFile name (leading directories removed) matches PATTERN.\n"
+ 	"\t-print\t\tprint the full file name followed by a newline to stdout.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_FREE
+ const char free_usage[] =
+ 	"free\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nDisplays the amount of free and used system memory\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_FREERAMDISK
+ const char freeramdisk_usage[] =
+ 	"freeramdisk DEVICE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nFrees all memory used by the specified ramdisk.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_FSCK_MINIX
+ const char fsck_minix_usage[] =
+ 	"Usage: fsck.minix [-larvsmf] /dev/name\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPerforms a consistency check for MINIX filesystems.\n\n"
+ 	"Options:\n"
+ 	"\t-l\tLists all filenames\n"
+ 	"\t-r\tPerform interactive repairs\n"
+ 	"\t-a\tPerform automatic repairs\n"
+ 	"\t-v\tverbose\n"
+ 	"\t-s\tOutputs super-block information\n"
+ 	"\t-m\tActivates MINIX-like \"mode not cleared\" warnings\n"
+ 	"\t-f\tForce file system check.\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_GREP
+ const char grep_usage[] =
+ 	"grep [-ihHnqvs] pattern [files...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSearch for PATTERN in each FILE or standard input.\n\n"
+ 	"Options:\n"
+ 	"\t-H\tprefix output lines with filename where match was found\n"
+ 	"\t-h\tsuppress the prefixing filename on output\n"
+ 	"\t-i\tignore case distinctions\n"
+ 	"\t-n\tprint line number with output lines\n"
+ 	"\t-q\tbe quiet. Returns 0 if result was found, 1 otherwise\n"
+ 	"\t-v\tselect non-matching lines\n"
+ 	"\t-s\tsuppress file open/read error messages\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_GUNZIP
+ const char gunzip_usage[] =
+ 	"gunzip [OPTION]... FILE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nUncompress FILE (or standard input if FILE is '-').\n\n"
+ 	"Options:\n"
+ 	"\t-c\tWrite output to standard output\n"
+ 	"\t-t\tTest compressed file integrity\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_GZIP
+ const char gzip_usage[] =
+ 	"gzip [OPTION]... FILE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCompress FILE with maximum compression.\n"
+ 	"When FILE is '-', reads standard input.  Implies -c.\n\n"
+ 	"Options:\n"
+ 	"\t-c\tWrite output to standard output instead of FILE.gz\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_HALT
+ const char halt_usage[] =
+ 	"halt\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nHalt the system.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_HEAD
+ const char head_usage[] =
+ 	"head [OPTION] [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint first 10 lines of each FILE to standard output.\n"
+ 	"With more than one FILE, precede each with a header giving the\n"
+ 	"file name. With no FILE, or when FILE is -, read standard input.\n\n"
+ 
+ 	"Options:\n" "\t-n NUM\t\tPrint first NUM lines instead of first 10\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_HOSTID
+ const char hostid_usage[] =
+ 	"hostid\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint out a unique 32-bit identifier for the machine.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_HOSTNAME
+ const char hostname_usage[] =
+ 	"hostname [OPTION] {hostname | -F file}\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nGet or set the hostname or DNS domain name. If a hostname is given\n"
+ 	"(or a file with the -F parameter), the host name will be set.\n\n"
+ 	"Options:\n"
+ 	"\t-s\t\tShort\n"
+ 
+ 	"\t-i\t\tAddresses for the hostname\n"
+ 	"\t-d\t\tDNS domain name\n"
+ 	"\t-F FILE\t\tUse the contents of FILE to specify the hostname\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_ID
+ const char id_usage[] =
+ 	"id [OPTIONS]... [USERNAME]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint information for USERNAME or the current user\n\n"
+ 	"Options:\n"
+ 	"\t-g\tprints only the group ID\n"
+ 	"\t-u\tprints only the user ID\n"
+ 	"\t-r\tprints the real user ID instead of the effective ID (with -ug)\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_INSMOD
+ const char insmod_usage[] =
+ 	"insmod [OPTION]... MODULE [symbol=value]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nLoads the specified kernel modules into the kernel.\n\n"
+ 	"Options:\n"
+ 	"\t-f\tForce module to load into the wrong kernel version.\n"
+ 	"\t-k\tMake module autoclean-able.\n"
+ 	"\t-v\tverbose output\n" "\t-x\tdo not export externs\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_KILL
+ const char kill_usage[] =
+ 	"kill [-signal] process-id [process-id ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSend a signal (default is SIGTERM) to the specified process(es).\n\n"
+ 	"Options:\n" "\t-l\tList all signal names and numbers.\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_KILLALL
+ const char killall_usage[] =
+ 	"killall [-signal] process-name [process-name ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSend a signal (default is SIGTERM) to the specified process(es).\n\n"
+ 	"Options:\n" "\t-l\tList all signal names and numbers.\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LENGTH
+ const char length_usage[] =
+ 	"length STRING\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints out the length of the specified STRING.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LN
+ const char ln_usage[] =
+ 	"ln [OPTION] TARGET... LINK_NAME|DIRECTORY\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreate a link named LINK_NAME or DIRECTORY to the specified TARGET\n"
+ 	"\nYou may use '--' to indicate that all following arguments are non-options.\n\n"
+ 	"Options:\n"
+ 	"\t-s\tmake symbolic links instead of hard links\n"
+ 
+ 	"\t-f\tremove existing destination files\n"
+ 	"\t-n\tno dereference symlinks - treat like normal file\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LOADACM
+ const char loadacm_usage[] =
+ 	"loadacm\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nLoads an acm from standard input.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LOADFONT
+ const char loadfont_usage[] =
+ 	"loadfont\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"Loads a console font from standard input.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LOADKMAP
+ const char loadkmap_usage[] =
+ 	"loadkmap\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nLoads a binary keyboard translation table from standard input.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LOGGER
+ const char logger_usage[] =
+ 	"logger [OPTION]... [MESSAGE]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nWrite MESSAGE to the system log.  If MESSAGE is '-', log stdin.\n\n"
+ 	"Options:\n"
+ 	"\t-s\tLog to stderr as well as the system log.\n"
+ 	"\t-t\tLog using the specified tag (defaults to user name).\n"
+ 
+ 	"\t-p\tEnter the message with the specified priority.\n"
+ 	"\t\tThis may be numerical or a ``facility.level'' pair.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LOGNAME
+ const char logname_usage[] =
+ 	"logname\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint the name of the current user.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LS
+ const char ls_usage[] =
+ 	"ls [-1a"
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"c"
+ #endif
+ 	"d"
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"e"
+ #endif
+ 	"ln"
+ #ifdef BB_FEATURE_LS_FILETYPES
+ 	"p"
+ #endif
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"u"
+ #endif
+ 	"xAC"
+ #ifdef BB_FEATURE_LS_FILETYPES
+ 	"F"
+ #endif
+ #ifdef BB_FEATURE_LS_RECURSIVE
+ 	"R"
+ #endif
+ 	"] [filenames...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nList directory contents\n\n"
+ 	"Options:\n"
+ 	"\t-a\tdo not hide entries starting with .\n"
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"\t-c\twith -l: show ctime (the time of last\n"
+ 	"\t\tmodification of file status information)\n"
+ #endif
+ 	"\t-d\tlist directory entries instead of contents\n"
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"\t-e\tlist both full date and full time\n"
+ #endif
+ 	"\t-l\tuse a long listing format\n"
+ 	"\t-n\tlist numeric UIDs and GIDs instead of names\n"
+ #ifdef BB_FEATURE_LS_FILETYPES
+ 	"\t-p\tappend indicator (one of /=@|) to entries\n"
+ #endif
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"\t-u\twith -l: show access time (the time of last\n"
+ 	"\t\taccess of the file)\n"
+ #endif
+ 	"\t-x\tlist entries by lines instead of by columns\n"
+ 	"\t-A\tdo not list implied . and ..\n"
+ 	"\t-C\tlist entries by columns\n"
+ #ifdef BB_FEATURE_LS_FILETYPES
+ 	"\t-F\tappend indicator (one of */=@|) to entries\n"
+ #endif
+ #ifdef BB_FEATURE_LS_RECURSIVE
+ 	"\t-R\tlist subdirectories recursively\n"
+ #endif
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LSMOD
+ const char lsmod_usage[] =
+ 	"lsmod\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nList the currently loaded kernel modules.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MAKEDEVS
+ const char makedevs_usage[] =
+ 	"makedevs NAME TYPE MAJOR MINOR FIRST LAST [s]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreates a range of block or character special files\n\n"
+ 	"TYPEs include:\n"
+ 	"\tb:\tMake a block (buffered) device.\n"
+ 	"\tc or u:\tMake a character (un-buffered) device.\n"
+ 	"\tp:\tMake a named pipe. MAJOR and MINOR are ignored for named pipes.\n\n"
+ 	"FIRST specifies the number appended to NAME to create the first device.\n"
+ 	"LAST specifies the number of the last item that should be created.\n"
+ 	"If 's' is the last argument, the base device is created as well.\n\n"
+ 	"For example:\n"
+ 	"\tmakedevs /dev/ttyS c 4 66 2 63   ->  ttyS2-ttyS63\n"
+ 	"\tmakedevs /dev/hda b 3 0 0 8 s    ->  hda,hda1-hda8\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MD5SUM
+ const char md5sum_usage[] =
+ 	"md5sum [OPTION] [FILE]...\n"
+ 	"or:    md5sum [OPTION] -c [FILE]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint or check MD5 checksums.\n\n"
+ 	"Options:\n"
+ 	"With no FILE, or when FILE is -, read standard input.\n\n"
+ 	"\t-b\tread files in binary mode\n"
+ 	"\t-c\tcheck MD5 sums against given list\n"
+ 	"\t-t\tread files in text mode (default)\n"
+ 	"\t-g\tread a string\n"
+ 	"\nThe following two options are useful only when verifying checksums:\n"
+ 	"\t-s,\tdon't output anything, status code shows success\n"
+ 	"\t-w,\twarn about improperly formated MD5 checksum lines\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKDIR
+ const char mkdir_usage[] =
+ 	"mkdir [OPTION] DIRECTORY...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreate the DIRECTORY(ies), if they do not already exist\n\n"
+ 	"Options:\n"
+ 
+ 	"\t-m\tset permission mode (as in chmod), not rwxrwxrwx - umask\n"
+ 	"\t-p\tno error if existing, make parent directories as needed\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKFIFO
+ const char mkfifo_usage[] =
+ 	"mkfifo [OPTIONS] name\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreates a named pipe (identical to 'mknod name p')\n\n"
+ 	"Options:\n"
+ 	"\t-m\tcreate the pipe using the specified mode (default a=rw)\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKFS_MINIX
+ const char mkfs_minix_usage[] =
+ 	"mkfs.minix [-c | -l filename] [-nXX] [-iXX] /dev/name [blocks]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nMake a MINIX filesystem.\n\n"
+ 	"Options:\n"
+ 	"\t-c\t\tCheck the device for bad blocks\n"
+ 	"\t-n [14|30]\tSpecify the maximum length of filenames\n"
+ 	"\t-i INODES\tSpecify the number of inodes for the filesystem\n"
+ 	"\t-l FILENAME\tRead the bad blocks list from FILENAME\n"
+ 	"\t-v\t\tMake a Minix version 2 filesystem\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKNOD
+ const char mknod_usage[] =
+ 	"mknod [OPTIONS] NAME TYPE MAJOR MINOR\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreate a special file (block, character, or pipe).\n\n"
+ 	"Options:\n"
+ 	"\t-m\tcreate the special file using the specified mode (default a=rw)\n\n"
+ 	"TYPEs include:\n"
+ 	"\tb:\tMake a block (buffered) device.\n"
+ 	"\tc or u:\tMake a character (un-buffered) device.\n"
+ 	"\tp:\tMake a named pipe. MAJOR and MINOR are ignored for named pipes.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKSWAP
+ const char mkswap_usage[] =
+ 	"mkswap [-c] [-v0|-v1] device [block-count]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrepare a disk partition to be used as a swap partition.\n\n"
+ 	"Options:\n" "\t-c\t\tCheck for read-ability.\n"
+ 	"\t-v0\t\tMake version 0 swap [max 128 Megs].\n"
+ 	"\t-v1\t\tMake version 1 swap [big!] (default for kernels > 2.1.117).\n"
+ 
+ 	"\tblock-count\tNumber of block to use (default is entire partition).\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKTEMP
+ const char mktemp_usage[] =
+ 	"mktemp [-q] TEMPLATE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreates a temporary file with its name based on TEMPLATE.\n"
+ 	"TEMPLATE is any name with six `Xs' (i.e. /tmp/temp.XXXXXX).\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MORE
+ const char more_usage[] =
+ 	"more [FILE ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nMore is a filter for viewing FILE one screenful at a time.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MOUNT
+ const char mount_usage[] = 
+ 	"mount [flags] device directory [-o options,more-options]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nMount a filesystem\n\n"
+ 	"Flags:\n" 
+ 	"\t-a:\t\tMount all filesystems in fstab.\n"
+ #ifdef BB_MTAB
+ 	"\t-f:\t\t\"Fake\" mount. Add entry to mount table but don't mount it.\n"
+ 	"\t-n:\t\tDon't write a mount table entry.\n"
+ #endif
+ 	"\t-o option:\tOne of many filesystem options, listed below.\n"
+ 	"\t-r:\t\tMount the filesystem read-only.\n"
+ 	"\t-t fs-type:\tSpecify the filesystem type.\n"
+ 	"\t-w:\t\tMount for reading and writing (default).\n"
+ 	"\n"
+ 	"Options for use with the \"-o\" flag:\n"
+ 	"\tasync/sync:\tWrites are asynchronous / synchronous.\n"
+ 	"\tatime/noatime:\tEnable / disable updates to inode access times.\n"
+ 	"\tdev/nodev:\tAllow use of special device files / disallow them.\n"
+ 	"\texec/noexec:\tAllow use of executable files / disallow them.\n"
+ #if defined BB_FEATURE_MOUNT_LOOP
+ 	"\tloop:\t\tMounts a file via loop device.\n"
+ #endif
+ 	"\tsuid/nosuid:\tAllow set-user-id-root programs / disallow them.\n"
+ 	"\tremount:\tRe-mount a currently-mounted filesystem, changing its flags.\n"
+ 	"\tro/rw:\t\tMount for read-only / read-write.\n"
+ 	"\nThere are EVEN MORE flags that are specific to each filesystem.\n"
+ 	"You'll have to see the written documentation for those.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MT
+ const char mt_usage[] =
+ 	"mt [-f device] opcode value\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nControl magnetic tape drive operation\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CP_MV
+ const char mv_usage[] =
+ 	"mv SOURCE DEST\n"
+ 	"   or: mv SOURCE... DIRECTORY\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nRename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_NC
+ const char nc_usage[] =
+ 	"nc [IP] [port]\n" 
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nNetcat opens a pipe to IP:port\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_NSLOOKUP
+ const char nslookup_usage[] =
+ 	"nslookup [HOST]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nQueries the nameserver for the IP address of the given HOST\n"
+ #endif
+ ;
+ #endif
+ 
+ #if defined BB_PING
+ #if defined BB_FEATURE_SIMPLE_PING
+ const char ping_usage[] =
+ 	"ping host\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSend ICMP ECHO_REQUEST packets to network hosts\n"
+ #endif
+ 	;
+ #else /* ! defined BB_FEATURE_SIMPLE_PING */
+ const char ping_usage[] =
+ 	"ping [OPTION]... host\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSend ICMP ECHO_REQUEST packets to network hosts.\n\n"
+ 	"Options:\n"
+ 	"\t-c COUNT\tSend only COUNT pings.\n"
+ 	"\t-s SIZE\t\tSend SIZE data bytes in packets (default=56).\n"
+ 	"\t-q\t\tQuiet mode, only displays output at start\n"
+ 	"\t\t\tand when finished.\n"
+ #endif
+ 	;
+ #endif
+ #endif
+ 
+ #if defined BB_POWEROFF
+ const char poweroff_usage[] =
+ 	"poweroff\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nHalt the system and request that the kernel shut off the power.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_PRINTF
+ const char printf_usage[] =
+ 	"printf FORMAT [ARGUMENT...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nFormats and prints ARGUMENT(s) according to FORMAT,\n"
+ 	"Where FORMAT controls the output exactly as in C printf.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_PS
+ const char ps_usage[] =
+ 	"ps\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nReport process status\n"
+ 	"\nThis version of ps accepts no options.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_PWD
+ const char pwd_usage[] =
+ 	"pwd\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint the full filename of the current working directory.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_REBOOT
+ const char reboot_usage[] =
+ 	"reboot\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nReboot the system.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_RM
+ const char rm_usage[] =
+ 	"rm [OPTION]... FILE...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nRemove (unlink) the FILE(s).  You may use '--' to\n"
+ 	"indicate that all following arguments are non-options.\n\n"
+ 	"Options:\n"
+ 	"\t-f\t\tremove existing destinations, never prompt\n"
+ 	"\t-r or -R\tremove the contents of directories recursively\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_RMDIR
+ const char rmdir_usage[] =
+ 	"rmdir [OPTION]... DIRECTORY...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nRemove the DIRECTORY(ies), if they are empty.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_RMMOD
+ const char rmmod_usage[] =
+ 	"rmmod [OPTION]... [MODULE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nUnloads the specified kernel modules from the kernel.\n\n"
+ 	"Options:\n" 
+ 	"\t-a\tTry to remove all unused kernel modules.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SED
+ const char sed_usage[] =
+ 	"sed [-Vhnef] pattern [files...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\n"
+ 	"-n\tsuppress automatic printing of pattern space\n"
+ 	"-e script\tadd the script to the commands to be executed\n"
+ 	"-f scriptfile\tadd the contents of script-file to the commands to be executed\n"
+ 	"-h\tdisplay this help message\n"
+ 	"\n"
+ 	"If no -e or -f is given, the first non-option argument is taken as the\n"
+ 	"sed script to interpret. All remaining arguments are names of input\n"
+ 	"files; if no input files are specified, then the standard input is read.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SETKEYCODES
+ const char setkeycodes_usage[] =
+ 	"setkeycodes SCANCODE KEYCODE ...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSet entries into the kernel's scancode-to-keycode map,\n"
+ 	"allowing unusual keyboards to generate usable keycodes.\n\n" 
+ 	"SCANCODE may be either xx or e0xx (hexadecimal),\n"
+ 	"and KEYCODE is given in decimal\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SH
+ const char shell_usage[] =
+ 	"sh [FILE]...\n"
+ 	"   or: sh -c command [args]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nlash: The BusyBox command interpreter (shell).\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SLEEP
+ const char sleep_usage[] =
+ 	"sleep N\n" 
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPause for N seconds.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SORT
+ const char sort_usage[] =
+ 	"sort [-n]"
+ #ifdef BB_FEATURE_SORT_REVERSE
+ 	" [-r]"
+ #endif
+ 	" [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSorts lines of text in the specified files\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SWAPONOFF
+ const char swapoff_usage[] =
+ 	"swapoff [OPTION] [device]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nStop swapping virtual memory pages on the given device.\n\n"
+ 	"Options:\n"
+ 	"\t-a\tStop swapping on all swap devices\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SWAPONOFF
+ const char swapon_usage[] =
+ 	"swapon [OPTION] [device]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nStart swapping virtual memory pages on the given device.\n\n"
+ 	"Options:\n"
+ 	"\t-a\tStart swapping on all swap devices\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SYNC
+ const char sync_usage[] =
+ 	"sync\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nWrite all buffered filesystem blocks to disk.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SYSLOGD
+ const char syslogd_usage[] =
+ 	"syslogd [OPTION]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nLinux system and kernel (provides klogd) logging utility.\n"
+ 	"Note that this version of syslogd/klogd ignores /etc/syslog.conf.\n\n"
+ 	"Options:\n"
+ 	"\t-m NUM\t\tInterval between MARK lines (default=20min, 0=off)\n"
+ 	"\t-n\t\tRun as a foreground process\n"
+ #ifdef BB_FEATURE_KLOGD
+ 	"\t-K\t\tDo not start up the klogd process\n"
+ #endif
+ 	"\t-O FILE\t\tUse an alternate log file (default=/var/log/messages)\n"
+ #ifdef BB_FEATURE_REMOTE_LOG
+ 	"\t-R HOST[:PORT]\t\tLog remotely to IP or hostname on PORT (default PORT=514/UDP)\n"
+ #endif
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TAIL
+ #if defined BB_FEATURE_SIMPLE_TAIL
+ const char tail_usage[] =
+ 	"tail [OPTION] [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint last 10 lines of each FILE to standard output.\n"
+ 	"With more than one FILE, precede each with a header giving the\n"
+ 	"file name. With no FILE, or when FILE is -, read standard input.\n\n"
+ 	"Options:\n"
+ 	"\t-n NUM\t\tPrint last NUM lines instead of first 10\n"
+ 
+ 	"\t-f\t\tOutput data as the file grows.  This version\n"
+ 	"\t\t\tof 'tail -f' supports only one file at a time.\n"
+ #endif
+ 	;
+ #else /* ! defined BB_FEATURE_SIMPLE_TAIL */
+ const char tail_usage[] =
+ 	"tail [OPTION]... [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint last 10 lines of each FILE to standard output.\n"
+ 	"With more than one FILE, precede each with a header giving the file name.\n"
+ 	"With no FILE, or when FILE is -, read standard input.\n"
+ 	"\n"
+ 	"  -c=N[kbm]       output the last N bytes\n"
+ 	"  -f              output appended data as the file grows\n"
+ 	"  -n=N            output the last N lines, instead of last 10\n"
+ 	"  -q              never output headers giving file names\n"
+ 	"  -v              always output headers giving file names\n"
+ 	"\n"
+ 	"If the first character of N (bytes or lines) is a `+', output begins with \n"
+ 	"the Nth item from the start of each file, otherwise, print the last N items\n"
+ 	"in the file.  N bytes may be suffixed by k (x1024), b (x512), or m (1024^2).\n"
+ #endif
+ 	;
+ #endif
+ #endif
+ 
+ #if defined BB_TAR
+ const char tar_usage[] =
+ #ifdef BB_FEATURE_TAR_CREATE
+ 	"tar -[cxtvO] "
+ #else
+ 	"tar -[xtvO] "
+ #endif
+ #if defined BB_FEATURE_TAR_EXCLUDE
+ 	"[--exclude File] "
+ #endif
+ 	"[-f tarFile] [FILE] ...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreate, extract, or list files from a tar file.  Note that\n"
+ 	"this version of tar treats hard links as separate files.\n\n"
+ 	"Main operation mode:\n"
+ #ifdef BB_FEATURE_TAR_CREATE
+ 	"\tc\t\tcreate\n"
+ #endif
+ 	"\tx\t\textract\n"
+ 	"\tt\t\tlist\n"
+ 	"\nFile selection:\n"
+ 	"\tf\t\tname of tarfile or \"-\" for stdin\n"
+ 	"\tO\t\textract to stdout\n"
+ #if defined BB_FEATURE_TAR_EXCLUDE
+ 	"\t--exclude\tfile to exclude\n"
+ #endif
+ 	"\nInformative output:\n"
+ 	"\tv\t\tverbosely list files processed\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TEE
+ const char tee_usage[] =
+ 	"tee [OPTION]... [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCopy standard input to each FILE, and also to standard output.\n\n"
+ 	"Options:\n" "\t-a\tappend to the given FILEs, do not overwrite\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TELNET
+ const char telnet_usage[] =
+ 	"telnet host [port]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nTelnet is used to establish interactive communication with another\n"
+ 	"computer over a network using the TELNET protocol.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TEST
+ const char test_usage[] =
+ 	"test EXPRESSION\n"
+ 	"or   [ EXPRESSION ]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nChecks file types and compares values returning an exit\n"
+ 	"code determined by the value of EXPRESSION.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TOUCH
+ const char touch_usage[] =
+ 	"touch [-c] file [file ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nUpdate the last-modified date on the given file[s].\n\n"
+ 	"Options:\n"
+ 	"\t-c\tDo not create any files\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TR
+ const char tr_usage[] =
+ 	"tr [-cds] STRING1 [STRING2]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nTranslate, squeeze, and/or delete characters from\n"
+ 	"standard input, writing to standard output.\n\n"
+ 	"Options:\n"
+ 	"\t-c\ttake complement of STRING1\n"
+ 	"\t-d\tdelete input characters coded STRING1\n"
+ 	"\t-s\tsqueeze multiple output characters of STRING2 into one character\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TRUE_FALSE
+ const char true_usage[] =
+ 	"true\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nReturn an exit code of TRUE (0).\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TTY
+ const char tty_usage[] =
+ 	"tty\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint the file name of the terminal connected to standard input.\n\n"
+ 	"Options:\n"
+ 	"\t-s\tprint nothing, only return an exit status\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UMOUNT
+ const char umount_usage[] =
+ 	"umount [flags] filesystem|directory\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"Unmount file systems\n"
+ 	"\nFlags:\n" "\t-a:\tUnmount all file systems"
+ #ifdef BB_MTAB
+ 	" in /etc/mtab\n\t-n:\tDon't erase /etc/mtab entries\n"
+ #else
+ 	"\n"
+ #endif
+ 	"\t-r:\tTry to remount devices as read-only if mount is busy\n"
+ #if defined BB_FEATURE_MOUNT_FORCE
+ 	"\t-f:\tForce filesystem umount (i.e. unreachable NFS server)\n"
+ #endif
+ #if defined BB_FEATURE_MOUNT_LOOP
+ 	"\t-l:\tDo not free loop device (if a loop device has been used)\n"
+ #endif
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UNAME
+ const char uname_usage[] =
+ 	"uname [OPTION]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint certain system information.  With no OPTION, same as -s.\n\n"
+ 	"Options:\n"
+ 	"\t-a\tprint all information\n"
+ 	"\t-m\tthe machine (hardware) type\n"
+ 	"\t-n\tprint the machine's network node hostname\n"
+ 	"\t-r\tprint the operating system release\n"
+ 	"\t-s\tprint the operating system name\n"
+ 
+ 	"\t-p\tprint the host processor type\n"
+ 	"\t-v\tprint the operating system version\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UNIQ
+ const char uniq_usage[] =
+ 	"uniq [OPTION]... [INPUT [OUTPUT]]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nDiscard all but one of successive identical lines from INPUT\n"
+ 	"(or standard input), writing to OUTPUT (or standard output).\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UPDATE
+ const char update_usage[] =
+ 	"update [options]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPeriodically flushes filesystem buffers.\n\n"
+ 	"Options:\n"
+ 	"\t-S\tforce use of sync(2) instead of flushing\n"
+ 	"\t-s SECS\tcall sync this often (default 30)\n"
+ 	"\t-f SECS\tflush some buffers this often (default 5)\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UPTIME
+ const char uptime_usage[] =
+ 	"uptime\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nDisplay the time since the last boot.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_USLEEP
+ const char usleep_usage[] =
+ 	"usleep N\n" 
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPause for N microseconds.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UUDECODE
+ const char uudecode_usage[] =
+ 	"uudecode [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nUudecode a file that is uuencoded.\n\n"
+ 	"Options:\n"
+ 	"\t-o FILE\tdirect output to FILE\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UUENCODE
+ const char uuencode_usage[] =
+ 	"uuencode [OPTION] [INFILE] REMOTEFILE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nUuencode a file.\n\n"
+ 	"Options:\n"
+ 	"\t-m\tuse base64 encoding as of RFC1521\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_WC
+ const char wc_usage[] =
+ 	"wc [OPTION]... [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint line, word, and byte counts for each FILE, and a total line if\n"
+ 	"more than one FILE is specified.  With no FILE, read standard input.\n\n"
+ 	"Options:\n"
+ 	"\t-c\tprint the byte counts\n"
+ 	"\t-l\tprint the newline counts\n"
+ 
+ 	"\t-L\tprint the length of the longest line\n"
+ 	"\t-w\tprint the word counts\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_WHICH
+ const char which_usage[] =
+ 	"which [COMMAND ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nLocates a COMMAND.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_WHOAMI
+ const char whoami_usage[] =
+ 	"whoami\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints the user name associated with the current effective user id.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_YES
+ const char yes_usage[] =
+ 	"yes [OPTION]... [STRING]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nRepeatedly outputs a line with all specified STRING(s), or `y'.\n"
+ #endif
+ 	;
+ #endif
+diff --git a/docs/busybox.pod b/docs/busybox.pod
+index ca24143..4264f57 100644
+--- a/docs/busybox.pod
++++ b/docs/busybox.pod
+@@ -1,2037 +1,2037 @@
+ # vi: set sw=4 ts=4:
+ 
+ =head1 NAME
+ 
+ BusyBox - The Swiss Army Knife of Embedded Linux
+ 
+ =head1 SYNTAX
+ 
+  BusyBox <function> [arguments...]  # or
+ 
+  <function> [arguments...]	    # if symlinked
+ 
+ =head1 DESCRIPTION
+ 
+ BusyBox combines tiny versions of many common UNIX utilities into a single
+ small executable. It provides minimalist replacements for most of the utilities
+ you usually find in fileutils, shellutils, findutils, textutils, grep, gzip,
+ tar, etc.  BusyBox provides a fairly complete POSIX environment for any small
+ or embedded system.  The utilities in BusyBox generally have fewer options than
+ their full-featured GNU cousins; however, the options that are included provide
+ the expected functionality and behave very much like their GNU counterparts. 
+ 
+ BusyBox has been written with size-optimization and limited resources in mind.
+ It is also extremely modular so you can easily include or exclude commands (or
+ features) at compile time.  This makes it easy to customize your embedded
+ systems.  To create a working system, just add a kernel, a shell (such as ash),
+ and an editor (such as elvis-tiny or ae).
+ 
+ =head1 USAGE
+ 
+ When you create a link to BusyBox for the function you wish to use, when BusyBox
+ is called using that link it will behave as if the command itself has been invoked.
+ 
+ For example, entering
+ 
+ 	ln -s ./BusyBox ls
+ 	./ls
+ 
+ will cause BusyBox to behave as 'ls' (if the 'ls' command has been compiled
+ into BusyBox). 
+ 
+ You can also invoke BusyBox by issuing the command as an argument on the
+ command line.  For example, entering
+ 
+ 	./BusyBox ls
+ 
+ will also cause BusyBox to behave as 'ls'. 
+ 
+ =head1 COMMON OPTIONS
+ 
+ Most BusyBox commands support the B<--help> option to provide a
+ terse runtime description of their behavior. 
+ 
+ =head1 COMMANDS
+ 
+ Currently defined functions include:
+ 
+ ar, basename, cat, chgrp, chmod, chown, chroot, chvt, clear, cp, cut, date,
+ dc, dd, deallocvt, df, dirname, dmesg, du, dumpkmap, dutmp, echo, false, fbset,
+ fdflush, find, free, freeramdisk, fsck.minix, grep, gunzip, gzip, halt,
+ head, hostid, hostname, id, init, insmod, kill, killall, length, ln,
+ loadacm, loadfont, loadkmap, logger, logname, ls, lsmod, makedevs, mkdir,
+ mkfifo, mkfs.minix, mknod, mkswap, mktemp, more, mount, mt, mv, nc,
+ nslookup, ping, poweroff, printf, ps, pwd, reboot, rm, rmdir, rmmod, sed,
+ setkeycodes, sh, sleep, sort, swapoff, swapon, sync, syslogd, tail,
+ tar, tee, telnet, test, touch, tr, true, tty, umount, uname, uniq, update,
+ uptime, usleep, uudecode, uuencode, wc, which, whoami, yes, zcat, [
+ 
+ -------------------------------
+ 
+ =over 4
+ 
+ =item ar
+ 
+ Usage: ar [optxvV] archive [filenames]
+ 
+ Extract or list files from an ar archive.
+ 
+ Options:
+ 
+ 	o               preserve original dates
+ 	p               extract to stdout
+ 	t               list
+ 	x               extract
+ 	v               verbosely list files processed
+ 
+ -------------------------------
+ 
+ =item basename
+ 
+ Usage: basename FILE [SUFFIX]
+ 
+ Strips directory path and suffixes from FILE.
+ If specified, also removes any trailing SUFFIX.
+ 
+ Example:
+ 
+ 	$ basename /usr/local/bin/foo
+ 	foo
+ 	$ basename /usr/local/bin/
+ 	bin
+ 	$ basename /foo/bar.txt .txt
+ 	bar
+ 
+ -------------------------------
+ 
+ =item cat  
+ 
+ Usage: cat [FILE ...]
+ 
+ Concatenates FILE(s) and prints them to the standard output.
+ 
+ Example:
+ 
+ 	$ cat /proc/uptime
+ 	110716.72 17.67
+ 
+ -------------------------------
+ 
+ =item chgrp
+ 
+ Usage: chgrp [OPTION]... GROUP FILE...
+ 
+ Change the group membership of each FILE to GROUP.
+ 
+ Options:
+ 
+ 	-R	change files and directories recursively
+ 
+ Example:
+ 
+ 	$ ls -l /tmp/foo
+ 	-r--r--r--    1 andersen andersen        0 Apr 12 18:25 /tmp/foo
+ 	$ chgrp root /tmp/foo
+ 	$ ls -l /tmp/foo
+ 	-r--r--r--    1 andersen root            0 Apr 12 18:25 /tmp/foo
+ 
+ -------------------------------
+ 
+ =item chmod
+ 
+ Usage: chmod [B<-R>] MODE[,MODE]... FILE...
+ 
+ Changes file access permissions for the specified FILE(s) (or directories).
+ Each MODE is defined by combining the letters for WHO has access to the file,
+ an OPERATOR for selecting how the permissions should be changed, and a
+ PERMISSION for FILE(s) (or directories).
+ 
+ WHO may be chosen from
+ 
+ 	u	User who owns the file
+ 	g	Users in the file's Group
+ 	o	Other users not in the file's group
+ 	a	All users
+ 
+ OPERATOR may be chosen from
+ 
+ 	+	Add a permission
+ 	-	Remove a permission
+ 	=	Assign a permission
+ 
+ PERMISSION may be chosen from
+ 
+ 	r	Read
+ 	w	Write
+ 	x	Execute (or access for directories)
+ 	s	Set user (or group) ID bit
+ 	t	Sticky bit (for directories prevents removing files by non-owners)
+ 
+ Alternately, permissions can be set numerically where the first three
+ numbers are calculated by adding the octal values, such as
+ 
+ 	4	Read
+ 	2	Write
+ 	1	Execute
+ 
+ An optional fourth digit can also be used to specify
+ 
+ 	4	Set user ID
+ 	2	Set group ID
+ 	1	Sticky bit
+ 
+ Options:
+ 
+ 	-R	Change files and directories recursively.
+ 
+ Example:
+ 
+ 	$ ls -l /tmp/foo
+ 	-rw-rw-r--    1 root     root            0 Apr 12 18:25 /tmp/foo
+ 	$ chmod u+x /tmp/foo
+ 	$ ls -l /tmp/foo
+ 	-rwxrw-r--    1 root     root            0 Apr 12 18:25 /tmp/foo*
+ 	$ chmod 444 /tmp/foo
+ 	$ ls -l /tmp/foo
+ 	-r--r--r--    1 root     root            0 Apr 12 18:25 /tmp/foo
+ 
+ -------------------------------
+ 
+ =item chown
+ 
+ Usage: chown [OPTION]...  OWNER[<.|:>[GROUP] FILE...
+ 
+ Changes the owner and/or group of each FILE to OWNER and/or GROUP.
+ 
+ Options:
+ 
+ 	-R	Changes files and directories recursively
+ 
+ Example:
+ 
+ 	$ ls -l /tmp/foo
+ 	-r--r--r--    1 andersen andersen        0 Apr 12 18:25 /tmp/foo
+ 	$ chown root /tmp/foo
+ 	$ ls -l /tmp/foo
+ 	-r--r--r--    1 root     andersen        0 Apr 12 18:25 /tmp/foo
+ 	$ chown root.root /tmp/foo
+ 	ls -l /tmp/foo
+ 	-r--r--r--    1 root     root            0 Apr 12 18:25 /tmp/foo
+ 
+ -------------------------------
+ 
+ =item chroot
+ 
+ Usage: chroot NEWROOT [COMMAND...]
+ 
+ Run COMMAND with root directory set to NEWROOT.
+ 
+ Example:
+ 
+ 	$ ls -l /bin/ls
+ 	lrwxrwxrwx    1 root     root          12 Apr 13 00:46 /bin/ls -> /BusyBox
+ 	$ mount /dev/hdc1 /mnt -t minix
+ 	$ chroot /mnt
+ 	$ ls -l /bin/ls
+ 	-rwxr-xr-x    1 root     root        40816 Feb  5 07:45 /bin/ls*
+ 
+ -------------------------------
+ 
+ =item chvt
+ 
+ Usage: chvt N
+ 
+ Changes the foreground virtual terminal to /dev/ttyN
+ 
+ -------------------------------
+ 
+ =item clear
+ 
+ Clears the screen.
+ 
+ -------------------------------
+ 
+ =item cp
+ 
+ Usage: cp [OPTION]... SOURCE DEST
+ 
+    or: cp [OPTION]... SOURCE... DIRECTORY
+ 
+ Copies SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
+ 
+ Options:
+ 
+         -a      Same as -dpR
+         -d      Preserves links
+         -p      Preserves file attributes if possible
+         -R      Copies directories recursively
+ 
+ -------------------------------
+ 
+ =item cut
+ 
+ Usage: cut [OPTION]... [FILE]...
+ 
+ Prints selected fields from each input FILE to standard output.
+ 
+ Options:
+ 
+ 		-b LIST Output only bytes from LIST
+ 		-c LIST Output only characters from LIST
+ 		-d CHAR Use CHAR instead of tab as the field delimiter
+-		-s      Only output Lines if the include DELIM
++		-s      Output only the lines containing delimiter
+ 		-f N    Print only these fields
+ 		-n      Ignored
+ 
+ Example:
+ 
+ 	$ echo "Hello world" | cut -f 1 -d ' '
+ 	Hello
+ 	$ echo "Hello world" | cut -f 2 -d ' '
+ 	world
+ 
+ 
+ -------------------------------
+ 
+ =item date
+ 
+ Usage: date [OPTION]... [+FORMAT]
+ 
+   or:  date [OPTION] [MMDDhhmm[[CC]YY][.ss]]
+ 
+ Displays the current time in the given FORMAT, or sets the system date.
+ 
+ Options:
+ 
+         -R      Outputs RFC-822 compliant date string
+         -s      Sets time described by STRING
+         -u      Prints or sets Coordinated Universal Time
+ 
+ Example:
+ 
+ 	$ date
+ 	Wed Apr 12 18:52:41 MDT 2000
+ 
+ -------------------------------
+ 
+ =item dc
+ 
+ Usage: dc expression ...
+ 
+ This is a Tiny RPN calculator that understands the
+ following operations: +, -, /, *, and, or, not, eor.
+ If no arguments are given, dc will process input from STDIN.
+ 
+ The behaviour of BusyBox/dc deviates (just a little ;-) from
+ GNU/dc, but this will be remedied in the future.
+ 
+ Example:
+ 
+ 	$ dc 2 2 +
+ 	4
+ 	$ dc 8 8 \* 2 2 + /
+ 	16
+ 	$ dc 0 1 and
+ 	0
+ 	$ dc 0 1 or
+ 	1
+ 	$ echo 72 9 div 8 mul | dc
+ 	64
+ 
+ -------------------------------
+ 
+ =item dd
+ 
+ Usage: dd [if=name] [of=name] [bs=n] [count=n] [skip=n] [seek=n]
+ 
+ Copy a file, converting and formatting according to options
+ 
+ 	if=FILE read from FILE instead of stdin
+ 	of=FILE write to FILE instead of stdout
+ 	bs=n    read and write n bytes at a time
+ 	count=n copy only n input blocks
+ 	skip=n  skip n input blocks
+ 	seek=n  skip n output blocks
+ 
+ Numbers may be suffixed by w (x2), k (x1024), b (x512), or M (x1024^2)
+ 
+ Example:
+ 
+ 	$ dd if=/dev/zero of=/dev/ram1 bs=1M count=4
+ 	4+0 records in
+ 	4+0 records out
+ 
+ -------------------------------
+ 
+ =item deallocvt
+ 
+ Usage: deallocvt N
+ 
+ Deallocates unused virtual terminal /dev/ttyN
+ 
+ -------------------------------
+ 
+ =item df
+ 
+ Usage: df [filesystem ...]
+ 
+ Prints the filesystem space used and space available.
+ 
+ Example:
+ 
+ 	$ df
+ 	Filesystem           1k-blocks      Used Available Use% Mounted on
+ 	/dev/sda3              8690864   8553540    137324  98% /
+ 	/dev/sda1                64216     36364     27852  57% /boot
+ 	$ df /dev/sda3
+ 	Filesystem           1k-blocks      Used Available Use% Mounted on
+ 	/dev/sda3              8690864   8553540    137324  98% /
+ 
+ -------------------------------
+ 
+ =item dirname
+ 
+ Usage: dirname NAME
+ 
+ Strip non-directory suffix from file name
+ 
+ Example:
+ 
+ 	$ dirname /tmp/foo
+ 	/tmp
+ 	$ dirname /tmp/foo/
+ 	/tmp
+ 
+ -------------------------------
+ 
+ =item dmesg
+ 
+ Usage: dmesg [B<-c>] [B<-n> level] [B<-s> bufsize]
+ 
+ Print or controls the kernel ring buffer.
+ 
+ -------------------------------
+ 
+ =item du
+ 
+ Usage: du [OPTION]... [FILE]...
+ 
+ Summarize disk space used for each FILE and/or directory.
+ Disk space is printed in units of 1k (i.e. 1024 bytes).
+ 
+ Options:
+ 
+ 	-l      count sizes many times if hard linked
+ 	-s      display only a total for each argument
+ 
+ Example:
+ 
+ 	$ ./BusyBox du
+ 	16      ./CVS
+ 	12      ./kernel-patches/CVS
+ 	80      ./kernel-patches
+ 	12      ./tests/CVS
+ 	36      ./tests
+ 	12      ./scripts/CVS
+ 	16      ./scripts
+ 	12      ./docs/CVS
+ 	104     ./docs
+ 	2417    .
+ 
+ -------------------------------
+ 
+ =item dumpkmap
+ 
+ Usage: dumpkmap
+ 
+ Prints out a binary keyboard translation table to standard input.
+ 
+ -------------------------------
+ 
+ =item dutmp
+ 
+ Usage: dutmp [FILE]
+ 
+ Dump utmp file format (pipe delimited) from FILE
+ or stdin to stdout.
+ 
+ Example:
+ 
+ 	$ dutmp /var/run/utmp
+ 	8|7||si|||0|0|0|955637625|760097|0
+ 	2|0|~|~~|reboot||0|0|0|955637625|782235|0
+ 	1|20020|~|~~|runlevel||0|0|0|955637625|800089|0
+ 	8|125||l4|||0|0|0|955637629|998367|0
+ 	6|245|tty1|1|LOGIN||0|0|0|955637630|998974|0
+ 	6|246|tty2|2|LOGIN||0|0|0|955637630|999498|0
+ 	7|336|pts/0|vt00andersen|andersen|:0.0|0|0|0|955637763|0|0
+ 
+ -------------------------------
+ 
+ =item echo
+ 
+ Usage: echo [-neE] [ARG ...]
+ 
+ Prints the specified ARGs to stdout
+ 
+ Options:
+ 
+ 	-n      suppress trailing newline
+ 	-e      interpret backslash-escaped characters (i.e. \t=tab etc)
+ 	-E      disable interpretation of backslash-escaped characters
+ 
+ Example:
+ 
+ 	$ echo "Erik is cool"
+ 	Erik is cool
+ 	$  echo -e "Erik\nis\ncool"
+ 	Erik
+ 	is
+ 	cool
+ 	$ echo "Erik\nis\ncool"
+ 	Erik\nis\ncool
+ 
+ -------------------------------
+ 
+ =item false
+ 
+ Returns an exit code of FALSE (1)
+ 
+ Example:
+ 
+ 	$ false
+ 	$ echo $?
+ 	1
+ 
+ -------------------------------
+ 
+ =item fbset
+ 
+ Usage: fbset [options] [mode]
+ 
+ Show and modify frame buffer device settings
+ 
+ Options:
+ 
+ 	-h
+ 	-fb
+ 	-db
+ 	-a
+ 	-i
+ 	-g
+ 	-t
+ 	-accel
+ 	-hsync
+ 	-vsync
+ 	-laced
+ 	-double
+ 
+ Example:
+ 
+ 	$ fbset
+ 	mode "1024x768-76"
+ 			# D: 78.653 MHz, H: 59.949 kHz, V: 75.694 Hz
+ 			geometry 1024 768 1024 768 16
+ 			timings 12714 128 32 16 4 128 4
+ 			accel false
+ 			rgba 5/11,6/5,5/0,0/0
+ 	endmode
+ 
+ -------------------------------
+ 
+ =item fdflush
+ 
+ Usage: fdflush device
+ 
+ Force floppy disk drive to detect disk change
+ 
+ -------------------------------
+ 
+ =item find
+ 
+ Usage: find [PATH...] [EXPRESSION]
+ 
+ Search for files in a directory hierarchy.  The default PATH is
+ the current directory; default EXPRESSION is '-print'
+ 
+ 
+ EXPRESSION may consist of:
+ 
+ 	-follow			Dereference symbolic links.
+ 	-name PATTERN	File name (leading directories removed) matches PATTERN.
+ 	-print			print the full file name followed by a newline to stdout.
+ 
+ Example:
+ 
+ 	$ find / -name /etc/passwd
+ 	/etc/passwd
+ 
+ -------------------------------
+ 
+ =item free
+ 
+ Usage: free
+ 
+ Displays the amount of free and used system memory.
+ 
+ Example:
+ 
+ 	$ free
+ 				  total         used         free       shared      buffers
+ 	  Mem:       257628       248724         8904        59644        93124
+ 	 Swap:       128516         8404       120112
+ 	Total:       386144       257128       129016
+ 
+ -------------------------------
+ 
+ =item freeramdisk
+ 
+ Usage: freeramdisk DEVICE
+ 
+ Frees all memory used by the specified ramdisk.
+ 
+ Example:
+ 
+ 	$ freeramdisk /dev/ram2
+ 
+ -------------------------------
+ 
+ =item fsck.minix
+ 
+ Usage: fsck.minix [B<-larvsmf>] /dev/name
+ 
+ Performs a consistency check for MINIX filesystems.
+ 
+ Options:
+ 
+ 	-l      Lists all filenames
+ 	-r      Perform interactive repairs
+ 	-a      Perform automatic repairs
+ 	-v      verbose
+ 	-s      Outputs super-block information
+ 	-m      Activates MINIX-like "mode not cleared" warnings
+ 	-f      Force file system check.
+ 
+ -------------------------------
+ 
+ =item grep
+ 
+ Usage: grep [OPTIONS]... PATTERN [FILE]...
+ 
+ Search for PATTERN in each FILE or standard input.
+ 
+ Options:
+ 
+ 	-h      suppress the prefixing filename on output
+ 	-i      ignore case distinctions
+ 	-n      print line number with output lines
+ 	-q      be quiet. Returns 0 if result was found, 1 otherwise
+ 	-v      select non-matching lines
+ 
+ This version of grep matches full regular expressions.
+ 
+ Example:
+ 
+ 	$ grep root /etc/passwd
+ 	root:x:0:0:root:/root:/bin/bash
+ 	$ grep ^[rR]oo. /etc/passwd
+ 	root:x:0:0:root:/root:/bin/bash
+ 
+ -------------------------------
+ 
+ =item gunzip
+ 
+ Usage: gunzip [OPTION]... FILE
+ 
+ Uncompress FILE (or standard input if FILE is '-').
+ 
+ Options:
+ 
+         -c      Write output to standard output
+         -t      Test compressed file integrity
+ 
+ Example:
+ 
+ 	$ ls -la /tmp/BusyBox*
+ 	-rw-rw-r--    1 andersen andersen   557009 Apr 11 10:55 /tmp/BusyBox-0.43.tar.gz
+ 	$ gunzip /tmp/BusyBox-0.43.tar.gz
+ 	$ ls -la /tmp/BusyBox*
+ 	-rw-rw-r--    1 andersen andersen  1761280 Apr 14 17:47 /tmp/BusyBox-0.43.tar
+ 
+ -------------------------------
+ 
+ =item gzip
+ 
+ Usage: gzip [OPTION]... FILE
+ 
+ Compress FILE with maximum compression.
+ When FILE is '-', reads standard input.  Implies B<-c>.
+ 
+ Options:
+ 
+         -c      Write output to standard output instead of FILE.gz
+ 
+ Example:
+ 
+ 	$ ls -la /tmp/BusyBox*
+ 	-rw-rw-r--    1 andersen andersen  1761280 Apr 14 17:47 /tmp/BusyBox-0.43.tar
+ 	$ gzip /tmp/BusyBox-0.43.tar
+ 	$ ls -la /tmp/BusyBox*
+ 	-rw-rw-r--    1 andersen andersen   554058 Apr 14 17:49 /tmp/BusyBox-0.43.tar.gz
+ 
+ 
+ -------------------------------
+ 
+ =item halt
+ 
+ Usage: halt
+ 
+ This command halts the system.
+ 
+ -------------------------------
+ 
+ =item head
+ 
+ Usage: head [OPTION] [FILE]...
+ 
+ Print first 10 lines of each FILE to standard output.
+ With more than one FILE, precede each with a header giving the
+ file name. With no FILE, or when FILE is -, read standard input.
+ 
+ Options:
+ 
+ 	-n NUM          Print first NUM lines instead of first 10
+ 
+ Example:
+ 
+ 	$ head -n 2 /etc/passwd
+ 	root:x:0:0:root:/root:/bin/bash
+ 	daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+ 
+ -------------------------------
+ 
+ =item hostid
+ 
+ Usage: hostid
+ 
+ Prints out a unique  32-bit  identifier  for  the  current
+ machine.   The  32-bit identifier is intended to be unique
+ among all UNIX systems in existence. 
+ 
+ -------------------------------
+ 
+ =item hostname
+ 
+ Usage: hostname [OPTION] {hostname | B<-F> file}
+ 
+ Get or set the hostname or DNS domain name. If a hostname is given
+ (or a file with the B<-F> parameter), the host name will be set.
+ 
+ Options:
+ 
+ 	-s              Short
+ 	-i              Addresses for the hostname
+ 	-d              DNS domain name
+ 	-F FILE         Use the contents of FILE to specify the hostname
+ 
+ Example:
+ 
+ 	$ hostname
+ 	slag 
+ 
+ -------------------------------
+ 
+ =item id
+ 
+ Print information for USERNAME or the current user
+ 
+ Options:
+ 
+         -g      prints only the group ID
+         -u      prints only the user ID
+         -r      prints the real user ID instead of the effective ID (with -ug)
+ 
+ Example:
+ 
+ 	$ id
+ 	uid=1000(andersen) gid=1000(andersen)
+ 
+ -------------------------------
+ 
+ =item init
+ 
+ Usage: init
+ 
+ Init is the parent of all processes.
+ 
+ This version of init is designed to be run only by the kernel.
+ 
+ BusyBox init doesn't support multiple runlevels.  The runlevels field of
+ the /etc/inittab file is completely ignored by BusyBox init. If you want 
+ runlevels, use sysvinit.
+ 
+ BusyBox init works just fine without an inittab.  If no inittab is found, 
+ it has the following default behavior:
+ 
+ 	::sysinit:/etc/init.d/rcS
+ 	::askfirst:/bin/sh
+ 
+ if it detects that /dev/console is _not_ a serial console, it will also run:
+ 
+ 	tty2::askfirst:/bin/sh
+ 
+ If you choose to use an /etc/inittab file, the inittab entry format is as follows:
+ 
+ 	<id>:<runlevels>:<action>:<process>
+ 
+ 	<id>: 
+ 
+ 		WARNING: This field has a non-traditional meaning for BusyBox init!
+ 		The id field is used by BusyBox init to specify the controlling tty for
+ 		the specified process to run on.  The contents of this field are
+ 		appended to "/dev/" and used as-is.  There is no need for this field to
+ 		be unique, although if it isn't you may have strange results.  If this
+ 		field is left blank, it is completely ignored.  Also note that if
+ 		BusyBox detects that a serial console is in use, then all entries
+ 		containing non-empty id fields will _not_ be run.  BusyBox init does
+ 		nothing with utmp.  We don't need no stinkin' utmp.
+ 
+ 	<runlevels>: 
+ 
+ 		The runlevels field is completely ignored.
+ 
+ 	<action>: 
+ 
+ 		Valid actions include: sysinit, respawn, askfirst, wait, 
+ 		once, and ctrlaltdel.
+ 
+ 		askfirst acts just like respawn, but before running the specified
+ 		process it displays the line "Please press Enter to activate this
+ 		console." and then waits for the user to press enter before starting
+ 		the specified process.
+ 
+ 		Unrecognized actions (like initdefault) will cause init to emit
+ 		an error message, and then go along with its business.
+ 
+ 	<process>: 
+ 
+ 		Specifies the process to be executed and it's command line.
+ 
+ 
+ Example /etc/inittab file:
+ 
+ 	# This is run first except when booting in single-user mode.
+ 	#
+ 	::sysinit:/etc/init.d/rcS
+ 
+ 	# /bin/sh invocations on selected ttys
+ 	#
+ 	# Start an "askfirst" shell on the console (whatever that may be)
+ 	::askfirst:/bin/sh
+ 	# Start an "askfirst" shell on /dev/tty2
+ 	tty2::askfirst:/bin/sh
+ 
+ 	# /sbin/getty invocations for selected ttys
+ 	#
+ 	tty4::respawn:/sbin/getty 38400 tty4
+ 	tty5::respawn:/sbin/getty 38400 tty5
+ 
+ 
+ 	# Example of how to put a getty on a serial line (for a terminal)
+ 	#
+ 	#ttyS0::respawn:/sbin/getty -L ttyS0 9600 vt100
+ 	#ttyS1::respawn:/sbin/getty -L ttyS1 9600 vt100
+ 	#
+ 	# Example how to put a getty on a modem line.
+ 	#ttyS2::respawn:/sbin/getty -x0 -s 57600 ttyS2
+ 
+ 	# Stuff to do before rebooting
+ 	::ctrlaltdel:/bin/umount -a -r > /dev/null 2>&1
+ 	::ctrlaltdel:/sbin/swapoff -a > /dev/null 2>&1
+ 
+ -------------------------------
+ 
+ =item insmod
+ 
+ Usage: insmod [OPTION]... MODULE [symbol=value]...
+ 
+ Loads the specified kernel modules into the kernel.
+ 
+ Options:
+ 
+ 		-f      Force module to load into the wrong kernel version.
+ 		-k      Make module autoclean-able.
+ 		-v      verbose output
+ 		-x      do not export externs
+ 
+ -------------------------------
+ 
+ =item kill
+ 
+ Usage: kill [B<-signal>] process-id [process-id ...]
+ 
+ Send a signal (default is SIGTERM) to the specified process(es).
+ 
+ Options:
+ 
+ 	-l      List all signal names and numbers.
+ 
+ Example:
+ 
+ 	$ ps | grep apache
+ 	252 root     root     S [apache]
+ 	263 www-data www-data S [apache]
+ 	264 www-data www-data S [apache]
+ 	265 www-data www-data S [apache]
+ 	266 www-data www-data S [apache]
+ 	267 www-data www-data S [apache]
+ 	$ kill 252
+ 
+ -------------------------------
+ 
+ =item killall
+ 
+ Usage: killall [B<-signal>] process-name [process-name ...]
+ 
+ Send a signal (default is SIGTERM) to the specified process(es).
+ 
+ Options:
+ 
+         -l      List all signal names and numbers.
+ 
+ Example:
+ 
+ 	$ killall apache
+ 
+ -------------------------------
+ 
+ =item length
+ 
+ Usage: length STRING
+ 
+ Prints out the length of the specified STRING.
+ 
+ Example:
+ 
+ 	$ length "Hello"
+ 	5
+ 
+ -------------------------------
+ 
+ =item ln
+ 
+ Usage: ln [OPTION] TARGET... LINK_NAME|DIRECTORY
+ 
+ Create a link named LINK_NAME or DIRECTORY to the specified TARGET
+ You may use '--' to indicate that all following arguments are non-options.
+ 
+ Options:
+ 
+ 	-s	make symbolic links instead of hard links
+ 	-f	remove existing destination files
+ 
+ Example:
+ 
+     $ ln -s BusyBox /tmp/ls
+     $ ls -l /tmp/ls
+     lrwxrwxrwx    1 root     root            7 Apr 12 18:39 ls -> BusyBox*
+ 
+ -------------------------------
+ 
+ =item loadacm
+ 
+ Usage: loadacm
+ 
+ Loads an acm from standard input.
+ 
+ Example:
+ 
+ 	$ loadacm < /etc/i18n/acmname
+ 
+ -------------------------------
+ 
+ =item loadfont
+ 
+ Usage: loadfont
+ 
+ Loads a console font from standard input.
+ 
+ Example:
+ 
+ 	$ loadfont < /etc/i18n/fontname
+ 
+ -------------------------------
+ 
+ =item loadkmap
+ 
+ Usage: loadkmap
+ 
+ Loads a binary keyboard translation table from standard input.
+ 
+ Example:
+ 
+ 	$ loadkmap < /etc/i18n/lang-keymap
+ 
+ -------------------------------
+ 
+ =item logger
+ 
+ Usage: logger [OPTION]... [MESSAGE]
+ 
+ Write MESSAGE to the system log.  If MESSAGE is '-', log stdin.
+ 
+ Options:
+ 
+         -s      Log to stderr as well as the system log.
+         -t      Log using the specified tag (defaults to user name).
+         -p      Enter the message with the specified priority.
+                 This may be numerical or a ``facility.level'' pair.
+ 
+ Example:
+ 
+ 		$ logger "hello"
+ 
+ -------------------------------
+ 
+ =item logname
+ 
+ Usage: logname
+ 
+ Print the name of the current user.
+ 
+ Example:
+ 
+ 	$ logname
+ 	root
+ 
+ -------------------------------
+ 
+ =item ls
+ 
+ Usage: ls [B<-1acdelnpuxACFR>] [filenames...]
+ 
+ Options:
+ 
+ 	-a	do not hide entries starting with .
+ 	-c	with  -l:  show ctime (the time of last
+ 		modification of file status information)
+ 	-d	list directory entries instead of contents
+ 	-e	list both full date and full time
+ 	-l	use a long listing format
+ 	-n	list numeric UIDs and GIDs instead of names
+ 	-p	append indicator (one of /=@|) to entries
+ 	-u	with -l: show access time (the time of last
+ 		access of the file)
+ 	-x	list entries by lines instead of by columns
+ 	-A	do not list implied . and ..
+ 	-C	list entries by columns
+ 	-F	append indicator (one of */=@|) to entries
+ 	-R  list subdirectories recursively
+ 
+ -------------------------------
+ 
+ =item lsmod
+ 
+ Usage: lsmod
+ 
+ Shows a list of all currently loaded kernel modules.
+ 
+ -------------------------------
+ 
+ =item makedevs
+ 
+ Usage: makedevs NAME TYPE MAJOR MINOR FIRST LAST [s]
+ 
+ Creates a range of block or character special files
+ 
+ TYPEs include:
+ 
+         b:      Make a block (buffered) device.
+         c or u: Make a character (un-buffered) device.
+         p:      Make a named pipe. MAJOR and MINOR are ignored for named pipes.
+ 
+ FIRST specifies the number appended to NAME to create the first device.
+ LAST specifies the number of the last item that should be created.
+ If 's' is the last argument, the base device is created as well.
+ 
+ Example:
+ 
+ 	$ makedevs /dev/ttyS c 4 66 2 63
+ 	[creates ttyS2-ttyS63]
+ 	$ makedevs /dev/hda b 3 0 0 8 s
+ 	[creates hda,hda1-hda8]
+ 
+ -------------------------------
+ 
+ =item md5sum
+ 
+ Usage: md5sum [OPTION] [file ...]
+ 
+ Print or check MD5 checksums.
+ 
+ Options:
+ 
+ 	-b       read files in binary mode
+ 	-c       check MD5 sums against given list
+ 	-t       read files in text mode (default)
+ 	-g       read a string
+ 
+ The following two options are useful only when verifying checksums:
+ 
+ 	-s       don't output anything, status code shows success
+ 	-w       warn about improperly formated MD5 checksum lines
+ 
+ Example:
+ 
+ 	$ md5sum busybox
+ 	6fd11e98b98a58f64ff3398d7b324003  busybox
+ 	$ md5sum -c -
+ 	6fd11e98b98a58f64ff3398d7b324003  busybox
+ 	busybox: OK
+ 	^D
+ 
+ -------------------------------
+ 
+ =item mkdir
+ 
+ Usage: mkdir [OPTION] DIRECTORY...
+ 
+ Create the DIRECTORY(ies), if they do not already exist
+ 
+ Options:
+ 
+ 	-m      set permission mode (as in chmod), not rwxrwxrwx - umask
+ 	-p      no error if directory exists, make parent directories as needed
+ 
+ Example:
+ 
+ 	$ mkdir /tmp/foo
+ 	$ mkdir /tmp/foo
+ 	/tmp/foo: File exists
+ 	$ mkdir /tmp/foo/bar/baz
+ 	/tmp/foo/bar/baz: No such file or directory
+ 	$ mkdir -p /tmp/foo/bar/baz
+ 
+ -------------------------------
+ 
+ =item mkfifo
+ 
+ Usage: mkfifo [OPTIONS] name
+ 
+ Creates a named pipe (identical to 'mknod name p')
+ 
+ Options:
+ 
+         -m      create the pipe using the specified mode (default a=rw)
+ 
+ -------------------------------
+ 
+ =item mkfs.minix
+ 
+ Usage: mkfs.minix [B<-c> | B<-l> filename] [B<-nXX>] [B<-iXX>] /dev/name [blocks]
+ 
+ Make a MINIX filesystem.
+ 
+ Options:
+ 
+ 	-c              Check the device for bad blocks
+ 	-n [14|30]      Specify the maximum length of filenames
+ 	-i              Specify the number of inodes for the filesystem
+ 	-l FILENAME     Read the bad blocks list from FILENAME
+ 	-v              Make a Minix version 2 filesystem
+ 
+ -------------------------------
+ 
+ =item mknod
+ 
+ Usage: mknod [OPTIONS] NAME TYPE MAJOR MINOR
+ 
+ Create a special file (block, character, or pipe).
+ 
+ Options:
+ 
+         -m      create the special file using the specified mode (default a=rw)
+ 
+ TYPEs include:
+         b:      Make a block (buffered) device.
+         c or u: Make a character (un-buffered) device.
+         p:      Make a named pipe. MAJOR and MINOR are ignored for named pipes.
+ 
+ Example:
+ 
+ 	$ mknod /dev/fd0 b 2 0 
+ 	$ mknod -m 644 /tmp/pipe p
+ 
+ -------------------------------
+ 
+ =item mkswap
+ 
+ Usage: mkswap [B<-c>] [B<-v0>|B<-v1>] device [block-count]
+ 
+ Prepare a disk partition to be used as a swap partition.
+ 
+ Options:
+ 
+ 	-c              Check for read-ability.
+ 	-v0             Make version 0 swap [max 128 Megs].
+ 	-v1             Make version 1 swap [big!] (default for kernels > 2.1.117).
+ 	block-count     Number of block to use (default is entire partition).
+ 
+ -------------------------------
+ 
+ =item mktemp
+ 
+ Usage: mktemp [B<-q>] TEMPLATE
+ 
+ Creates a temporary file with its name based on TEMPLATE.
+ TEMPLATE is any name with six `Xs' (i.e. /tmp/temp.XXXXXX).
+ 
+ Example:
+ 
+ 	$ mktemp /tmp/temp.XXXXXX
+ 	/tmp/temp.mWiLjM
+ 	$ ls -la /tmp/temp.mWiLjM
+ 	-rw-------    1 andersen andersen        0 Apr 25 17:10 /tmp/temp.mWiLjM
+ 
+ -------------------------------
+ 
+ =item more
+ 
+ Usage: more [file ...]
+ 
+ More is a filter for paging through text one screenful at a time.
+ 
+ Example:
+ 
+ 	$ dmesg | more
+ 
+ -------------------------------
+ 
+ =item mount
+ 
+ Usage:  mount [flags]
+         mount [flags] device directory [B<-o> options,more-options]
+ 
+ Flags:
+ 
+ 	-a:             Mount all file systems in fstab.
+ 	-o option:      One of many filesystem options, listed below.
+ 	-r:             Mount the filesystem read-only.
+ 	-t fs-type:     Specify the filesystem type.
+ 	-w:             Mount for reading and writing (default).
+ 
+ Options for use with the "B<-o>" flag:
+ 
+ 	async/sync:     Writes are asynchronous / synchronous.
+ 	atime/noatime:  Enable / disable updates to inode access times.
+ 	dev/nodev:      Allow use of special device files / disallow them.
+ 	exec/noexec:    Allow use of executable files / disallow them.
+ 	loop:           Mounts a file via loop device.
+ 	suid/nosuid:    Allow set-user-id-root programs / disallow them.
+ 	remount:        Re-mount a currently-mounted filesystem, changing its flags.
+ 	ro/rw:          Mount for read-only / read-write.
+ 	There are EVEN MORE flags that are specific to each filesystem.
+ 	You'll have to see the written documentation for those.
+ 
+ Example:
+ 
+ 	$ mount
+ 	/dev/hda3 on / type minix (rw)
+ 	proc on /proc type proc (rw)
+ 	devpts on /dev/pts type devpts (rw)
+ 	$ mount /dev/fd0 /mnt -t msdos -o ro
+ 	$ mount /tmp/diskimage /opt -t ext2 -o loop
+ 
+ -------------------------------
+ 
+ =item mt
+ 
+ Usage: mt [B<-f> device] opcode value
+ 
+ Control magnetic tape drive operation
+ 
+ -------------------------------
+ 
+ =item mv
+ 
+ Usage: mv SOURCE DEST
+ 
+    or: mv SOURCE... DIRECTORY
+ 
+ Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
+ 
+ Example:
+ 
+ 	$ mv /tmp/foo /bin/bar
+ 
+ -------------------------------
+ 
+ =item nc
+ 
+ Usage: nc [IP] [port]
+ 
+ Netcat opens a pipe to IP:port
+ 
+ Example:
+ 
+ 	$ nc foobar.somedomain.com 25
+ 	220 foobar ESMTP Exim 3.12 #1 Sat, 15 Apr 2000 00:03:02 -0600
+ 	help
+ 	214-Commands supported:
+ 	214-    HELO EHLO MAIL RCPT DATA AUTH
+ 	214     NOOP QUIT RSET HELP
+ 	quit
+ 	221 foobar closing connection
+ 
+ -------------------------------
+ 
+ =item nslookup
+ 
+ Usage: nslookup [HOST]
+ 
+ Queries the nameserver for the IP address of the given HOST
+ 
+ Example:
+ 
+ 	$ nslookup localhost
+ 	Server:     default
+ 	Address:    default
+ 
+ 	Name:       debian
+ 	Address:    127.0.0.1
+ 
+ -------------------------------
+ 
+ =item ping
+ 
+ Usage: ping [OPTION]... host
+ 
+ Send ICMP ECHO_REQUEST packets to network hosts.
+ 
+ Options:
+ 
+ 	-c COUNT        Send only COUNT pings.
+ 	-s SIZE		Send SIZE data bytes in packets (default=56).
+ 	-q              Quiet mode, only displays output at start
+                         and when finished.
+ Example:
+ 
+ 	$ ping localhost
+ 	PING slag (127.0.0.1): 56 data bytes
+ 	64 bytes from 127.0.0.1: icmp_seq=0 ttl=255 time=20.1 ms
+ 
+ 	--- debian ping statistics ---
+ 	1 packets transmitted, 1 packets received, 0% packet loss
+ 	round-trip min/avg/max = 20.1/20.1/20.1 ms
+ 
+ -------------------------------
+ 
+ =item poweroff
+ 
+ Shuts down the system, and requests that the kernel turn off power upon halting.
+ 
+ -------------------------------
+ 
+ =item printf
+ 
+ Usage: printf format [argument...]
+ 
+ Formats and prints the given data in a manner similar to the C printf command.
+ 
+ Example:
+ 
+ 	$ printf "Val=%d\n" 5
+ 	Val=5
+ 
+ -------------------------------
+ 
+ =item ps
+ 
+ Usage: ps
+ 
+ Report process status
+ 
+ This version of ps accepts no options.
+ 
+ Example:
+ 
+ 	$ ps
+   PID  Uid      Gid State Command
+     1 root     root     S init
+     2 root     root     S [kflushd]
+     3 root     root     S [kupdate]
+     4 root     root     S [kpiod]
+     5 root     root     S [kswapd]
+   742 andersen andersen S [bash]
+   743 andersen andersen S -bash
+   745 root     root     S [getty]
+  2990 andersen andersen R ps
+ 
+ -------------------------------
+ 
+ =item pwd
+ 
+ Prints the full filename of the current working directory.
+ 
+ Example:
+ 
+ 	$ pwd
+ 	/root
+ 
+ -------------------------------
+ 
+ =item reboot
+ 
+ Instructs the kernel to reboot the system.
+ 
+ -------------------------------
+ 
+ =item rm
+ 
+ Usage: rm [OPTION]... FILE...
+ 
+ Remove (unlink) the FILE(s).  You may use '--' to 
+ indicate that all following arguments are non-options.
+ 
+ Options:
+ 
+         -f              remove existing destinations, never prompt
+         -r or -R        remove the contents of directories recursively
+ 
+ Example:
+ 
+ 	$ rm -rf /tmp/foo
+ 
+ -------------------------------
+ 
+ =item rmdir
+ 
+ Usage: rmdir [OPTION]... DIRECTORY...
+ 
+ Remove the DIRECTORY(ies), if they are empty.
+ 
+ Example:
+ 
+ 	# rmdir /tmp/foo
+ 
+ -------------------------------
+ 
+ =item rmmod
+ 
+ Usage: rmmod [OPTION]... [MODULE]...
+ 
+ Unloads the specified kernel modules from the kernel.
+ 
+ Options:
+ 
+         -a      Try to remove all unused kernel modules.
+ 
+ Example:
+ 
+ 	$ rmmod tulip
+ 
+ -------------------------------
+ 
+ =item sed
+ 
+ Usage: sed [B<-n>] B<-e> script [file...]
+ 
+ Allowed sed scripts come in the following form:
+ 
+ 	'ADDR [!] COMMAND'
+ 
+ 	where address ADDR can be:
+ 	  NUMBER    Match specified line number
+ 	  $         Match last line
+ 	  /REGEXP/  Match specified regexp
+ 	  (! inverts the meaning of the match)
+ 
+ 	and COMMAND can be:
+ 	  s/regexp/replacement/[igp]
+ 		 which attempt to match regexp against the pattern space
+ 		 and if successful replaces the matched portion with replacement.
+ 
+ 	  aTEXT
+ 		 which appends TEXT after the pattern space
+ 
+ Options:
+ 
+ 	-e      add the script to the commands to be executed
+ 	-n      suppress automatic printing of pattern space
+ 
+ This version of sed matches full regular expressions.
+ 
+ Example:
+ 
+ 	$ echo "foo" | sed -e 's/f[a-zA-Z]o/bar/g'
+ 	bar
+ 
+ -------------------------------
+ 
+ =item setkeycodes
+ 
+ Usage: setkeycodes SCANCODE KEYCODE ...
+ 
+ Set entries into the kernel's scancode-to-keycode map,
+ allowing unusual keyboards to generate usable keycodes.
+ 
+ SCANCODE may be either xx or e0xx (hexadecimal),
+ and KEYCODE is given in decimal
+ 
+ Example:
+ 
+ 	# setkeycodes e030 127
+ 
+ -------------------------------
+ 
+ =item sh
+ 
+ Usage: sh
+ 
+ lash -- the BusyBox LAme SHell (command interpreter)
+ 
+ This command does not yet have proper documentation.  
+ 
+ Use lash just as you would use any other shell.  It properly handles pipes,
+ redirects, job control, can be used as the shell for scripts (#!/bin/sh), and
+ has a sufficient set of builtins to do what is needed.  It does not (yet)
+ support Bourne Shell syntax.  If you need things like "if-then-else", "while",
+ and such, use ash or bash.  If you just need a very simple and extremely small
+ shell, this will do the job.
+ 
+ -------------------------------
+ 
+ =item sleep
+ 
+ Usage: sleep N
+ 
+ Pause for N seconds.
+ 
+ Example:
+ 
+ 	$ sleep 2
+ 	[2 second delay results]
+ 
+ -------------------------------
+ 
+ =item sort
+ 
+ Usage: sort [B<-n>] [B<-r>] [FILE]...
+ 
+ Sorts lines of text in the specified files
+ 
+ Example:
+ 
+ 	$ echo -e "e\nf\nb\nd\nc\na" | sort
+ 	a
+ 	b
+ 	c
+ 	d
+ 	e
+ 	f
+ 
+ -------------------------------
+ 
+ =item swapoff
+ 
+ Usage: swapoff [OPTION] [device]
+ 
+ Stop swapping virtual memory pages on the given device.
+ 
+ Options:
+ 
+         -a      Stop swapping on all swap devices
+ 
+ -------------------------------
+ 
+ =item swapon
+ 
+ Usage: swapon [OPTION] [device]
+ 
+ Start swapping virtual memory pages on the given device.
+ 
+ Options:
+ 
+         -a      Start swapping on all swap devices
+ 
+ -------------------------------
+ 
+ =item sync
+ 
+ Usage: sync
+ 
+ Write all buffered filesystem blocks to disk.
+ 
+ -------------------------------
+ 
+ =item syslogd
+ 
+ Usage: syslogd [OPTION]...
+ 
+ Linux system and kernel (provides klogd) logging utility.
+ Note that this version of syslogd/klogd ignores /etc/syslog.conf.
+ 
+ Options:
+ 
+ 	-m NUM		Interval between MARK lines (default=20min, 0=off)
+ 	-n		Run as a foreground process
+ 	-K		Do not start up the klogd process
+ 	-O FILE		Use an alternate log file (default=/var/log/messages)
+ 	-R HOST[:PORT]  Log messages to HOST on PORT (default=514) over UDP.
+ 
+ Example:
+ 
+ 	$ syslogd -R masterlog:514
+ 	$ syslogd -R 192.168.1.1:601
+ 
+ -------------------------------
+ 
+ =item tail
+ 
+ Usage: tail [OPTION] [FILE]...
+ 
+ Print last 10 lines of each FILE to standard output.
+ With more than one FILE, precede each with a header giving the
+ file name. With no FILE, or when FILE is -, read standard input.
+ 
+ Options:
+ 
+         -n NUM          Print last NUM lines instead of first 10
+         -f              Output data as the file grows.  This version
+                         of 'tail -f' supports only one file at a time.
+ 
+ Example:
+ 
+ 	$ tail -n 1 /etc/resolv.conf
+ 	nameserver 10.0.0.1
+ 
+ -------------------------------
+ 
+ =item tar
+ 
+ Usage: tar -[cxtvO] [B<--exclude> File] [B<-f> tarFile] [FILE] ...
+ 
+ Create, extract, or list files from a tar file.  Note that
+ this version of tar treats hard links as separate files.
+ 
+ Main operation mode:
+ 
+         c               create
+         x               extract
+         t               list
+ 
+ File selection:
+ 
+         f               name of tarfile or "-" for stdin
+         O               extract to stdout
+         --exclude       file to exclude
+ 
+ Informative output:
+ 
+         v               verbosely list files processed
+ 
+ Example:
+ 
+ 	$ zcat /tmp/tarball.tar.gz | tar -xf -
+ 	$ tar -cf /tmp/tarball.tar /usr/local
+ 
+ -------------------------------
+ 
+ =item tee
+ 
+ Usage: tee [OPTION]... [FILE]...
+ 
+ Copy standard input to each FILE, and also to standard output.
+ 
+ Options:
+ 
+         -a      append to the given FILEs, do not overwrite
+ 
+ Example:
+ 
+ 	$ echo "Hello" | tee /tmp/foo
+ 	$ cat /tmp/foo
+ 	Hello
+ 
+ -------------------------------
+ 
+ =item telnet
+ 
+ Usage: telnet host [port]
+ 
+ Telnet is used to establish interactive communication with another
+ computer over a network using the TELNET protocol.
+ 
+ -------------------------------
+ 
+ =item test, [
+ 
+ Usage: test EXPRESSION
+ or   [ EXPRESSION ]
+ 
+ Checks file types and compares values returning an exit
+ code determined by the value of EXPRESSION.
+ 
+ Example:
+ 
+ 	$ test 1 -eq 2
+ 	$ echo $?
+ 	1
+ 	$ test 1 -eq 1
+ 	$ echo $?
+ 	0
+ 	$ [ -d /etc ]
+ 	$ echo $?
+ 	0
+ 	$ [ -d /junk ]
+ 	$ echo $?
+ 	1
+ 
+ -------------------------------
+ 
+ =item touch
+ 
+ Usage: touch [B<-c>] file [file ...]
+ 
+ Update the last-modified date on (or create) the selected file[s].
+ 
+ Example:
+ 
+ 	$ ls -l /tmp/foo
+ 	/bin/ls: /tmp/foo: No such file or directory
+ 	$ touch /tmp/foo
+ 	$ ls -l /tmp/foo
+ 	-rw-rw-r--    1 andersen andersen        0 Apr 15 01:11 /tmp/foo
+ 
+ -------------------------------
+ 
+ =item tr
+ 
+ Usage: tr [-cds] STRING1 [STRING2]
+ 
+ Translate, squeeze, and/or delete characters from
+ standard input, writing to standard output.
+ 
+ Options:
+ 
+ 	-c      take complement of STRING1
+ 	-d      delete input characters coded STRING1
+ 	-s      squeeze multiple output characters of STRING2 into one character
+ 
+ Example:
+ 
+ 	$ echo "gdkkn vnqkc" | tr [a-y] [b-z]
+ 	hello world
+ 
+ -------------------------------
+ 
+ =item true
+ 
+ Returns an exit code of TRUE (0)
+ 
+ Example:
+ 
+ 	$ true
+ 	$ echo $?
+ 	0
+ 
+ -------------------------------
+ 
+ =item tty
+ 
+ Usage: tty
+ 
+ Print the file name of the terminal connected to standard input.
+ 
+ Options:
+ 
+         -s      print nothing, only return an exit status
+ 
+ Example:
+ 
+ 	$ tty
+ 	/dev/tty2
+ 
+ -------------------------------
+ 
+ =item umount
+ 
+ Usage: umount [flags] filesystem|directory
+ 
+ Flags:
+ 
+ 		-a:     Unmount all file systems
+ 		-r:     Try to remount devices as read-only if mount is busy
+ 		-f:     Force filesystem umount (i.e. unreachable NFS server)
+ 		-l:     Do not free loop device (if a loop device has been used)
+ 
+ Example:
+ 
+ 	$ umount /dev/hdc1 
+ 
+ -------------------------------
+ 
+ =item uname
+ 
+ Usage: uname [OPTION]...
+ 
+ Print certain system information.  With no OPTION, same as B<-s>.
+ 
+ Options:
+ 
+         -a      print all information
+         -m      the machine (hardware) type
+         -n      print the machine's network node hostname
+         -r      print the operating system release
+         -s      print the operating system name
+         -p      print the host processor type
+         -v      print the operating system version
+ 
+ Example:
+ 
+ 	$ uname -a
+ 	Linux debian 2.2.15pre13 #5 Tue Mar 14 16:03:50 MST 2000 i686 unknown
+ 
+ -------------------------------
+ 
+ =item uniq
+ 
+ Usage: uniq [OPTION]... [INPUT [OUTPUT]]
+ 
+ Discard all but one of successive identical lines from INPUT
+ (or standard input), writing to OUTPUT (or standard output).
+ 
+ Example:
+ 
+ 	$ echo -e "a\na\nb\nc\nc\na" | sort | uniq
+ 	a
+ 	b
+ 	c
+ 
+ -------------------------------
+ 
+ =item update
+ 
+ Usage: update [options]
+ 
+ Periodically flushes filesystem buffers.
+ 
+ Options:
+ 
+         -S      force use of sync(2) instead of flushing
+         -s SECS call sync this often (default 30)
+         -f SECS flush some buffers this often (default 5)
+ 
+ -------------------------------
+ 
+ =item uptime
+ 
+ Usage: uptime
+ 
+ Tells how long the system has been running since boot.
+ 
+ Example:
+ 
+ 	$ uptime
+ 	  1:55pm  up  2:30, load average: 0.09, 0.04, 0.00
+ 
+ -------------------------------
+ 
+ =item usleep
+ 
+ Usage: usleep N
+ 
+ Pauses for N microseconds.
+ 
+ Example:
+ 
+ 	$ usleep 1000000
+ 	[pauses for 1 second]
+ 
+ -------------------------------
+ 
+ =item uuencode
+ 
+ Usage: uuencode [OPTION] [INFILE] REMOTEFILE
+ 
+ Uuencode a file.
+ 
+ Options:
+ 
+ 	-m      use base64 encoding as of RFC1521
+ 
+ Example:
+ 
+ 	$ uuencode busybox busybox
+ 	begin 755 busybox
+ 	M?T5,1@$!`0````````````(``P`!````L+@$"#0```!0N@,``````#0`(``&
+ 	.....
+ 	$ uudecode busybox busybox > busybox.uu
+ 	$
+ 
+ -------------------------------
+ 
+ =item uudecode
+ 
+ Usage: uudecode [OPTION] [FILE]
+ 
+ Uudecode a uuencoded file
+ 
+ Options:
+ 
+ 	-o FILE  direct output to FILE
+ 
+ Example:
+ 
+ 	$ uudecode -o busybox busybox.uu
+ 	$ ls -l busybox
+ 	-rwxr-xr-x   1 ams      ams        245264 Jun  7 21:35 busybox
+ 
+ -------------------------------
+ 
+ =item wc
+ 
+ Usage: wc [OPTION]... [FILE]...
+ 
+ Print line, word, and byte counts for each FILE, and a total line if
+ more than one FILE is specified.  With no FILE, read standard input.
+ 
+ Options:
+ 
+         -c      print the byte counts
+         -l      print the newline counts
+         -L      print the length of the longest line
+         -w      print the word counts
+ 
+ Example:
+ 
+ 	$ wc /etc/passwd
+ 	     31      46    1365 /etc/passwd
+ 
+ -------------------------------
+ 
+ =item which
+ 
+ Usage: which [COMMAND ...]
+ 
+ Locates a COMMAND.
+ 
+ Example:
+ 
+ 	$ which login
+ 	/bin/login
+ 
+ -------------------------------
+ 
+ =item whoami
+ 
+ Usage: whoami
+ 
+ Prints the user name associated with the current effective user id.
+ 
+ Example:
+ 
+ 	$ whoami
+ 	andersen
+ 
+ -------------------------------
+ 
+ =item yes
+ 
+ Usage: yes [OPTION]... [STRING]...
+ 
+ Repeatedly outputs a line with all specified STRING(s), or `y'.
+ 
+ -------------------------------
+ 
+ =item zcat
+ 
+ This is essentially an alias for invoking "gunzip B<-c>", where 
+ it decompresses the file in question and send the output to stdout. 
+ 
+ -------------------------------
+ 
+ =back
+ 
+ =head1 LIBC NSS
+ 
+ GNU Libc uses the Name Service Switch (NSS) to configure the behavior of the C
+ library for the local environment, and to configure how it reads system data,
+ such as passwords and group information.  BusyBox has made it Policy that it
+ will never use NSS, and will never use and libc calls that make use of NSS.
+ This allows you to run an embedded system without the need for installing an
+ /etc/nsswitch.conf file and without and /lib/libnss_* libraries installed.
+ 
+ If you are using a system that is using a remote LDAP server for authentication
+ via GNU libc NSS, and you want to use BusyBox, then you will need to adjust the
+ BusyBox source.  Chances are though, that if you have enough space to install
+ of that stuff on your system, then you probably want the full GNU utilities.
+ 
+ =head1 SEE ALSO
+ 
+ textutils(1), shellutils(1), etc...
+ 
+ =head1 MAINTAINER
+ 
+ Erik Andersen <andersee@debian.org> <andersen@lineo.com>
+ 
+ =head1 AUTHORS
+ 
+ The following people have contributed code to BusyBox whether
+ they know it or not.
+ 
+ Erik Andersen <andersee@debian.org>
+ 
+ =for html <br>
+ 
+ John Beppu <beppu@lineo.com>
+ 
+ =for html <br>
+ 
+ Brian Candler <B.Candler@pobox.com>
+ 
+ =for html <br>
+ 
+ Randolph Chung <tausq@debian.org>
+ 
+ =for html <br>
+ 
+ Dave Cinege <dcinege@psychosis.com>	
+ 
+ =for html <br>
+ 
+ Karl M. Hegbloom <karlheg@debian.org>
+ 
+ =for html <br>
+ 
+ John Lombardo <john@deltanet.com>	
+ 
+ =for html <br>
+ 
+ Glenn McGrath <bug1@netconnect.com.au>
+ 
+ =for html <br>
+ 
+ Bruce Perens <bruce@perens.com>
+ 
+ =for html <br>
+ 
+ Pavel Roskin <proski@gnu.org>
+ 
+ =for html <br>
+ 
+ Linus Torvalds <torvalds@transmeta.com>
+ 
+ =for html <br>
+ 
+ Charles P. Wright <cpwright@villagenet.com>
+ 
+ =for html <br>
+ 
+ Enrique Zanardi <ezanardi@ull.es>
+ 
+ =for html <br>
+ 
+ =cut
+ 
+-# $Id: busybox.pod,v 1.57 2000/07/20 23:41:24 andersen Exp $
++# $Id: busybox.pod,v 1.58 2000/07/21 15:10:57 proski Exp $
+diff --git a/docs/busybox.sgml b/docs/busybox.sgml
+index f0dd3bf..d19ee24 100644
+--- a/docs/busybox.sgml
++++ b/docs/busybox.sgml
+@@ -1,3597 +1,3597 @@
+ <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V3.1//EN" [...]>
+ <book id="BusyBoxDocumentation">
+  <bookinfo>
+   <title>BusyBox - The Swiss Army Knife of Embedded Linux</title>
+   
+   <legalnotice>
+    <para>
+      This documentation is free software; you can redistribute
+      it and/or modify it under the terms of the GNU General Public
+      License as published by the Free Software Foundation; either
+      version 2 of the License, or (at your option) any later
+      version.
+    </para>
+       
+    <para>
+      This program is distributed in the hope that it will be
+      useful, but WITHOUT ANY WARRANTY; without even the implied
+      warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      See the GNU General Public License for more details.
+    </para>
+       
+    <para>
+      You should have received a copy of the GNU General Public
+      License along with this program; if not, write to the Free
+      Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+      MA 02111-1307 USA
+    </para>
+       
+    <para>
+      For more details see the file COPYING in the source
+      distribution of Linux.
+    </para>
+   </legalnotice>
+  </bookinfo>
+ 
+ <toc></toc>
+   <chapter id="Introduction">
+      <title>Introduction</title>
+ 
+ 	<para>
+ 	BusyBox combines tiny versions of many common UNIX utilities into a single
+ 	small executable. It provides minimalist replacements for most of the
+ 	utilities you usually find in fileutils, shellutils, findutils, textutils,
+ 	grep, gzip, tar, etc. BusyBox provides a fairly complete POSIX environment
+ 	for any small or embedded system. The utilities in BusyBox generally have
+ 	fewer options than their full-featured GNU cousins; however, the options
+ 	that are included provide the expected functionality and behave very much
+ 	like their GNU counterparts. 
+ 	</para>
+ 
+ 	<para>
+ 	BusyBox has been written with size-optimization and limited resources in
+ 	mind. It is also extremely modular so you can easily include or exclude
+ 	commands (or features) at compile time. This makes it easy to customize
+ 	your embedded systems. To create a working system, just add a kernel, a
+ 	shell (such as ash), and an editor (such as elvis-tiny or ae).
+ 	</para>
+   </chapter>
+ 
+   <chapter id="Syntax">
+      <title>How to use BusyBox</title>
+ 	<sect1 id="How to use BusyBox">
+ 	    <title>Syntax</title
+ 
+ 	    <para>
+ 	    <screen>
+ 	     BusyBox &lt;function&gt; [arguments...]  # or
+ 	    </screen>
+ 	    </para>
+ 
+ 	    <para>
+ 	    <screen>
+ 	     &lt;function&gt; [arguments...]          # if symlinked
+ 	    </screen>
+ 	    </para>
+ 	</sect1>
+ 
+ 	<sect1 id="Invoking BusyBox">
+ 	    <para>
+ 	    When you create a link to BusyBox for the function you wish to use, when
+ 	    BusyBox is called using that link it will behave as if the command itself
+ 	    has been invoked.
+ 	    </para>
+ 
+ 	    <para>
+ 	    For example, entering
+ 	    </para>
+ 
+ 	    <para>
+ 	    <screen>
+ 		    ln -s ./BusyBox ls
+ 		    ./ls
+ 	    </screen>
+ 	    </para>
+ 
+ 	    <para>
+ 	    will cause BusyBox to behave as 'ls' (if the 'ls' command has been compiled
+ 	    into BusyBox). 
+ 	    </para>
+ 
+ 	    <para>
+ 	    You can also invoke BusyBox by issuing the command as an argument on the
+ 	    command line. For example, entering
+ 	    </para>
+ 
+ 	    <para>
+ 	    <screen>
+ 		    ./BusyBox ls
+ 	    </screen>
+ 	    </para>
+ 
+ 	    <para>
+ 	    will also cause BusyBox to behave as 'ls'. 
+ 	    </para>
+ 
+ 	</sect1>
+ 
+ 	<sect1 id="Common options">
+ 	    <para>
+ 	    Most BusyBox commands support the <emphasis>--help</emphasis> option to provide 
+ 	    a terse runtime description of their behavior. 
+ 	    </para>
+ 	</sect1>
+   </chapter>
+ 
+   <chapter id="Commands">
+      <title>BusyBox Commands</title>
+ 	<sect1 id="Available BusyBox Commands">
+ 	    <title>Available BusyBox Commands</title>
+ 		<para>
+ 		Currently defined functions include:
+ 		</para>
+ 
+ 		<para>
+ 		ar, basename, cat, chgrp, chmod, chown, chroot, chvt, clear,
+ 		cp, cut, date, dc, dd, deallocvt, df, dirname, dmesg, du,
+ 		dumpkmap, dutmp, echo, false, fbset, fdflush, find, free,
+ 		freeramdisk, fsck.minix, grep, gunzip, gzip, halt, head,
+ 		hostid, hostname, id, init, insmod, kill, killall, length, ln,
+ 		loadacm, loadfont, loadkmap, logger, logname, ls, lsmod,
+ 		makedevs, mkdir, mkfifo, mkfs.minix, mknod, mkswap, mktemp,
+ 		more, mount, mt, mv, nc, nslookup, ping, poweroff, printf, ps,
+ 		pwd, reboot, rm, rmdir, rmmod, sed, setkeycodes, sh, sleep,
+ 		sort, swapoff, swapon, sync, syslogd, tail, tar, tee, telnet,
+ 		test, touch, tr, true, tty, umount, uname, uniq, update,
+ 		uptime, usleep, uudecode, uuencode, wc, which, whoami, yes,
+ 		zcat, [
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="ar">
+ 	    <title>ar</title>
+ 
+ 		<para>
+ 		Usage: ar [OPTION] archive [FILENAME]...
+ 		</para>
+ 
+ 		<para>
+ 		Extract or list files from an ar archive.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			o	Preserve original dates
+ 			p	Extract to stdout
+ 			t	List
+ 			x	Extract
+ 			v	Verbosely list files processed
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="basename">
+ 	    <title>basename</title>
+ 		<para>
+ 		Usage: basename FILE [SUFFIX]
+ 		</para>
+ 
+ 		<para>
+ 		Strip directory path and suffixes from FILE. If specified, also removes
+ 		any trailing SUFFIX.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ basename /usr/local/bin/foo
+ 			foo
+ 			$ basename /usr/local/bin/
+ 			bin
+ 			$ basename /foo/bar.txt .txt
+ 			bar
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="cat">
+ 	    <title>cat</title>
+ 
+ 		<para>
+ 		Usage: cat [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Concatenate <literal>FILE(s)</literal> and prints them to the standard
+ 		output.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ cat /proc/uptime
+ 			110716.72 17.67
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="chgrp">
+ 	    <title>chgrp</title>
+ 
+ 		<para>
+ 		Usage: chgrp [OPTION]... GROUP FILE...
+ 		</para>
+ 
+ 		<para>
+ 		Change the group membership of each FILE to GROUP.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-R      Change files and directories recursively
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ls -l /tmp/foo
+ 			-r--r--r--    1 andersen andersen        0 Apr 12 18:25 /tmp/foo
+ 			$ chgrp root /tmp/foo
+ 			$ ls -l /tmp/foo
+ 			-r--r--r--    1 andersen root            0 Apr 12 18:25 /tmp/foo
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="chmod">
+ 	    <title>chmod</title>
+ 
+ 		<para>
+ 		Usage: chmod [<emphasis>-R</emphasis>] MODE[,MODE]... FILE...
+ 		</para>
+ 
+ 		<para>
+ 		Change file access permissions for the specified
+ 		<literal>FILE(s)</literal> (or directories). Each MODE is defined by
+ 		combining the letters for WHO has access to the file, an OPERATOR for
+ 		selecting how the permissions should be changed, and a PERMISSION for
+ 		<literal>FILE(s)</literal> (or directories).
+ 		</para>
+ 
+ 		<para>
+ 		WHO may be chosen from
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			u       User who owns the file
+ 			g       Users in the file's Group
+ 			o       Other users not in the file's group
+ 			a       All users
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		OPERATOR may be chosen from
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			+       Add a permission
+ 			-       Remove a permission
+ 			=       Assign a permission
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		PERMISSION may be chosen from
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			r       Read
+ 			w       Write
+ 			x       Execute (or access for directories)
+ 			s       Set user (or group) ID bit
+ 			t       Sticky bit (for directories prevents removing files by non-owners)
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Alternately, permissions can be set numerically where the first three
+ 		numbers are calculated by adding the octal values, such as
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			4       Read
+ 			2       Write
+ 			1       Execute
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		An optional fourth digit can also be used to specify
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			4       Set user ID
+ 			2       Set group ID
+ 			1       Sticky bit
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-R      Change files and directories recursively.
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ls -l /tmp/foo
+ 			-rw-rw-r--    1 root     root            0 Apr 12 18:25 /tmp/foo
+ 			$ chmod u+x /tmp/foo
+ 			$ ls -l /tmp/foo
+ 			-rwxrw-r--    1 root     root            0 Apr 12 18:25 /tmp/foo*
+ 			$ chmod 444 /tmp/foo
+ 			$ ls -l /tmp/foo
+ 			-r--r--r--    1 root     root            0 Apr 12 18:25 /tmp/foo
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 	
+ 	<sect1 id="chown">
+ 	    <title>chown</title>
+ 		<para>
+ 		Usage: chown [OPTION]... OWNER[&lt;.|:&gt;[GROUP] FILE...
+ 		</para>
+ 
+ 		<para>
+ 		Change the owner and/or group of each FILE to OWNER and/or GROUP.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-R      Change files and directories recursively
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ls -l /tmp/foo
+ 			-r--r--r--    1 andersen andersen        0 Apr 12 18:25 /tmp/foo
+ 			$ chown root /tmp/foo
+ 			$ ls -l /tmp/foo
+ 			-r--r--r--    1 root     andersen        0 Apr 12 18:25 /tmp/foo
+ 			$ chown root.root /tmp/foo
+ 			ls -l /tmp/foo
+ 			-r--r--r--    1 root     root            0 Apr 12 18:25 /tmp/foo
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="chroot">
+ 	    <title>chroot</title>
+ 		<para>
+ 		Usage: chroot NEWROOT [COMMAND...]
+ 		</para>
+ 
+ 		<para>
+ 		Run COMMAND with root directory set to NEWROOT.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ls -l /bin/ls
+ 			lrwxrwxrwx    1 root     root          12 Apr 13 00:46 /bin/ls -&gt; /BusyBox
+ 			$ mount /dev/hdc1 /mnt -t minix
+ 			$ chroot /mnt
+ 			$ ls -l /bin/ls
+ 			-rwxr-xr-x    1 root     root        40816 Feb  5 07:45 /bin/ls*
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="chvt">
+ 	    <title>chvt</title>
+ 		<para>
+ 		Usage: chvt N
+ 		</para>
+ 
+ 		<para>
+ 		Change the foreground virtual terminal to /dev/ttyN
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="clear">
+ 	    <title>clear</title>
+ 
+ 		<para>
+ 		Usage: clear
+ 		</para>
+ 
+ 		<para>
+ 		Clear the screen.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="cp">
+ 	    <title>cp</title>
+ 
+ 		<para>
+ 		Usage: cp [OPTION]... SOURCE DEST
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 		   or: cp [OPTION]... SOURCE... DIRECTORY
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Copy SOURCE to DEST, or multiple <literal>SOURCE(s)</literal> to
+ 		DIRECTORY.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-a      Same as -dpR
+ 			-d      Preserve links
+ 			-p      Preserve file attributes if possible
+ 			-R      Copy directories recursively
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="cut">
+ 	    <title>cut</title>
+ 
+ 		<para>
+ 		Usage: cut [OPTION]... [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Print selected fields from each input FILE to standard output.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 				-b LIST Output only bytes from LIST
+ 				-c LIST Output only characters from LIST
+ 				-d CHAR Use CHAR instead of tab as the field delimiter
+-				-s      Only output Lines if the include DELIM
++				-s      Output only the lines containing delimiter
+ 				-f N    Print only these fields
+ 				-n      Ignored
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ echo "Hello world" | cut -f 1 -d ' '
+ 			Hello
+ 			$ echo "Hello world" | cut -f 2 -d ' '
+ 			world
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="date">
+ 	    <title>date</title>
+ 
+ 		<para>
+ 		Usage: date [OPTION]... [+FORMAT]
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 		  or:  date [OPTION] [MMDDhhmm[[CC]YY][.ss]]
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Display the current time in the given FORMAT, or set the system date.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-R      Output RFC-822 compliant date string
+ 			-s      Set time described by STRING
+ 			-u      Print or set Coordinated Universal Time
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ date
+ 			Wed Apr 12 18:52:41 MDT 2000
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="dc">
+ 	    <title>dc</title>
+ 
+ 		<para>
+ 		Usage: dc [EXPRESSION]
+ 		</para>
+ 
+ 		<para>
+ 		This is a Tiny RPN calculator that understands the
+ 		following operations: +, -, /, *, and, or, not, eor. If
+ 		no arguments are given, dc will process input from
+ 		stdin.
+ 		</para>
+ 
+ 		<para>
+ 		The behaviour of BusyBox/dc deviates (just a little ;-)
+ 		from GNU/dc, but this will be remedied in the future.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ dc 2 2 +
+ 			4
+ 			$ dc 8 8 \* 2 2 + /
+ 			16
+ 			$ dc 0 1 and
+ 			0
+ 			$ dc 0 1 or
+ 			1
+ 			$ echo 72 9 div 8 mul | dc
+ 			64
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="dd">
+ 	    <title>dd</title>
+ 
+ 		<para>
+ 		Usage: dd [OPTION]...
+ 		</para>
+ 
+ 		<para>
+ 		Copy a file, converting and formatting according to
+ 		options.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			if=FILE Read from FILE instead of stdin
+ 			of=FILE Write to FILE instead of stdout
+ 			bs=N    Read and write N bytes at a time
+ 			count=N Copy only N input blocks
+ 			skip=N  Skip N input blocks
+ 			seek=N  Skip N output blocks
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Numbers may be suffixed by w (x2), k (x1024), b (x512),
+ 		or M (x1024^2).
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ dd if=/dev/zero of=/dev/ram1 bs=1M count=4
+ 			4+0 records in
+ 			4+0 records out
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="deallocvt">
+ 	    <title>deallocvt</title>
+ 
+ 		<para>
+ 		Usage: deallocvt N
+ 		</para>
+ 
+ 		<para>
+ 		Deallocate unused virtual terminal /dev/ttyN.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="df">
+ 	    <title>df</title>
+ 
+ 		<para>
+ 		Usage: df [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Print the filesystem space used and space available.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ df
+ 			Filesystem           1k-blocks      Used Available Use% Mounted on
+ 			/dev/sda3              8690864   8553540    137324  98% /
+ 			/dev/sda1                64216     36364     27852  57% /boot
+ 			$ df /dev/sda3
+ 			Filesystem           1k-blocks      Used Available Use% Mounted on
+ 			/dev/sda3              8690864   8553540    137324  98% /
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 	
+ 	<sect1 id="dirname">
+ 	    <title>dirname</title>
+ 
+ 		<para>
+ 		Usage: dirname NAME
+ 		</para>
+ 
+ 		<para>
+ 		Strip non-directory suffix from NAME.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ dirname /tmp/foo
+ 			/tmp
+ 			$ dirname /tmp/foo/
+ 			/tmp
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="dmesg">
+ 	    <title>dmesg</title>
+ 
+ 		<para>
+ 		Usage: dmesg [OPTION]...
+ 		</para>
+ 
+ 		<para>
+ 		Print or control the kernel ring buffer.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-c		Clear the ring buffer after printing
+ 			-n LEVEL	Set the console logging level to LEVEL
+ 			-s BUFSIZE	Query ring buffer using a buffer of BUFSIZE
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="du">
+ 	    <title>du</title>
+ 
+ 		<para>
+ 		Usage: du [OPTION]... [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Summarize the disk space used for each FILE or current
+ 		directory.  Disk space printed in units of 1k (i.e.
+ 		1024 bytes).
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-l	Count sizes many times if hard linked
+ 			-s	Display only a total for each argument
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ du
+ 			16	./CVS
+ 			12	./kernel-patches/CVS
+ 			80	./kernel-patches
+ 			12	./tests/CVS
+ 			36	./tests
+ 			12	./scripts/CVS
+ 			16	./scripts
+ 			12	./docs/CVS
+ 			104	./docs
+ 			2417	.
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="dumpkmap">
+ 	    <title>dumpkmap</title>
+ 
+ 		<para>
+ 		Usage: dumpkmap
+ 		</para>
+ 
+ 		<para>
+ 		Prints out a binary keyboard translation table to standard input.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="dutmp">
+ 	    <title>dutmp</title>
+ 
+ 		<para>
+ 		Usage: dutmp [FILE]
+ 		</para>
+ 
+ 		<para>
+ 		Dump utmp file format (pipe delimited) from FILE or
+ 		stdin to stdout.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ dutmp /var/run/utmp
+ 			8|7||si|||0|0|0|955637625|760097|0
+ 			2|0|~|~~|reboot||0|0|0|955637625|782235|0
+ 			1|20020|~|~~|runlevel||0|0|0|955637625|800089|0
+ 			8|125||l4|||0|0|0|955637629|998367|0
+ 			6|245|tty1|1|LOGIN||0|0|0|955637630|998974|0
+ 			6|246|tty2|2|LOGIN||0|0|0|955637630|999498|0
+ 			7|336|pts/0|vt00andersen|andersen|:0.0|0|0|0|955637763|0|0
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="echo">
+ 	    <title>echo</title>
+ 
+ 		<para>
+ 		Usage: echo [OPTION]... [ARG]...
+ 		</para>
+ 
+ 		<para>
+ 		Print ARGs to stdout.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-n	Suppress trailing newline
+ 			-e	Enable interpretation of escaped characters
+ 			-E	Disable interpretation of escaped characters
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ echo "Erik is cool"
+ 			Erik is cool
+ 			$ echo -e "Erik\nis\ncool"
+ 			Erik
+ 			is
+ 			cool
+ 			$ echo "Erik\nis\ncool"
+ 			Erik\nis\ncool
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="false">
+ 	    <title>false</title>
+ 
+ 		<para>
+ 		Usage: false
+ 		</para>
+ 
+ 		<para>
+ 		Return an exit code of FALSE (1).
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ false
+ 			$ echo $?
+ 			1
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="fbset">
+ 	    <title>fbset</title>
+ 
+ 		<para>
+ 		Usage: fbset [OPTION]... [MODE]
+ 		</para>
+ 
+ 		<para>
+ 		Show and modify frame buffer device settings.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-h						Display option summary
+ 			-fb DEVICE					Operate on DEVICE
+ 			-db FILE					Use FILE for mode database
+ 			-g XRES YRES VXRES VYRES DEPTH			Set all geometry parameters
+ 			-t PIXCLOCK LEFT RIGHT UPPER LOWER HSLEN VSLEN	Set all timing parameters
+ 			-xres RES					Set visible horizontal resolution
+ 			-yres RES					Set visible vertical resolution
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ fbset
+ 			mode "1024x768-76"
+ 					# D: 78.653 MHz, H: 59.949 kHz, V: 75.694 Hz
+ 					geometry 1024 768 1024 768 16
+ 					timings 12714 128 32 16 4 128 4
+ 					accel false
+ 					rgba 5/11,6/5,5/0,0/0
+ 			endmode
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="fdflush">
+ 	    <title>fdflush</title>
+ 
+ 		<para>
+ 		Usage: fdflush DEVICE
+ 		</para>
+ 
+ 		<para>
+ 		Force floppy disk drive to detect disk change on DEVICE.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="find">
+ 	    <title>find</title>
+ 
+ 		<para>
+ 		Usage: find [PATH]... [EXPRESSION]
+ 		</para>
+ 
+ 		<para>
+ 		Search for files in a directory hierarchy. The default
+ 		PATH is the current directory; default EXPRESSION is
+ 		'-print'.
+ 		</para>
+ 
+ 		<para>
+ 		EXPRESSION may consist of:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-follow		Dereference symbolic links
+ 			-name PATTERN	File name (leading directories removed) matches PATTERN
+ 			-print		Print the full file name followed by a newline to stdout
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ find / -name /etc/passwd
+ 			/etc/passwd
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="free">
+ 	    <title>free</title>
+ 
+ 		<para>
+ 		Usage: free
+ 		</para>
+ 
+ 		<para>
+ 		Displays the amount of free and used system memory.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ free
+ 			total         used         free       shared      buffers
+ 			  Mem:       257628       248724         8904        59644        93124
+ 			 Swap:       128516         8404       120112
+ 			Total:       386144       257128       129016
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="freeramdisk">
+ 	    <title>freeramdisk</title>
+ 
+ 		<para>
+ 		Usage: freeramdisk DEVICE
+ 		</para>
+ 
+ 		<para>
+ 		Free all memory used by the ramdisk DEVICE.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ freeramdisk /dev/ram2
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="fsck.minix">
+ 	    <title>fsck.minix</title>
+ 
+ 		<para>
+ 		Usage: fsck.minix [OPTION]... DEVICE
+ 		</para>
+ 
+ 		<para>
+ 		Perform a consistency check on the MINIX filesystem on
+ 		DEVICE.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-l	List all filenames
+ 			-r	Perform interactive repairs
+ 			-a	Perform automatic repairs
+ 			-v	Verbose
+ 			-s	Output super-block information
+ 			-m	Activate MINIX-like "mode not cleared" warnings
+ 			-f	Force file system check.
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="grep">
+ 	    <title>grep</title>
+ 
+ 		<para>
+ 		Usage: grep [OPTIONS]... PATTERN [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Search for PATTERN in each FILE or stdin.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-h	Suppress the prefixing filename on output
+ 			-i	Ignore case distinctions
+ 			-n	Print line number with output lines
+ 			-q	Be quiet. Returns 0 if result was found, 1 otherwise
+ 			-v	Select non-matching lines
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		This version of grep matches full regular expressions.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ grep root /etc/passwd
+ 			root:x:0:0:root:/root:/bin/bash
+ 			$ grep ^[rR]oo. /etc/passwd
+ 			root:x:0:0:root:/root:/bin/bash
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="gunzip">
+ 	    <title>gunzip</title>
+ 
+ 		<para>
+ 		Usage: gunzip [OPTION]... FILE
+ 		</para>
+ 
+ 		<para>
+ 		Uncompress FILE (or stdin if FILE is '-').
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-c	Write output to standard output
+ 			-t	Test compressed file integrity
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ls -la /tmp/BusyBox*
+ 			-rw-rw-r--    1 andersen andersen   557009 Apr 11 10:55 /tmp/BusyBox-0.43.tar.gz
+ 			$ gunzip /tmp/BusyBox-0.43.tar.gz
+ 			$ ls -la /tmp/BusyBox*
+ 			-rw-rw-r--    1 andersen andersen  1761280 Apr 14 17:47 /tmp/BusyBox-0.43.tar
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ <	<sect1 id="gzip">
+ 	    <title>gzip</title>
+ 
+ 		<para>
+ 		Usage: gzip [OPTION]... FILE
+ 		</para>
+ 
+ 		<para>
+ 		Compress FILE (or stdin if FILE is '-') with maximum
+ 		compression to FILE.gz (or stdout if FILE is '-').
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-c	Write output to standard output
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ls -la /tmp/BusyBox*
+ 			-rw-rw-r--    1 andersen andersen  1761280 Apr 14 17:47 /tmp/BusyBox-0.43.tar
+ 			$ gzip /tmp/BusyBox-0.43.tar
+ 			$ ls -la /tmp/BusyBox*
+ 			-rw-rw-r--    1 andersen andersen   554058 Apr 14 17:49 /tmp/BusyBox-0.43.tar.gz
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="halt">
+ 	    <title>halt</title>
+ 
+ 		<para>
+ 		Usage: halt
+ 		</para>
+ 
+ 		<para>
+ 		Halt the system.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="head">
+ 	    <title>head</title>
+ 
+ 		<para>
+ 		Usage: head [OPTION] FILE...
+ 		</para>
+ 
+ 		<para>
+ 		Print first 10 lines of each FILE to standard output.
+ 		With more than one FILE, precede each with a header
+ 		giving the file name. With no FILE, or when FILE is -,
+ 		read standard input.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-n NUM	Print first NUM lines instead of first 10
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ head -n 2 /etc/passwd
+ 			root:x:0:0:root:/root:/bin/bash
+ 			daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="hostid">
+ 	    <title>hostid</title>
+ 
+ 		<para>
+ 		Usage: hostid
+ 		</para>
+ 
+ 		<para>
+ 		Prints out a unique 32-bit identifier for the current
+ 		machine. The 32-bit identifier is intended to be unique
+ 		among all UNIX systems in existence. 
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="hostname">
+ 	    <title>hostname</title>
+ 
+ 		<para>
+ 		Usage: hostname [OPTION]... [HOSTNAME|-F FILE]
+ 		</para>
+ 
+ 		<para>
+ 		Get or set the hostname or DNS domain name. If a
+ 		hostname is given (or a file with the -F parameter), the
+ 		host name will be set.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-s	Short
+ 			-i	Addresses for the hostname
+ 			-d	DNS domain name
+ 			-F FILE	Use the contents of FILE to specify the hostname
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ hostname
+ 			slag
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="id">
+ 	    <title>id</title>
+ 
+ 		<para>
+ 		Usage: id [OPTION]... [USERNAME]
+ 		</para>
+ 
+ 		<para>
+ 		Print information for USERNAME or the current user.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-g	Print only the group ID
+ 			-u	Print only the user ID
+ 			-r	Print the real user ID instead of the effective ID (with -ug)
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ id
+ 			uid=1000(andersen) gid=1000(andersen)
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="init">
+ 	    <title>init</title>
+ 
+ 		<para>
+ 		Usage: init
+ 		</para>
+ 
+ 		<para>
+ 		Init is the parent of all processes.
+ 		</para>
+ 
+ 		<para>
+ 		This version of init is designed to be run only by the
+ 		kernel.
+ 		</para>
+ 
+ 		<para>
+ 		BusyBox init doesn't support multiple runlevels. The
+ 		runlevels field of the /etc/inittab file is completely
+ 		ignored by BusyBox init. If you want runlevels, use
+ 		sysvinit.
+ 		</para>
+ 
+ 		<para>
+ 		BusyBox init works just fine without an inittab. If no
+ 		inittab is found, it has the following default behavior:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			::sysinit:/etc/init.d/rcS
+ 			::askfirst:/bin/sh
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		If it detects that /dev/console is _not_ a serial
+ 		console, it will also run:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			tty2::askfirst:/bin/sh
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		If you choose to use an /etc/inittab file, the inittab
+ 		entry format is as follows:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			&lt;id&gt;:&lt;runlevels&gt;:&lt;action&gt;:&lt;process&gt;
+ 		</screen>
+ 		<para>
+ 
+ 		<sect2>
+ 		    <title>id</title>
+ 			<para>
+                 	WARNING: This field has a non-traditional
+ 			meaning for BusyBox init!  The id field is used
+ 			by BusyBox init to specify the controlling tty
+ 			for the specified process to run on.  The
+ 			contents of this field are appended to "/dev/"
+ 			and used as-is.  There is no need for this field
+ 			to be unique, although if it isn't you may have
+ 			strange results.  If this field is left blank,
+ 			it is completely ignored.  Also note that if
+ 			BusyBox detects that a serial console is in use,
+ 			then all entries containing non-empty id fields
+ 			will _not_ be run.  BusyBox init does nothing
+ 			with utmp.  We don't need no stinkin' utmp.
+ 			</para>
+ 		</sect2>
+ 
+ 		<sect2>
+ 		    <title>runlevels</title>
+ 
+ 			<para>
+                 	The runlevels field is completely ignored.
+ 			</para>
+ 		</sect2>
+ 
+ 		<sect2>
+ 		    <title>action</title>
+ 
+ 			<para>
+                 	Valid actions include: sysinit, respawn,
+ 			askfirst, wait, once, and ctrlaltdel.
+ 			</para>
+ 
+ 			<para>
+                 	askfirst acts just like respawn, but before
+ 			running the specified process it displays the
+ 			line "Please press Enter to activate this
+ 			console." and then waits for the user to press
+ 			enter before starting the specified process.
+ 			</para>
+ 
+ 			<para>
+                 	Unrecognized actions (like initdefault) will
+ 			cause init to emit an error message, and then go
+ 			along with its business.
+ 			</para>
+ 		</sect2>
+ 
+ 		<sect2>
+ 		    <title>process</title>
+ 
+ 			<para>
+                 	Specifies the process to be executed and its
+ 			command line.
+ 			</para>
+ 		</sect2>
+ 
+ 		<para>
+ 		Example /etc/inittab file:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			# This is run first except when booting in single-user mode.
+ 			#
+ 			::sysinit:/etc/init.d/rcS
+ 
+ 			# /bin/sh invocations on selected ttys
+ 			#
+ 			# Start an "askfirst" shell on the console (whatever that may be)
+ 			::askfirst:/bin/sh
+ 			# Start an "askfirst" shell on /dev/tty2
+ 			tty2::askfirst:/bin/sh
+ 
+ 			# /sbin/getty invocations for selected ttys
+ 			#
+ 			tty4::respawn:/sbin/getty 38400 tty4
+ 			tty5::respawn:/sbin/getty 38400 tty5
+ 
+ 			# Example of how to put a getty on a serial line (for a terminal)
+ 			#
+ 			#ttyS0::respawn:/sbin/getty -L ttyS0 9600 vt100
+ 			#ttyS1::respawn:/sbin/getty -L ttyS1 9600 vt100
+ 			#
+ 			# Example how to put a getty on a modem line.
+ 			#ttyS2::respawn:/sbin/getty -x0 -s 57600 ttyS2
+ 
+ 			# Stuff to do before rebooting
+ 			::ctrlaltdel:/bin/umount -a -r &gt; /dev/null 2&gt;&amp;1
+ 			::ctrlaltdel:/sbin/swapoff -a &gt; /dev/null 2&gt;&amp;1
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="insmod">
+ 	    <title>insmod</title>
+ 
+ 		<para>
+ 		Usage: insmod [OPTION]... MODULE [symbol=value]...
+ 		</para>
+ 
+ 		<para>
+ 		Load MODULE into the kernel.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-f	Force module to load into the wrong kernel version.
+ 			-k	Make module autoclean-able.
+ 			-v	Verbose output
+ 			-x	Do not export externs
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="kill">
+ 	    <title>kill</title>
+ 
+ 		<para>
+ 		Usage: kill [OPTION] PID...
+ 		</para>
+ 
+ 		<para>
+ 		Send a signal (default is SIGTERM) to the specified
+ 		PID(s).
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-l	List all signal names and numbers
+ 			-SIG	Send signal SIG
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ps | grep apache
+ 			252 root     root     S [apache]
+ 			263 www-data www-data S [apache]
+ 			264 www-data www-data S [apache]
+ 			265 www-data www-data S [apache]
+ 			266 www-data www-data S [apache]
+ 			267 www-data www-data S [apache]
+ 			$ kill 252
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="killall">
+ 	    <title>killall</title>
+ 
+ 		<para>
+ 		Usage: killall [OPTION] NAME...
+ 		</para>
+ 
+ 		<para>
+ 		Send a signal (default is SIGTERM) to the specified
+ 		NAME(s).
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-l	List all signal names and numbers
+ 			-SIG	Send signal SIG
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ killall apache
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="length">
+ 	    <title>length</title>
+ 
+ 		<para>
+ 		Usage: length STRING
+ 		</para>
+ 
+ 		<para>
+ 		Print the length of STRING.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ length "Hello"
+ 			5
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="ln">
+ 	    <title>ln</title>
+ 
+ 		<para>
+ 		Usage: ln [OPTION]... TARGET FILE|DIRECTORY
+ 		</para>
+ 
+ 		<para>
+ 		Create a link named FILE or DIRECTORY to the specified
+ 		TARGET.  You may use '--' to indicate that all following
+ 		arguments are non-options.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-s	Make symbolic link instead of hard link
+ 			-f	Remove existing destination file
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ln -s BusyBox /tmp/ls
+ 			$ ls -l /tmp/ls
+ 			lrwxrwxrwx    1 root     root            7 Apr 12 18:39 ls -&gt; BusyBox*
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="loadacm">
+ 	    <title>loadacm</title>
+ 
+ 		<para>
+ 		Usage: loadacm
+ 		</para>
+ 
+ 		<para>
+ 		Load an acm from stdin.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ loadacm &lt; /etc/i18n/acmname
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="loadfont">
+ 	    <title>loadfont</title>
+ 
+ 		<para>
+ 		Usage: loadfont
+ 		</para>
+ 
+ 		<para>
+ 		Load a console font from stdin.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ loadfont &lt; /etc/i18n/fontname
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="loadkmap">
+ 	    <title>loadkmap</title>
+ 
+ 		<para>
+ 		Usage: loadkmap
+ 		</para>
+ 
+ 		<para>
+ 		Load a binary keyboard translation table from stdin.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ loadkmap &lt; /etc/i18n/lang-keymap
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="logger">
+ 	    <title>logger</title>
+ 
+ 		<para>
+ 		Usage: logger [OPTION]... [MESSAGE]
+ 		</para>
+ 
+ 		<para>
+ 		Write MESSAGE to the system log.  If MESSAGE is '-', log
+ 		stdin.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-s	Log to stderr as well as the system log
+ 			-t	Log using the specified tag (defaults to user name)
+ 			-p	Enter the message with the specified priority
+ 				This may be numerical or a ``facility.level'' pair
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ logger "hello"
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="logname">
+ 	    <title>logname</title>
+ 
+ 		<para>
+ 		Usage: logname
+ 		</para>
+ 
+ 		<para>
+ 		Print the name of the current user.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ logname
+ 			root
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="ls">
+ 	    <title>ls</title>
+ 
+ 		<para>
+ 		Usage: ls [OPTION]... [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-a	Do not hide entries starting with .
+ 			-c	With  -l:  show ctime (the time of last
+ 				modification of file status information)
+ 			-d	List directory entries instead of contents
+ 			-e	List both full date and full time
+ 			-l	Use a long listing format
+ 			-n	List numeric UIDs and GIDs instead of names
+ 			-p	Append indicator (one of /=@|) to entries
+ 			-u	With -l: show access time (the time of last
+ 				access of the file)
+ 			-x	List entries by lines instead of by columns
+ 			-A	Do not list implied . and ..
+ 			-C	List entries by columns
+ 			-F	Append indicator (one of */=@|) to entries
+ 			-R	List subdirectories recursively
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="lsmod">
+ 	    <title>lsmod</title>
+ 
+ 		<para>
+ 		Usage: lsmod
+ 		</para>
+ 
+ 		<para>
+ 		List currently loaded kernel modules.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="makedevs">
+ 	    <title>makedevs</title>
+ 
+ 		<para>
+ 		Usage: makedevsf NAME TYPE MAJOR MINOR FIRST LAST [s]
+ 		</para>
+ 
+ 		<para>
+ 		Create a range of block or character special files.
+ 		</para>
+ 
+ 		<para>
+ 		TYPE may be:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			b	Make a block (buffered) device
+ 			c or u	Make a character (un-buffered) device
+ 			p	Make a named pipe. MAJOR and MINOR are ignored for named pipes
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		FIRST specifies the number appended to NAME to create
+ 		the first device.  LAST specifies the number of the last
+ 		item that should be created. If 's' is the last
+ 		argument, the base device is created as well.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ makedevs /dev/ttyS c 4 66 2 63
+ 			[creates ttyS2-ttyS63]
+ 			$ makedevs /dev/hda b 3 0 0 8 s
+ 			[creates hda,hda1-hda8]
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="md5sum">
+ 	    <title>md5sum</title>
+ 
+ 		<para>
+ 		Usage: md5sum [OPTION]... FILE...
+ 		</para>
+ 
+ 		<para>
+ 		Print or check MD5 checksums.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-b	Read files in binary mode
+ 			-c	Check MD5 sums against given list
+ 			-t	Read files in text mode (default)
+ 			-g	Read a string
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		The following two options are useful only when verifying
+ 		checksums:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-s	Don't output anything, status code shows success
+ 			-w	Warn about improperly formated MD5 checksum lines
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ md5sum busybox
+ 			6fd11e98b98a58f64ff3398d7b324003  busybox
+ 			$ md5sum -c
+ 			6fd11e98b98a58f64ff3398d7b324003  busybox
+ 			6fd11e98b98a58f64ff3398d7b324002  busybox
+ 			md5sum: MD5 check failed for 'busybox'
+ 			^D
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="mkdir">
+ 	    <title>mkdir</title>
+ 
+ 		<para>
+ 		Usage: mkdir [OPTION]... DIRECTORY...
+ 		</para>
+ 
+ 		<para>
+ 		Create the DIRECTORY(s), if they do not already exist.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-m	Set permission mode (as in chmod), not rwxrwxrwx - umask
+ 			-p	No error if directory exists, make parent directories as needed
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ mkdir /tmp/foo
+ 			$ mkdir /tmp/foo
+ 			/tmp/foo: File exists
+ 			$ mkdir /tmp/foo/bar/baz
+ 			/tmp/foo/bar/baz: No such file or directory
+ 			$ mkdir -p /tmp/foo/bar/baz
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="mkfifo">
+ 	    <title>mkfifo</title>
+ 
+ 		<para>
+ 		Usage: mkfifo [OPTION] NAME
+ 		</para>
+ 
+ 		<para>
+ 		Create a named pipe (identical to 'mknod NAME p').
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-m MODE	Create the pipe using the specified mode (default a=rw)
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="mkfs.minix">
+ 	    <title>mkfs.minix</title>
+ 
+ 		<para>
+ 		Usage: mkfs.minix [OPTION]... NAME [BLOCKS]
+ 		</para>
+ 
+ 		<para>
+ 		Make a MINIX filesystem.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-c		Check the device for bad blocks
+ 			-n [14|30]	Specify the maximum length of filenames
+ 			-i		Specify the number of inodes for the filesystem
+ 			-l FILENAME	Read the bad blocks list from FILENAME
+ 			-v		Make a Minix version 2 filesystem
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="mknod">
+ 	    <title>mknod</title>
+ 
+ 		<para>
+ 		Usage: mknod [OPTION]... NAME TYPE MAJOR MINOR
+ 		</para>
+ 
+ 		<para>
+ 		Create a special file (block, character, or pipe).
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-m	Create the special file using the specified mode (default a=rw)
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		TYPE may be:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			b	Make a block (buffered) device
+ 			c or u	Make a character (un-buffered) device
+ 			p	Make a named pipe. MAJOR and MINOR are ignored for named pipes
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ mknod /dev/fd0 b 2 0 
+ 			$ mknod -m 644 /tmp/pipe p
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="mkswap">
+ 	    <title>mkswap</title>
+ 
+ 		<para>
+ 		Usage: mkswap [OPTION]... DEVICE [BLOCKS]
+ 		</para>
+ 
+ 		<para>
+ 		Prepare a disk partition to be used as a swap partition.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-c	Check for read-ability.
+ 			-v0	Make version 0 swap [max 128 Megs].
+ 			-v1	Make version 1 swap [big!] (default for kernels &gt; 2.1.117).
+ 			BLOCKS	Number of block to use (default is entire partition).
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="mktemp">
+ 	    <title>mktemp</title>
+ 
+ 		<para>
+ 		Usage: mktemp TEMPLATE
+ 		</para>
+ 
+ 		<para>
+ 		Creates a temporary file with its name based on
+ 		TEMPLATE.  TEMPLATE is any name with six `Xs' (i.e.
+ 		/tmp/temp.XXXXXX).
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ mktemp /tmp/temp.XXXXXX
+ 			/tmp/temp.mWiLjM
+ 			$ ls -la /tmp/temp.mWiLjM
+ 			-rw-------    1 andersen andersen        0 Apr 25 17:10 /tmp/temp.mWiLjM
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="more">
+ 	    <title>more</title>
+ 
+ 		<para>
+ 		Usage: more [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Page through text one screenful at a time.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ dmesg | more
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="mount">
+ 	    <title>mount</title>
+ 
+ 		<para>
+ 		Usage: mount [OPTION]...
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 		   or: mount [OPTION]... DEVICE DIRECTORY
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Mount filesystems.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-a	Mount all filesystems in /etc/fstab
+ 			-o	One of the many filesystem options listed below
+ 			-r	Mount the filesystem read-only
+ 			-t TYPE	Specify the filesystem type
+ 			-w	Mount the filesystem read-write
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Options for use with the -o flag:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			async/sync	Writes are asynchronous / synchronous
+ 			atime/noatime	Enable / disable updates to inode access times
+ 			dev/nodev	Allow / disallow use of special device files
+ 			exec/noexec	Allow / disallow use of executable files
+ 			loop		Mount a file via loop device
+ 			suid/nosuid	Allow / disallow set-user-id-root programs
+ 			remount		Remount a currently mounted filesystem
+ 			ro/rw		Mount filesystem read-only / read-write
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		There are even more flags that are filesystem specific.
+ 		You'll have to see the written documentation for those.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ mount
+ 			/dev/hda3 on / type minix (rw)
+ 			proc on /proc type proc (rw)
+ 			devpts on /dev/pts type devpts (rw)
+ 			$ mount /dev/fd0 /mnt -t msdos -o ro
+ 			$ mount /tmp/diskimage /opt -t ext2 -o loop
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="mt">
+ 	    <title>mt</title>
+ 
+ 		<para>
+ 		Usage: mt [OPTION] OPCODE VALUE
+ 		</para>
+ 
+ 		<para>
+ 		Control magnetic tape drive operation.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-f DEVICE	Control DEVICE
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="mv">
+ 	    <title>mv</title>
+ 
+ 		<para>
+ 		Usage: mv SOURCE DEST
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 		   or: mv SOURCE... DIRECTORY
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ mv /tmp/foo /bin/bar
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="nc">
+ 	    <title>nc</title>
+ 
+ 		<para>
+ 		Usage: nc HOST PORT
+ 		</para>
+ 
+ 		<para>
+ 		Open a pipe to HOST:PORT.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ nc foobar.somedomain.com 25
+ 			220 foobar ESMTP Exim 3.12 #1 Sat, 15 Apr 2000 00:03:02 -0600
+ 			help
+ 			214-Commands supported:
+ 			214-    HELO EHLO MAIL RCPT DATA AUTH
+ 			214     NOOP QUIT RSET HELP
+ 			quit
+ 			221 foobar closing connection
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="nslookup">
+ 	    <title>nslookup</title>
+ 
+ 		<para>
+ 		Usage: nslookup [HOST]
+ 		</para>
+ 
+ 		<para>
+ 		Query the nameserver for the IP address of the given
+ 		HOST.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ nslookup localhost
+ 			Server:     default
+ 			Address:    default
+ 
+ 			Name:       debian
+ 			Address:    127.0.0.1
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="ping">
+ 	    <title>ping</title>
+ 
+ 		<para>
+ 		Usage: ping [OPTION]... HOST
+ 		</para>
+ 
+ 		<para>
+ 		Send ICMP ECHO_REQUEST packets to HOST.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-c COUNT	Send only COUNT pings
+ 			-s SIZE		Send SIZE data bytes in packets (default=56)
+ 			-q		Quiet mode, only displays output at start and when finished
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ping localhost
+ 			PING slag (127.0.0.1): 56 data bytes
+ 			64 bytes from 127.0.0.1: icmp_seq=0 ttl=255 time=20.1 ms
+ 
+ 			--- debian ping statistics ---
+ 			1 packets transmitted, 1 packets received, 0% packet loss
+ 			round-trip min/avg/max = 20.1/20.1/20.1 ms
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="poweroff">
+ 	    <title>poweroff</title>
+ 
+ 		<para>
+ 		Usage: poweroff
+ 		</para>
+ 
+ 		<para>
+ 		Shut down the system, and request that the kernel turn
+ 		off power upon halting.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="printf">
+ 	    <title>printf</title>
+ 
+ 		<para>
+ 		Usage: printf FORMAT [ARGUMENT]...
+ 		</para>
+ 
+ 		<para>
+ 		Format and print the given data in a manner similar to
+ 		the C printf command.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ printf "Val=%d\n" 5
+ 			Val=5
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="ps">
+ 	    <title>ps</title>
+ 
+ 		<para>
+ 		Usage: ps
+ 		</para>
+ 
+ 		<para>
+ 		Report process status.  This version of ps accepts no
+ 		options.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ps
+ 			  PID  Uid      Gid State Command
+ 			    1 root     root     S init
+ 			    2 root     root     S [kflushd]
+ 			    3 root     root     S [kupdate]
+ 			    4 root     root     S [kpiod]
+ 			    5 root     root     S [kswapd]
+ 			  742 andersen andersen S [bash]
+ 			  743 andersen andersen S -bash
+ 			  745 root     root     S [getty]
+ 			 2990 andersen andersen R ps
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="pwd">
+ 	    <title>pwd</title>
+ 
+ 		<para>
+ 		Usage: pwd
+ 		</para>
+ 
+ 		<para>
+ 		Print the full filename of the current working
+ 		directory.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ pwd
+ 			/root
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="reboot">
+ 	    <title>reboot</title>
+ 
+ 		<para>
+ 		Usage: reboot
+ 		</para>
+ 
+ 		<para>
+ 		Reboot the system.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="rm">
+ 	    <title>rm</title>
+ 
+ 		<para>
+ 		Usage: rm [OPTION]... FILE...
+ 		</para>
+ 
+ 		<para>
+ 		Remove (unlink) the FILE(s).  You may use '--' to
+ 		indicate that all following arguments are non-options.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-f		Remove existing destinations, never prompt
+ 			-r or -R	Remove the contents of directories recursively
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ rm -rf /tmp/foo
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="rmdir">
+ 	    <title>rmdir</title>
+ 
+ 		<para>
+ 		Usage: rmdir DIRECTORY...
+ 		</para>
+ 
+ 		<para>
+ 		Remove DIRECTORY(s) if they are empty.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ rmdir /tmp/foo
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="rmmod">
+ 	    <title>rmmod</title>
+ 
+ 		<para>
+ 		Usage: rmmod [OPTION]... [MODULE]...
+ 		</para>
+ 
+ 		<para>
+ 		Unload MODULE(s) from the kernel.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-a	Try to remove all unused kernel modules
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ rmmod tulip
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="sed">
+ 	    <title>sed</title>
+ 
+ 		<para>
+ 		Usage: sed [OPTION]... SCRIPT [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Allowed sed scripts come in the following form:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 		ADDR [!] COMMAND
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		ADDR can be:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			NUMBER    Match specified line number
+ 			$         Match last line
+ 			/REGEXP/  Match specified regexp
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		! inverts the meaning of the match
+ 		</para>
+ 
+ 		<para>
+ 		COMMAND can be:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			s/regexp/replacement/[igp]
+ 				which attempt to match regexp against the pattern space
+ 				and if successful replaces the matched portion with replacement.
+ 			aTEXT
+ 				which appends TEXT after the pattern space
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		This version of sed matches full regular expressions.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-e	Add the script to the commands to be executed
+ 			-n	Suppress automatic printing of pattern space
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ echo "foo" | sed -e 's/f[a-zA-Z]o/bar/g'
+ 			bar
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="setkeycodes">
+ 	    <title>setkeycodes</title>
+ 
+ 		<para>
+ 		Usage: setkeycodes SCANCODE KEYCODE ...
+ 		</para>
+ 
+ 		<para>
+ 		Set entries into the kernel's scancode-to-keycode map,
+ 		allowing unusual keyboards to generate usable keycodes.
+ 		</para>
+ 
+ 		<para>
+ 		SCANCODE may be either xx or e0xx (hexadecimal), and
+ 		KEYCODE is given in decimal.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ setkeycodes e030 127
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 
+ 	<sect1 id="sh">
+ 	    <title>sh</title>
+ 
+ 		<para>
+ 		Usage: sh
+ 		</para>
+ 
+ 		<para>
+ 		lash -- the BusyBox LAme SHell (command interpreter)
+ 		</para>
+ 
+ 		<para>
+ 		This command does not yet have proper documentation.  
+ 		</para>
+ 
+ 		<para>
+ 		Use lash just as you would use any other shell. It
+ 		properly handles pipes, redirects, job control, can be
+ 		used as the shell for scripts (#!/bin/sh), and has a
+ 		sufficient set of builtins to do what is needed. It does
+ 		not (yet) support Bourne Shell syntax. If you need
+ 		things like ``if-then-else'', ``while'', and such, use
+ 		ash or bash. If you just need a very simple and
+ 		extremely small shell, this will do the job.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="sleep">
+ 	    <title>sleep</title>
+ 
+ 		<para>
+ 		Usage: sleep N
+ 		</para>
+ 
+ 		<para>
+ 		Pause for N seconds.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ sleep 2
+ 			[2 second delay results]
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="sort">
+ 	    <title>sort</title>
+ 
+ 		<para>
+ 		Usage: sort [OPTION]... [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Sort lines of text in FILE(s).
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-n	Compare numerically
+ 			-r	Reverse after sorting
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ echo -e "e\nf\nb\nd\nc\na" | sort
+ 			a
+ 			b
+ 			c
+ 			d
+ 			e
+ 			f
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="swapoff">
+ 	    <title>swapoff</title>
+ 
+ 		<para>
+ 		Usage: swapoff [OPTION] [DEVICE]
+ 		</para>
+ 
+ 		<para>
+ 		Stop swapping virtual memory pages on DEVICE.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-a	Stop swapping on all swap devices
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="swapon">
+ 	    <title>swapon</title>
+ 
+ 		<para>
+ 		Usage: swapon [OPTION] [DEVICE]
+ 		</para>
+ 
+ 		<para>
+ 		Start swapping virtual memory pages on the given device.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-a	Start swapping on all swap devices
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="sync">
+ 	    <title>sync</title>
+ 
+ 		<para>
+ 		Usage: sync
+ 		</para>
+ 
+ 		<para>
+ 		Write all buffered filesystem blocks to disk.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="syslogd">
+ 	    <title>syslogd</title>
+ 
+ 		<para>
+ 		Usage: syslogd [OPTION]...
+ 		</para>
+ 
+ 		<para>
+ 		Linux system and kernel (provides klogd) logging
+ 		utility. Note that this version of syslogd/klogd ignores
+ 		/etc/syslog.conf.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-m NUM	Interval between MARK lines (default=20min, 0=off)
+ 			-n	Run as a foreground process
+ 			-K	Do not start up the klogd process
+ 			-O FILE	Use an alternate log file (default=/var/log/messages)
+ 			-R HOST[:PORT] Log messages to HOST on PORT (default=514) over UDP.
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 		$ syslogd -R masterlog:514
+ 		$ syslogd -R 192.168.1.1:601
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="tail">
+ 	    <title>tail</title>
+ 
+ 		<para>
+ 		Usage: tail [OPTION] [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Print last 10 lines of each FILE to standard output.
+ 		With more than one FILE, precede each with a header
+ 		giving the file name. With no FILE, or when FILE is -,
+ 		read stdin.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-n NUM	Print last NUM lines instead of last 10
+ 			-f	Output data as the file grows.  This version
+ 				of 'tail -f' supports only one file at a time.
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ tail -n 1 /etc/resolv.conf
+ 			nameserver 10.0.0.1
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="tar">
+ 	    <title>tar</title>
+ 
+ 		<para>
+ 		Usage: tar [MODE] [OPTION] [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		
+ 		</para>
+ 
+ 		<para>
+ 		MODE may be chosen from
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			c	Create
+ 			x	Extract
+ 			t	List
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			f FILE		Use FILE for tarfile (or stdin if '-')
+ 		        O		Extract to stdout
+         		--exclude FILE	Exclude FILE
+ 			v		List files processed
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ zcat /tmp/tarball.tar.gz | tar -xf -
+ 			$ tar -cf /tmp/tarball.tar /usr/local
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="tee">
+ 	    <title>tee</title>
+ 
+ 		<para>
+ 		Usage: tee [OPTION]... [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Copy stdin to FILE(s), and also to stdout.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-a	Append to the given FILEs, do not overwrite
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ echo "Hello" | tee /tmp/foo
+ 			Hello
+ 			$ cat /tmp/foo
+ 			Hello
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="telnet">
+ 	    <title>telnet</title>
+ 
+ 		<para>
+ 		Usage: telnet HOST [PORT]
+ 		</para>
+ 
+ 		<para>
+ 		Establish interactive communication with another
+ 		computer over a network using the TELNET protocol.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="test">
+ 	    <title>test, [</title>
+ 
+ 		<para>
+ 		Usage: test EXPRESSION
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 		   or: [ EXPRESSION ]
+ 
+ 		<para>
+ 		Check file types and compare values returning an exit
+ 		code determined by the value of EXPRESSION.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ test 1 -eq 2
+ 			$ echo $?
+ 			1
+ 			$ test 1 -eq 1
+ 			$ echo $?
+ 			0
+ 			$ [ -d /etc ]
+ 			$ echo $?
+ 			0
+ 			$ [ -d /junk ]
+ 			$ echo $?
+ 			1
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="touch">
+ 	    <title>touch</title>
+ 
+ 		<para>
+ 		Usage: touch [OPTION]... FILE...
+ 		</para>
+ 
+ 		<para>
+ 		Update the last-modified date on (or create) FILE(s).
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-c	Do not create files
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ ls -l /tmp/foo
+ 			/bin/ls: /tmp/foo: No such file or directory
+ 			$ touch /tmp/foo
+ 			$ ls -l /tmp/foo
+ 			-rw-rw-r--    1 andersen andersen        0 Apr 15 01:11 /tmp/foo
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="tr">
+ 	    <title>tr</title>
+ 
+ 		<para>
+ 		Usage: tr [OPTION]... STRING1 [STRING2]
+ 		</para>
+ 
+ 		<para>
+ 		Translate, squeeze, and/or delete characters from stdin,
+ 		writing to stdout.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-c	Take complement of STRING1
+ 			-d	Delete input characters coded STRING1
+ 			-s	Squeeze multiple output characters of STRING2 into one character
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ echo "gdkkn vnqkc" | tr [a-y] [b-z]
+ 			hello world
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="true">
+ 	    <title>true</title>
+ 
+ 		<para>
+ 		Usage: true
+ 		</para>
+ 
+ 		<para>
+ 		Return an exit code of TRUE (1).
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ true
+ 			$ echo $?
+ 			0
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="tty">
+ 	    <title>tty</title>
+ 
+ 		<para>
+ 		Usage: tty
+ 		</para>
+ 
+ 		<para>
+ 		Print the file name of the terminal connected to stdin.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-s	Print nothing, only return an exit status
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ tty
+ 			/dev/tty2
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="umount">
+ 	    <title>umount</title>
+ 
+ 		<para>
+ 		Usage: umount [OPTION]... DEVICE|DIRECTORY
+ 		</para>
+ 
+ 		<para>
+ 		
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-a	Unmount all file systems
+ 			-r	Try to remount devices as read-only if mount is busy
+ 			-f	Force filesystem umount (i.e. unreachable NFS server)
+ 			-l	Do not free loop device (if a loop device has been used)
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ umount /dev/hdc1 
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="uname">
+ 	    <title>uname</title>
+ 
+ 		<para>
+ 		Usage: uname [OPTION]...
+ 		</para>
+ 
+ 		<para>
+ 		Print certain system information. With no OPTION, same
+ 		as -s.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-a	Print all information
+ 			-m	Print the machine (hardware) type
+ 			-n	Print the machine's network node hostname
+ 			-r	Print the operating system release
+ 			-s	Print the operating system name
+ 			-p	Print the host processor type
+ 			-v	Print the operating system version
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ uname -a
+ 			Linux debian 2.2.15pre13 #5 Tue Mar 14 16:03:50 MST 2000 i686 unknown
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="uniq">
+ 	    <title>uniq</title>
+ 
+ 		<para>
+ 		Usage: uniq [INPUT [OUTPUT]]
+ 		</para>
+ 
+ 		<para>
+ 		Discard all but one of successive identical lines from
+ 		INPUT (or stdin), writing to OUTPUT (or stdout).
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ echo -e "a\na\nb\nc\nc\na" | sort | uniq
+ 			a
+ 			b
+ 			c
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="update">
+ 	    <title>update</title>
+ 
+ 		<para>
+ 		Usage: update [OPTION]...
+ 		</para>
+ 
+ 		<para>
+ 		Periodically flush filesystem buffers.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-S	Force use of sync(2) instead of flushing
+ 			-s SECS	Call sync this often (default 30)
+ 			-f SECS	Flush some buffers this often (default 5)
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="uptime">
+ 	    <title>uptime</title>
+ 
+ 		<para>
+ 		Usage: uptime
+ 		</para>
+ 
+ 		<para>
+ 		Display how long the system has been running since boot.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ uptime
+ 			  1:55pm  up  2:30, load average: 0.09, 0.04, 0.00
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="usleep">
+ 	    <title>usleep</title>
+ 
+ 		<para>
+ 		Usage: usleep N
+ 		</para>
+ 
+ 		<para>
+ 		Pause for N microseconds.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ usleep 1000000
+ 			[pauses for 1 second]
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="uudecode">
+ 	    <title>uudecode</title>
+ 
+ 		<para>
+ 		Usage: uudecode [OPTION] [FILE]
+ 		</para>
+ 
+ 		<para>
+ 		Uudecode a uuencoded file.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-o FILE	Direct output to FILE
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ uudecode -o busybox busybox.uu
+ 			$ ls -l busybox
+ 			-rwxr-xr-x   1 ams      ams        245264 Jun  7 21:35 busybox
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="uuencode">
+ 	    <title>uuencode</title>
+ 
+ 		<para>
+ 		Usage: uuencode [OPTION] [INFILE] OUTFILE
+ 		</para>
+ 
+ 		<para>
+ 		Uuencode a file.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-m	Use base64 encoding as of RFC1521
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ uuencode busybox busybox
+ 			begin 755 busybox
+ 			M?T5,1@$!`0````````````(``P`!````L+@$"#0```!0N@,``````#0`(``&amp;
+ 			.....
+ 			$ uudecode busybox busybox &gt; busybox.uu
+ 			$
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="wc">
+ 	    <title>wc</title>
+ 
+ 		<para>
+ 		Usage: wc [OPTION]... [FILE]...
+ 		</para>
+ 
+ 		<para>
+ 		Print line, word, and byte counts for each FILE, and a
+ 		total line if more than one FILE is specified. With no
+ 		FILE, read stdin.
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-c	Print the byte counts
+ 			-l	Print the newline counts
+ 			-L	Print the length of the longest line
+ 			-w	Print the word counts
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ wc /etc/passwd
+ 			     31      46    1365 /etc/passwd
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="which">
+ 	    <title>which</title>
+ 
+ 		<para>
+ 		Usage: which [COMMAND]...
+ 		</para>
+ 
+ 		<para>
+ 		Locate COMMAND(s).
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ which login
+ 			/bin/login
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="whoami">
+ 	    <title>whoami</title>
+ 
+ 		<para>
+ 		Usage: whoami
+ 		</para>
+ 
+ 		<para>
+ 		Print the user name associated with the current
+ 		effective user id.
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			$ whoami
+ 			andersen
+ 		</screen>
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="yes">
+ 	    <title>yes</title>
+ 
+ 		<para>
+ 		Usage: yes [STRING]...
+ 		</para>
+ 
+ 		<para>
+ 		Repeatedly output a line with all specified STRING(s),
+ 		or `y'.
+ 		</para>
+ 	</sect1>
+ 
+ 	<sect1 id="zcat">
+ 	    <title>zcat</title>
+ 
+ 		<para>
+ 		Usage: zcat [OPTION]... FILE
+ 		</para>
+ 
+ 		<para>
+ 		Uncompress FILE (or stdin if FILE is '-') to stdout.  
+ 		</para>
+ 
+ 		<para>
+ 		Options:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 			-t	Test compressed file integrity
+ 		</screen>
+ 		</para>
+ 
+ 		<para>
+ 		Example:
+ 		</para>
+ 
+ 		<para>
+ 		<screen>
+ 		</screen>
+ 		</para>
+ 	</sect1>
+   </chapter>
+ 
+   <chapter id="LIBC-NSS">
+     <title>LIBC NSS</title>
+ 
+ 	<para>
+ 	GNU Libc uses the Name Service Switch (NSS) to configure the
+ 	behavior of the C library for the local environment, and to
+ 	configure how it reads system data, such as passwords and group
+ 	information. BusyBox has made it Policy that it will never use
+ 	NSS, and will never use libc calls that make use of NSS. This
+ 	allows you to run an embedded system without the need for
+ 	installing an /etc/nsswitch.conf file and without /lib/libnss_*
+ 	libraries installed.
+ 	</para>
+ 
+ 	<para>
+ 	If you are using a system that is using a remote LDAP server for
+ 	authentication via GNU libc NSS, and you want to use BusyBox,
+ 	then you will need to adjust the BusyBox source. Chances are
+ 	though, that if you have enough space to install of that stuff
+ 	on your system, then you probably want the full GNU utilities.
+ 	</para>
+   </chapter>
+ 
+   <chapter id="SEE-ALSO">
+     <title>SEE ALSO</title>
+ 
+ 	<para>
+ 	<literal>textutils(1),</literal>
+ 	<literal>shellutils(1),</literal>
+ 	etc...
+ 	</para>
+   </chapter>
+ 
+   <chapter id="MAINTAINER">
+     <title>MAINTAINER</title>
+ 
+ 	<para>
+ 	Erik Andersen &lt;andersee@debian.org&gt; &lt;andersen@lineo.com&gt;
+ 	</para>
+   </chapter>
+ 
+   <chapter id="AUTHORS">
+     <title>AUTHORS</title>
+ 
+ 	<para>
+ 	The following people have contributed code to BusyBox whether
+ 	they know it or not.
+ 	</para>
+ 
+ 	<para>
+ 	Erik Andersen &lt;andersee@debian.org&gt;
+ 	</para>
+ 
+ 	<para>
+ 	John Beppu &lt;beppu@lineo.com&gt;
+ 	</para>
+ 
+ 	<para>
+ 	Brian Candler &lt;B.Candler@pobox.com&gt;
+ 	</para>
+ 
+ 	<para>
+ 	Randolph Chung &lt;tausq@debian.org&gt;
+ 	</para>
+ 
+ 	<para>
+ 	Dave Cinege &lt;dcinege@psychosis.com&gt;	
+ 	</para>
+ 
+ 	<para>
+ 	Karl M. Hegbloom &lt;karlheg@debian.org&gt;
+ 	</para>
+ 
+ 	<para>
+ 	John Lombardo &lt;john@deltanet.com&gt;	
+ 	</para>
+ 
+ 	<para>
+ 	Glenn McGrath &lt;bug1@netconnect.com.au&gt;
+ 	</para>
+ 
+ 	<para>
+ 	Bruce Perens &lt;bruce@perens.com&gt;
+ 	</para>
+ 
+ 	<para>
+ 	Pavel Roskin &lt;proski@gnu.org&gt;
+ 	</para>
+ 
+ 	<para>
+ 	Linus Torvalds &lt;torvalds@transmeta.com&gt;
+ 	</para>
+ 
+ 	<para>
+ 	Charles P. Wright &lt;cpwright@villagenet.com&gt;
+ 	</para>
+ 
+ 	<para>
+ 	Enrique Zanardi &lt;ezanardi@ull.es&gt;
+ 	</para>
+   </chapter>
+ </book>    <!-- End of the book -->
+diff --git a/usage.c b/usage.c
+index a3d302e..1031f24 100644
+--- a/usage.c
++++ b/usage.c
+@@ -1,1296 +1,1296 @@
+ #include "internal.h"
+ 
+ #if defined BB_AR
+ const char ar_usage[] =
+ 	"ar [optxvV] archive [filenames] \n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nExtract or list files from an ar archive.\n\n"
+ 	"Options:\n"
+ 	"\to\t\tpreserve original dates\n"
+ 	"\tp\t\textract to stdout\n"
+ 	"\tt\t\tlist\n"
+ 	"\tx\t\textract\n"
+ 	"\tv\t\tverbosely list files processed\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_BASENAME
+ const char basename_usage[] =
+ 	"basename FILE [SUFFIX]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nStrips directory path and suffixes from FILE.\n"
+ 	"If specified, also removes any trailing SUFFIX.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CAT
+ const char cat_usage[] =
+ 	"cat [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nConcatenates FILE(s) and prints them to stdout.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CHMOD_CHOWN_CHGRP
+ const char chgrp_usage[] =
+ 	"chgrp [OPTION]... GROUP FILE...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nChange the group membership of each FILE to GROUP.\n"
+ 	"\nOptions:\n\t-R\tChanges files and directories recursively.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CHMOD_CHOWN_CHGRP
+ const char chmod_usage[] =
+ 	"chmod [-R] MODE[,MODE]... FILE...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nEach MODE is one or more of the letters ugoa, one of the symbols +-= and\n"
+ 	"one or more of the letters rwxst.\n\n"
+ 	"\nOptions:\n\t-R\tChanges files and directories recursively.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CHMOD_CHOWN_CHGRP
+ const char chown_usage[] =
+ 	"chown [OPTION]...  OWNER[<.|:>[GROUP] FILE...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nChange the owner and/or group of each FILE to OWNER and/or GROUP.\n"
+ 	"\nOptions:\n\t-R\tChanges files and directories recursively.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CHROOT
+ const char chroot_usage[] =
+ 	"chroot NEWROOT [COMMAND...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nRun COMMAND with root directory set to NEWROOT.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CHVT
+ const char chvt_usage[] =
+ 	"chvt N\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nChanges the foreground virtual terminal to /dev/ttyN\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CLEAR
+ const char clear_usage[] =
+ 	"clear\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nClear screen.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CP_MV
+ const char cp_usage[] =
+ 	"cp [OPTION]... SOURCE DEST\n"
+ 	"   or: cp [OPTION]... SOURCE... DIRECTORY\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCopies SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.\n"
+ 	"\n"
+ 	"\t-a\tSame as -dpR\n"
+ 	"\t-d\tPreserves links\n"
+ 	"\t-p\tPreserves file attributes if possible\n"
+ 	"\t-f\tforce (implied; ignored) - always set\n"
+ 	"\t-R\tCopies directories recursively\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CUT
+ const char cut_usage[] =
+ 	"cut [OPTION]... [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints selected fields from each input FILE to standard output.\n\n"
+ 	"Options:\n"
+ 	"\t-b LIST\tOutput only bytes from LIST\n"
+ 	"\t-c LIST\tOutput only characters from LIST\n"
+ 	"\t-d CHAR\tUse CHAR instead of tab as the field delimiter\n"
+-	"\t-s\tOnly output Lines if the include DELIM\n"
++	"\t-s\tOutput only the lines containing delimiter\n"
+ 	"\t-f N\tPrint only these fields\n"
+ 	"\t-n\tIgnored\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DATE
+ const char date_usage[] =
+ 	"date [OPTION]... [+FORMAT]\n"
+ 	"  or:  date [OPTION] [MMDDhhmm[[CC]YY][.ss]]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nDisplays the current time in the given FORMAT, or sets the system date.\n"
+ 	"\nOptions:\n\t-R\tOutputs RFC-822 compliant date string\n"
+ 	"\t-s\tSets time described by STRING\n"
+ 	"\t-u\tPrints or sets Coordinated Universal Time\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DC
+ const char dc_usage[] =
+ 	"dc expression ...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nThis is a Tiny RPN calculator that understands the\n"
+ 	"following operations: +, -, /, *, and, or, not, eor.\n"
+ 	"i.e. 'dc 2 2 add' -> 4, and 'dc 8 8 \\* 2 2 + /' -> 16\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DD
+ const char dd_usage[] =
+ 	"dd [if=FILE] [of=FILE] [bs=N] [count=N] [skip=N] [seek=N]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCopy a file, converting and formatting according to options\n\n"
+ 	"\tif=FILE\tread from FILE instead of stdin\n"
+ 	"\tof=FILE\twrite to FILE instead of stdout\n"
+ 	"\tbs=N\tread and write N bytes at a time\n"
+ 	"\tcount=N\tcopy only N input blocks\n"
+ 	"\tskip=N\tskip N input blocks\n"
+ 	"\tseek=N\tskip N output blocks\n"
+ 	"\n"
+ 	"Numbers may be suffixed by w (x2), k (x1024), b (x512), or M (x1024^2)\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DEALLOCVT
+ const char deallocvt_usage[] =
+ 	"deallocvt N\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	 "\nDeallocate unused virtual terminal /dev/ttyN\n"
+ #endif
+ 	 ;
+ #endif
+ 
+ #if defined BB_DF
+ const char df_usage[] =
+ 	"df [filesystem ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint the filesystem space used and space available.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DIRNAME
+ const char dirname_usage[] =
+ 	"dirname [FILENAME ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nStrips non-directory suffix from FILENAME\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DMESG
+ const char dmesg_usage[] =
+ 	"dmesg [-c] [-n LEVEL] [-s SIZE]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints or controls the kernel ring buffer\n\n"
+ 	"Options:\n"
+ 	"\t-c\t\tClears the ring buffer's contents after printing\n"
+ 	"\t-n LEVEL\tSets console logging level\n"
+ 	"\t-s SIZE\t\tUse a buffer of size SIZE\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DU
+ const char du_usage[] =
+ 	"du [OPTION]... [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSummarizes disk space used for each FILE and/or directory.\n"
+ 	"Disk space is printed in units of 1024 bytes.\n\n"
+ 	"Options:\n"
+ 	"\t-l\tcount sizes many times if hard linked\n"
+ 	"\t-s\tdisplay only a total for each argument\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DUMPKMAP
+ const char dumpkmap_usage[] =
+ 	"dumpkmap\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints out a binary keyboard translation table to standard input.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_DUTMP
+ const char dutmp_usage[] =
+ 	"dutmp [FILE]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nDump utmp file format (pipe delimited) from FILE\n"
+ 	"or stdin to stdout.  (i.e. 'dutmp /var/run/utmp')\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_ECHO
+ const char echo_usage[] =
+ 	"echo [-neE] [ARG ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints the specified ARGs to stdout\n\n"
+ 	"Options:\n"
+ 	"\t-n\tsuppress trailing newline\n"
+ 	"\t-e\tinterpret backslash-escaped characters (i.e. \\t=tab etc)\n"
+ 	"\t-E\tdisable interpretation of backslash-escaped characters\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TRUE_FALSE
+ const char false_usage[] =
+ 	"false\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nReturn an exit code of FALSE (1).\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_FDFLUSH
+ const char fdflush_usage[] =
+ 	"fdflush DEVICE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nForces floppy disk drive to detect disk change\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_FIND
+ const char find_usage[] =
+ 	"find [PATH...] [EXPRESSION]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSearch for files in a directory hierarchy.  The default PATH is\n"
+ 	"the current directory; default EXPRESSION is '-print'\n\n"
+ 	"\nEXPRESSION may consist of:\n"
+ 	"\t-follow\t\tDereference symbolic links.\n"
+ 	"\t-name PATTERN\tFile name (leading directories removed) matches PATTERN.\n"
+ 	"\t-print\t\tprint the full file name followed by a newline to stdout.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_FREE
+ const char free_usage[] =
+ 	"free\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nDisplays the amount of free and used system memory\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_FREERAMDISK
+ const char freeramdisk_usage[] =
+ 	"freeramdisk DEVICE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nFrees all memory used by the specified ramdisk.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_FSCK_MINIX
+ const char fsck_minix_usage[] =
+ 	"Usage: fsck.minix [-larvsmf] /dev/name\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPerforms a consistency check for MINIX filesystems.\n\n"
+ 	"Options:\n"
+ 	"\t-l\tLists all filenames\n"
+ 	"\t-r\tPerform interactive repairs\n"
+ 	"\t-a\tPerform automatic repairs\n"
+ 	"\t-v\tverbose\n"
+ 	"\t-s\tOutputs super-block information\n"
+ 	"\t-m\tActivates MINIX-like \"mode not cleared\" warnings\n"
+ 	"\t-f\tForce file system check.\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_GREP
+ const char grep_usage[] =
+ 	"grep [-ihHnqvs] pattern [files...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSearch for PATTERN in each FILE or standard input.\n\n"
+ 	"Options:\n"
+ 	"\t-H\tprefix output lines with filename where match was found\n"
+ 	"\t-h\tsuppress the prefixing filename on output\n"
+ 	"\t-i\tignore case distinctions\n"
+ 	"\t-n\tprint line number with output lines\n"
+ 	"\t-q\tbe quiet. Returns 0 if result was found, 1 otherwise\n"
+ 	"\t-v\tselect non-matching lines\n"
+ 	"\t-s\tsuppress file open/read error messages\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_GUNZIP
+ const char gunzip_usage[] =
+ 	"gunzip [OPTION]... FILE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nUncompress FILE (or standard input if FILE is '-').\n\n"
+ 	"Options:\n"
+ 	"\t-c\tWrite output to standard output\n"
+ 	"\t-t\tTest compressed file integrity\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_GZIP
+ const char gzip_usage[] =
+ 	"gzip [OPTION]... FILE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCompress FILE with maximum compression.\n"
+ 	"When FILE is '-', reads standard input.  Implies -c.\n\n"
+ 	"Options:\n"
+ 	"\t-c\tWrite output to standard output instead of FILE.gz\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_HALT
+ const char halt_usage[] =
+ 	"halt\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nHalt the system.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_HEAD
+ const char head_usage[] =
+ 	"head [OPTION] [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint first 10 lines of each FILE to standard output.\n"
+ 	"With more than one FILE, precede each with a header giving the\n"
+ 	"file name. With no FILE, or when FILE is -, read standard input.\n\n"
+ 
+ 	"Options:\n" "\t-n NUM\t\tPrint first NUM lines instead of first 10\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_HOSTID
+ const char hostid_usage[] =
+ 	"hostid\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint out a unique 32-bit identifier for the machine.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_HOSTNAME
+ const char hostname_usage[] =
+ 	"hostname [OPTION] {hostname | -F file}\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nGet or set the hostname or DNS domain name. If a hostname is given\n"
+ 	"(or a file with the -F parameter), the host name will be set.\n\n"
+ 	"Options:\n"
+ 	"\t-s\t\tShort\n"
+ 
+ 	"\t-i\t\tAddresses for the hostname\n"
+ 	"\t-d\t\tDNS domain name\n"
+ 	"\t-F FILE\t\tUse the contents of FILE to specify the hostname\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_ID
+ const char id_usage[] =
+ 	"id [OPTIONS]... [USERNAME]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint information for USERNAME or the current user\n\n"
+ 	"Options:\n"
+ 	"\t-g\tprints only the group ID\n"
+ 	"\t-u\tprints only the user ID\n"
+ 	"\t-r\tprints the real user ID instead of the effective ID (with -ug)\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_INSMOD
+ const char insmod_usage[] =
+ 	"insmod [OPTION]... MODULE [symbol=value]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nLoads the specified kernel modules into the kernel.\n\n"
+ 	"Options:\n"
+ 	"\t-f\tForce module to load into the wrong kernel version.\n"
+ 	"\t-k\tMake module autoclean-able.\n"
+ 	"\t-v\tverbose output\n" "\t-x\tdo not export externs\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_KILL
+ const char kill_usage[] =
+ 	"kill [-signal] process-id [process-id ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSend a signal (default is SIGTERM) to the specified process(es).\n\n"
+ 	"Options:\n" "\t-l\tList all signal names and numbers.\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_KILLALL
+ const char killall_usage[] =
+ 	"killall [-signal] process-name [process-name ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSend a signal (default is SIGTERM) to the specified process(es).\n\n"
+ 	"Options:\n" "\t-l\tList all signal names and numbers.\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LENGTH
+ const char length_usage[] =
+ 	"length STRING\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints out the length of the specified STRING.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LN
+ const char ln_usage[] =
+ 	"ln [OPTION] TARGET... LINK_NAME|DIRECTORY\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreate a link named LINK_NAME or DIRECTORY to the specified TARGET\n"
+ 	"\nYou may use '--' to indicate that all following arguments are non-options.\n\n"
+ 	"Options:\n"
+ 	"\t-s\tmake symbolic links instead of hard links\n"
+ 
+ 	"\t-f\tremove existing destination files\n"
+ 	"\t-n\tno dereference symlinks - treat like normal file\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LOADACM
+ const char loadacm_usage[] =
+ 	"loadacm\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nLoads an acm from standard input.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LOADFONT
+ const char loadfont_usage[] =
+ 	"loadfont\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"Loads a console font from standard input.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LOADKMAP
+ const char loadkmap_usage[] =
+ 	"loadkmap\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nLoads a binary keyboard translation table from standard input.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LOGGER
+ const char logger_usage[] =
+ 	"logger [OPTION]... [MESSAGE]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nWrite MESSAGE to the system log.  If MESSAGE is '-', log stdin.\n\n"
+ 	"Options:\n"
+ 	"\t-s\tLog to stderr as well as the system log.\n"
+ 	"\t-t\tLog using the specified tag (defaults to user name).\n"
+ 
+ 	"\t-p\tEnter the message with the specified priority.\n"
+ 	"\t\tThis may be numerical or a ``facility.level'' pair.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LOGNAME
+ const char logname_usage[] =
+ 	"logname\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint the name of the current user.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LS
+ const char ls_usage[] =
+ 	"ls [-1a"
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"c"
+ #endif
+ 	"d"
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"e"
+ #endif
+ 	"ln"
+ #ifdef BB_FEATURE_LS_FILETYPES
+ 	"p"
+ #endif
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"u"
+ #endif
+ 	"xAC"
+ #ifdef BB_FEATURE_LS_FILETYPES
+ 	"F"
+ #endif
+ #ifdef BB_FEATURE_LS_RECURSIVE
+ 	"R"
+ #endif
+ 	"] [filenames...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nList directory contents\n\n"
+ 	"Options:\n"
+ 	"\t-a\tdo not hide entries starting with .\n"
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"\t-c\twith -l: show ctime (the time of last\n"
+ 	"\t\tmodification of file status information)\n"
+ #endif
+ 	"\t-d\tlist directory entries instead of contents\n"
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"\t-e\tlist both full date and full time\n"
+ #endif
+ 	"\t-l\tuse a long listing format\n"
+ 	"\t-n\tlist numeric UIDs and GIDs instead of names\n"
+ #ifdef BB_FEATURE_LS_FILETYPES
+ 	"\t-p\tappend indicator (one of /=@|) to entries\n"
+ #endif
+ #ifdef BB_FEATURE_LS_TIMESTAMPS
+ 	"\t-u\twith -l: show access time (the time of last\n"
+ 	"\t\taccess of the file)\n"
+ #endif
+ 	"\t-x\tlist entries by lines instead of by columns\n"
+ 	"\t-A\tdo not list implied . and ..\n"
+ 	"\t-C\tlist entries by columns\n"
+ #ifdef BB_FEATURE_LS_FILETYPES
+ 	"\t-F\tappend indicator (one of */=@|) to entries\n"
+ #endif
+ #ifdef BB_FEATURE_LS_RECURSIVE
+ 	"\t-R\tlist subdirectories recursively\n"
+ #endif
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_LSMOD
+ const char lsmod_usage[] =
+ 	"lsmod\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nList the currently loaded kernel modules.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MAKEDEVS
+ const char makedevs_usage[] =
+ 	"makedevs NAME TYPE MAJOR MINOR FIRST LAST [s]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreates a range of block or character special files\n\n"
+ 	"TYPEs include:\n"
+ 	"\tb:\tMake a block (buffered) device.\n"
+ 	"\tc or u:\tMake a character (un-buffered) device.\n"
+ 	"\tp:\tMake a named pipe. MAJOR and MINOR are ignored for named pipes.\n\n"
+ 	"FIRST specifies the number appended to NAME to create the first device.\n"
+ 	"LAST specifies the number of the last item that should be created.\n"
+ 	"If 's' is the last argument, the base device is created as well.\n\n"
+ 	"For example:\n"
+ 	"\tmakedevs /dev/ttyS c 4 66 2 63   ->  ttyS2-ttyS63\n"
+ 	"\tmakedevs /dev/hda b 3 0 0 8 s    ->  hda,hda1-hda8\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MD5SUM
+ const char md5sum_usage[] =
+ 	"md5sum [OPTION] [FILE]...\n"
+ 	"or:    md5sum [OPTION] -c [FILE]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint or check MD5 checksums.\n\n"
+ 	"Options:\n"
+ 	"With no FILE, or when FILE is -, read standard input.\n\n"
+ 	"\t-b\tread files in binary mode\n"
+ 	"\t-c\tcheck MD5 sums against given list\n"
+ 	"\t-t\tread files in text mode (default)\n"
+ 	"\t-g\tread a string\n"
+ 	"\nThe following two options are useful only when verifying checksums:\n"
+ 	"\t-s,\tdon't output anything, status code shows success\n"
+ 	"\t-w,\twarn about improperly formated MD5 checksum lines\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKDIR
+ const char mkdir_usage[] =
+ 	"mkdir [OPTION] DIRECTORY...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreate the DIRECTORY(ies), if they do not already exist\n\n"
+ 	"Options:\n"
+ 
+ 	"\t-m\tset permission mode (as in chmod), not rwxrwxrwx - umask\n"
+ 	"\t-p\tno error if existing, make parent directories as needed\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKFIFO
+ const char mkfifo_usage[] =
+ 	"mkfifo [OPTIONS] name\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreates a named pipe (identical to 'mknod name p')\n\n"
+ 	"Options:\n"
+ 	"\t-m\tcreate the pipe using the specified mode (default a=rw)\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKFS_MINIX
+ const char mkfs_minix_usage[] =
+ 	"mkfs.minix [-c | -l filename] [-nXX] [-iXX] /dev/name [blocks]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nMake a MINIX filesystem.\n\n"
+ 	"Options:\n"
+ 	"\t-c\t\tCheck the device for bad blocks\n"
+ 	"\t-n [14|30]\tSpecify the maximum length of filenames\n"
+ 	"\t-i INODES\tSpecify the number of inodes for the filesystem\n"
+ 	"\t-l FILENAME\tRead the bad blocks list from FILENAME\n"
+ 	"\t-v\t\tMake a Minix version 2 filesystem\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKNOD
+ const char mknod_usage[] =
+ 	"mknod [OPTIONS] NAME TYPE MAJOR MINOR\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreate a special file (block, character, or pipe).\n\n"
+ 	"Options:\n"
+ 	"\t-m\tcreate the special file using the specified mode (default a=rw)\n\n"
+ 	"TYPEs include:\n"
+ 	"\tb:\tMake a block (buffered) device.\n"
+ 	"\tc or u:\tMake a character (un-buffered) device.\n"
+ 	"\tp:\tMake a named pipe. MAJOR and MINOR are ignored for named pipes.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKSWAP
+ const char mkswap_usage[] =
+ 	"mkswap [-c] [-v0|-v1] device [block-count]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrepare a disk partition to be used as a swap partition.\n\n"
+ 	"Options:\n" "\t-c\t\tCheck for read-ability.\n"
+ 	"\t-v0\t\tMake version 0 swap [max 128 Megs].\n"
+ 	"\t-v1\t\tMake version 1 swap [big!] (default for kernels > 2.1.117).\n"
+ 
+ 	"\tblock-count\tNumber of block to use (default is entire partition).\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MKTEMP
+ const char mktemp_usage[] =
+ 	"mktemp [-q] TEMPLATE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreates a temporary file with its name based on TEMPLATE.\n"
+ 	"TEMPLATE is any name with six `Xs' (i.e. /tmp/temp.XXXXXX).\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MORE
+ const char more_usage[] =
+ 	"more [FILE ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nMore is a filter for viewing FILE one screenful at a time.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MOUNT
+ const char mount_usage[] = 
+ 	"mount [flags] device directory [-o options,more-options]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nMount a filesystem\n\n"
+ 	"Flags:\n" 
+ 	"\t-a:\t\tMount all filesystems in fstab.\n"
+ #ifdef BB_MTAB
+ 	"\t-f:\t\t\"Fake\" mount. Add entry to mount table but don't mount it.\n"
+ 	"\t-n:\t\tDon't write a mount table entry.\n"
+ #endif
+ 	"\t-o option:\tOne of many filesystem options, listed below.\n"
+ 	"\t-r:\t\tMount the filesystem read-only.\n"
+ 	"\t-t fs-type:\tSpecify the filesystem type.\n"
+ 	"\t-w:\t\tMount for reading and writing (default).\n"
+ 	"\n"
+ 	"Options for use with the \"-o\" flag:\n"
+ 	"\tasync/sync:\tWrites are asynchronous / synchronous.\n"
+ 	"\tatime/noatime:\tEnable / disable updates to inode access times.\n"
+ 	"\tdev/nodev:\tAllow use of special device files / disallow them.\n"
+ 	"\texec/noexec:\tAllow use of executable files / disallow them.\n"
+ #if defined BB_FEATURE_MOUNT_LOOP
+ 	"\tloop:\t\tMounts a file via loop device.\n"
+ #endif
+ 	"\tsuid/nosuid:\tAllow set-user-id-root programs / disallow them.\n"
+ 	"\tremount:\tRe-mount a currently-mounted filesystem, changing its flags.\n"
+ 	"\tro/rw:\t\tMount for read-only / read-write.\n"
+ 	"\nThere are EVEN MORE flags that are specific to each filesystem.\n"
+ 	"You'll have to see the written documentation for those.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_MT
+ const char mt_usage[] =
+ 	"mt [-f device] opcode value\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nControl magnetic tape drive operation\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_CP_MV
+ const char mv_usage[] =
+ 	"mv SOURCE DEST\n"
+ 	"   or: mv SOURCE... DIRECTORY\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nRename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_NC
+ const char nc_usage[] =
+ 	"nc [IP] [port]\n" 
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nNetcat opens a pipe to IP:port\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_NSLOOKUP
+ const char nslookup_usage[] =
+ 	"nslookup [HOST]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nQueries the nameserver for the IP address of the given HOST\n"
+ #endif
+ ;
+ #endif
+ 
+ #if defined BB_PING
+ #if defined BB_FEATURE_SIMPLE_PING
+ const char ping_usage[] =
+ 	"ping host\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSend ICMP ECHO_REQUEST packets to network hosts\n"
+ #endif
+ 	;
+ #else /* ! defined BB_FEATURE_SIMPLE_PING */
+ const char ping_usage[] =
+ 	"ping [OPTION]... host\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSend ICMP ECHO_REQUEST packets to network hosts.\n\n"
+ 	"Options:\n"
+ 	"\t-c COUNT\tSend only COUNT pings.\n"
+ 	"\t-s SIZE\t\tSend SIZE data bytes in packets (default=56).\n"
+ 	"\t-q\t\tQuiet mode, only displays output at start\n"
+ 	"\t\t\tand when finished.\n"
+ #endif
+ 	;
+ #endif
+ #endif
+ 
+ #if defined BB_POWEROFF
+ const char poweroff_usage[] =
+ 	"poweroff\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nHalt the system and request that the kernel shut off the power.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_PRINTF
+ const char printf_usage[] =
+ 	"printf FORMAT [ARGUMENT...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nFormats and prints ARGUMENT(s) according to FORMAT,\n"
+ 	"Where FORMAT controls the output exactly as in C printf.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_PS
+ const char ps_usage[] =
+ 	"ps\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nReport process status\n"
+ 	"\nThis version of ps accepts no options.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_PWD
+ const char pwd_usage[] =
+ 	"pwd\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint the full filename of the current working directory.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_REBOOT
+ const char reboot_usage[] =
+ 	"reboot\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nReboot the system.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_RM
+ const char rm_usage[] =
+ 	"rm [OPTION]... FILE...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nRemove (unlink) the FILE(s).  You may use '--' to\n"
+ 	"indicate that all following arguments are non-options.\n\n"
+ 	"Options:\n"
+ 	"\t-f\t\tremove existing destinations, never prompt\n"
+ 	"\t-r or -R\tremove the contents of directories recursively\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_RMDIR
+ const char rmdir_usage[] =
+ 	"rmdir [OPTION]... DIRECTORY...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nRemove the DIRECTORY(ies), if they are empty.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_RMMOD
+ const char rmmod_usage[] =
+ 	"rmmod [OPTION]... [MODULE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nUnloads the specified kernel modules from the kernel.\n\n"
+ 	"Options:\n" 
+ 	"\t-a\tTry to remove all unused kernel modules.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SED
+ const char sed_usage[] =
+ 	"sed [-Vhnef] pattern [files...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\n"
+ 	"-n\tsuppress automatic printing of pattern space\n"
+ 	"-e script\tadd the script to the commands to be executed\n"
+ 	"-f scriptfile\tadd the contents of script-file to the commands to be executed\n"
+ 	"-h\tdisplay this help message\n"
+ 	"\n"
+ 	"If no -e or -f is given, the first non-option argument is taken as the\n"
+ 	"sed script to interpret. All remaining arguments are names of input\n"
+ 	"files; if no input files are specified, then the standard input is read.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SETKEYCODES
+ const char setkeycodes_usage[] =
+ 	"setkeycodes SCANCODE KEYCODE ...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSet entries into the kernel's scancode-to-keycode map,\n"
+ 	"allowing unusual keyboards to generate usable keycodes.\n\n" 
+ 	"SCANCODE may be either xx or e0xx (hexadecimal),\n"
+ 	"and KEYCODE is given in decimal\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SH
+ const char shell_usage[] =
+ 	"sh [FILE]...\n"
+ 	"   or: sh -c command [args]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nlash: The BusyBox command interpreter (shell).\n\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SLEEP
+ const char sleep_usage[] =
+ 	"sleep N\n" 
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPause for N seconds.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SORT
+ const char sort_usage[] =
+ 	"sort [-n]"
+ #ifdef BB_FEATURE_SORT_REVERSE
+ 	" [-r]"
+ #endif
+ 	" [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nSorts lines of text in the specified files\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SWAPONOFF
+ const char swapoff_usage[] =
+ 	"swapoff [OPTION] [device]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nStop swapping virtual memory pages on the given device.\n\n"
+ 	"Options:\n"
+ 	"\t-a\tStop swapping on all swap devices\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SWAPONOFF
+ const char swapon_usage[] =
+ 	"swapon [OPTION] [device]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nStart swapping virtual memory pages on the given device.\n\n"
+ 	"Options:\n"
+ 	"\t-a\tStart swapping on all swap devices\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SYNC
+ const char sync_usage[] =
+ 	"sync\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nWrite all buffered filesystem blocks to disk.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_SYSLOGD
+ const char syslogd_usage[] =
+ 	"syslogd [OPTION]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nLinux system and kernel (provides klogd) logging utility.\n"
+ 	"Note that this version of syslogd/klogd ignores /etc/syslog.conf.\n\n"
+ 	"Options:\n"
+ 	"\t-m NUM\t\tInterval between MARK lines (default=20min, 0=off)\n"
+ 	"\t-n\t\tRun as a foreground process\n"
+ #ifdef BB_FEATURE_KLOGD
+ 	"\t-K\t\tDo not start up the klogd process\n"
+ #endif
+ 	"\t-O FILE\t\tUse an alternate log file (default=/var/log/messages)\n"
+ #ifdef BB_FEATURE_REMOTE_LOG
+ 	"\t-R HOST[:PORT]\t\tLog remotely to IP or hostname on PORT (default PORT=514/UDP)\n"
+ #endif
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TAIL
+ #if defined BB_FEATURE_SIMPLE_TAIL
+ const char tail_usage[] =
+ 	"tail [OPTION] [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint last 10 lines of each FILE to standard output.\n"
+ 	"With more than one FILE, precede each with a header giving the\n"
+ 	"file name. With no FILE, or when FILE is -, read standard input.\n\n"
+ 	"Options:\n"
+ 	"\t-n NUM\t\tPrint last NUM lines instead of first 10\n"
+ 
+ 	"\t-f\t\tOutput data as the file grows.  This version\n"
+ 	"\t\t\tof 'tail -f' supports only one file at a time.\n"
+ #endif
+ 	;
+ #else /* ! defined BB_FEATURE_SIMPLE_TAIL */
+ const char tail_usage[] =
+ 	"tail [OPTION]... [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint last 10 lines of each FILE to standard output.\n"
+ 	"With more than one FILE, precede each with a header giving the file name.\n"
+ 	"With no FILE, or when FILE is -, read standard input.\n"
+ 	"\n"
+ 	"  -c=N[kbm]       output the last N bytes\n"
+ 	"  -f              output appended data as the file grows\n"
+ 	"  -n=N            output the last N lines, instead of last 10\n"
+ 	"  -q              never output headers giving file names\n"
+ 	"  -v              always output headers giving file names\n"
+ 	"\n"
+ 	"If the first character of N (bytes or lines) is a `+', output begins with \n"
+ 	"the Nth item from the start of each file, otherwise, print the last N items\n"
+ 	"in the file.  N bytes may be suffixed by k (x1024), b (x512), or m (1024^2).\n"
+ #endif
+ 	;
+ #endif
+ #endif
+ 
+ #if defined BB_TAR
+ const char tar_usage[] =
+ #ifdef BB_FEATURE_TAR_CREATE
+ 	"tar -[cxtvO] "
+ #else
+ 	"tar -[xtvO] "
+ #endif
+ #if defined BB_FEATURE_TAR_EXCLUDE
+ 	"[--exclude File] "
+ #endif
+ 	"[-f tarFile] [FILE] ...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCreate, extract, or list files from a tar file.  Note that\n"
+ 	"this version of tar treats hard links as separate files.\n\n"
+ 	"Main operation mode:\n"
+ #ifdef BB_FEATURE_TAR_CREATE
+ 	"\tc\t\tcreate\n"
+ #endif
+ 	"\tx\t\textract\n"
+ 	"\tt\t\tlist\n"
+ 	"\nFile selection:\n"
+ 	"\tf\t\tname of tarfile or \"-\" for stdin\n"
+ 	"\tO\t\textract to stdout\n"
+ #if defined BB_FEATURE_TAR_EXCLUDE
+ 	"\t--exclude\tfile to exclude\n"
+ #endif
+ 	"\nInformative output:\n"
+ 	"\tv\t\tverbosely list files processed\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TEE
+ const char tee_usage[] =
+ 	"tee [OPTION]... [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nCopy standard input to each FILE, and also to standard output.\n\n"
+ 	"Options:\n" "\t-a\tappend to the given FILEs, do not overwrite\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TELNET
+ const char telnet_usage[] =
+ 	"telnet host [port]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nTelnet is used to establish interactive communication with another\n"
+ 	"computer over a network using the TELNET protocol.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TEST
+ const char test_usage[] =
+ 	"test EXPRESSION\n"
+ 	"or   [ EXPRESSION ]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nChecks file types and compares values returning an exit\n"
+ 	"code determined by the value of EXPRESSION.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TOUCH
+ const char touch_usage[] =
+ 	"touch [-c] file [file ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nUpdate the last-modified date on the given file[s].\n\n"
+ 	"Options:\n"
+ 	"\t-c\tDo not create any files\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TR
+ const char tr_usage[] =
+ 	"tr [-cds] STRING1 [STRING2]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nTranslate, squeeze, and/or delete characters from\n"
+ 	"standard input, writing to standard output.\n\n"
+ 	"Options:\n"
+ 	"\t-c\ttake complement of STRING1\n"
+ 	"\t-d\tdelete input characters coded STRING1\n"
+ 	"\t-s\tsqueeze multiple output characters of STRING2 into one character\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TRUE_FALSE
+ const char true_usage[] =
+ 	"true\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nReturn an exit code of TRUE (0).\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_TTY
+ const char tty_usage[] =
+ 	"tty\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint the file name of the terminal connected to standard input.\n\n"
+ 	"Options:\n"
+ 	"\t-s\tprint nothing, only return an exit status\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UMOUNT
+ const char umount_usage[] =
+ 	"umount [flags] filesystem|directory\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"Unmount file systems\n"
+ 	"\nFlags:\n" "\t-a:\tUnmount all file systems"
+ #ifdef BB_MTAB
+ 	" in /etc/mtab\n\t-n:\tDon't erase /etc/mtab entries\n"
+ #else
+ 	"\n"
+ #endif
+ 	"\t-r:\tTry to remount devices as read-only if mount is busy\n"
+ #if defined BB_FEATURE_MOUNT_FORCE
+ 	"\t-f:\tForce filesystem umount (i.e. unreachable NFS server)\n"
+ #endif
+ #if defined BB_FEATURE_MOUNT_LOOP
+ 	"\t-l:\tDo not free loop device (if a loop device has been used)\n"
+ #endif
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UNAME
+ const char uname_usage[] =
+ 	"uname [OPTION]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint certain system information.  With no OPTION, same as -s.\n\n"
+ 	"Options:\n"
+ 	"\t-a\tprint all information\n"
+ 	"\t-m\tthe machine (hardware) type\n"
+ 	"\t-n\tprint the machine's network node hostname\n"
+ 	"\t-r\tprint the operating system release\n"
+ 	"\t-s\tprint the operating system name\n"
+ 
+ 	"\t-p\tprint the host processor type\n"
+ 	"\t-v\tprint the operating system version\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UNIQ
+ const char uniq_usage[] =
+ 	"uniq [OPTION]... [INPUT [OUTPUT]]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nDiscard all but one of successive identical lines from INPUT\n"
+ 	"(or standard input), writing to OUTPUT (or standard output).\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UPDATE
+ const char update_usage[] =
+ 	"update [options]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPeriodically flushes filesystem buffers.\n\n"
+ 	"Options:\n"
+ 	"\t-S\tforce use of sync(2) instead of flushing\n"
+ 	"\t-s SECS\tcall sync this often (default 30)\n"
+ 	"\t-f SECS\tflush some buffers this often (default 5)\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UPTIME
+ const char uptime_usage[] =
+ 	"uptime\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nDisplay the time since the last boot.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_USLEEP
+ const char usleep_usage[] =
+ 	"usleep N\n" 
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPause for N microseconds.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UUDECODE
+ const char uudecode_usage[] =
+ 	"uudecode [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nUudecode a file that is uuencoded.\n\n"
+ 	"Options:\n"
+ 	"\t-o FILE\tdirect output to FILE\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_UUENCODE
+ const char uuencode_usage[] =
+ 	"uuencode [OPTION] [INFILE] REMOTEFILE\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nUuencode a file.\n\n"
+ 	"Options:\n"
+ 	"\t-m\tuse base64 encoding as of RFC1521\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_WC
+ const char wc_usage[] =
+ 	"wc [OPTION]... [FILE]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrint line, word, and byte counts for each FILE, and a total line if\n"
+ 	"more than one FILE is specified.  With no FILE, read standard input.\n\n"
+ 	"Options:\n"
+ 	"\t-c\tprint the byte counts\n"
+ 	"\t-l\tprint the newline counts\n"
+ 
+ 	"\t-L\tprint the length of the longest line\n"
+ 	"\t-w\tprint the word counts\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_WHICH
+ const char which_usage[] =
+ 	"which [COMMAND ...]\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nLocates a COMMAND.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_WHOAMI
+ const char whoami_usage[] =
+ 	"whoami\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nPrints the user name associated with the current effective user id.\n"
+ #endif
+ 	;
+ #endif
+ 
+ #if defined BB_YES
+ const char yes_usage[] =
+ 	"yes [OPTION]... [STRING]...\n"
+ #ifndef BB_FEATURE_TRIVIAL_HELP
+ 	"\nRepeatedly outputs a line with all specified STRING(s), or `y'.\n"
+ #endif
+ 	;
+ #endif

@@ -121,6 +121,7 @@ The results of the analysis are the following three files:
       to the contents of files but only change their permissions; if such
       commits are not available in the repository, this file may be missing.
 
+```
 Usage: java -jar ComAn.jar [-i DIR] [-o DIR]
     -i <input_dir>     specify the directory containing the "diff files"
                        (commit information) as extracted by the ComEx.sh script
@@ -132,7 +133,7 @@ Usage: java -jar ComAn.jar [-i DIR] [-o DIR]
     -d                 display debug information [optional]
     -h                 print this text
     -w                 display additional warnings [optional]
-
+```
 
 
 ## [Com]mit [Vi]sualization                     

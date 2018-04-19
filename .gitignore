@@ -2,3 +2,4 @@ build/
 docs/
 *.class
 **/.Rproj.user/**
+/bin/

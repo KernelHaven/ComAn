@@ -1,0 +1,976 @@
+1999-12-23 22:46:10 +0000
+diff --git a/Changelog b/Changelog
+index 10e5923..4b5ac71 100644
+--- a/Changelog
++++ b/Changelog
+@@ -1,289 +1,290 @@
+ 0.40
+ 	* Added the -s option to du -beppu
+ 	* Fixed an embarrasing segfault in head	-beppu
+ 	* Fixed an bug in syslogd causing it to stop logging after 20 minutes. -erik
+ 	* New Apps: lsmod, rmmod -erik
+ 	* New Apps: fbset contributed by Randolph Chung <tausq@debian.org>.
+ 	* Fixed the embarrasing failure of the -p opition in the logger app. -erik
+ 	* Re-worked the whole source tree a bit so it will compile under glibc 2.0.7 
+ 	    with the 2.0.x Linux kernel.
+ 	* Added 'grep -q' thanks to a patch from "Konstantin Boldyshev" 
+ 	    <konst@voshod.com>.
++	* Implemented sort. -beppu
+ 
+ 	-Erik Andersen
+ 
+ 0.39 
+ 	* New Apps: ping, hostname, and mkfifo contributed by Randolph Chung
+ 	    <tausq@debian.org>.  3 items off the TODO list!
+ 	* I wrote free (just calls "cat /proc/meminfo").
+ 	* Added tail, based on tail from GNU textutils-1.19, but adjusted
+ 	    to suit my evil purposes.  Costs 6k.  I'll make it smaller sometime.
+ 	* on reboot, init called 'umount -a -n', which caused errors
+ 	    when BB_MTAB was not enabled.  Changed to 'umount -a',
+ 	    which does the right thing.
+ 	* init will now try to run /sbin/getty if it is present (for easy
+ 	    integration with the about-to-be-released tinylogin.)
+ 	* kill now behaves itself properly, added 'kill -l' to list signals
+ 	* 'ls -l' was failing on long directories, since my_getid was leaking 
+ 	    one file descriptor per file.  Oops.
+ 	* Fixed rebooting from init.  I'd accidently left some debugging code in
+ 	    which blocked reboots.
+ 	* Fixed reboot, halt (and added poweroff) such that they handle it when
+ 	    init is not at PID 1 (like when running in an initrd).
+ 	* Added a prelinary du implementation.  Some parameter parsing
+ 	    stuff still needs to be added. -beppu (John Beppu <beppu@lineo.com>)
+ 	* Implemented tee.  -beppu
+ 	* Implemented head. -beppu
+ 
+ 	-Erik Andersen, Dec 10, 1999
+ 
+ 0.38
+ 	* Fixed a segfault in 'umount -a' when a badly formed /etc/fstab
+ 	    file existed.
+ 	* df will not exit on error, but will stat all mounted filesystems.
+ 	* Fixed tar so uid/gid/permissions on extracted tarballs will be correct.
+ 	* Fixed find -name so it properly uses shell wildcard patterns 
+ 	    (i.e. `*', `?', and `[]') instead of regular expressions, which
+ 	    was causing some confusing and unexpected behavior.
+ 	* Added klogd to syslogd, so now the log will contain both system and
+ 	    kernel messages.
+ 	* syslogd now creates the /dev/log socket to make sure it is there, and
+ 	    is actually a socket with the right permissions.
+ 	* I've taken a first step to making busybox not need the /proc 
+ 	    filesystem.  Most apps don't need it.  Those that _require_ it, 
+ 	    will complain if you enable them when you disable 
+ 	    BB_FEATURE_USE_PROCFS.
+ 	   
+ 	-Erik Andersen, Dec 5, 1999
+ 
+ 0.37
+ 	* Wrote a micro syslogd, and a logger util (to log things to the syslog
+ 	    from the command line or scripts)  With both compiled in, costs 4k.
+ 	* Fixed 'make install' so symlinks are installed in their proper locations.
+ 	* Changed the build system slightly so that features can now be enabled
+ 	    or disabled from the busybox.defs.h header file, without trying to 
+ 	    compile in a source file named after that featue (unless that file exists).
+ 	* Several options are now moved into busybox.defs.h
+ 	* Now 'rm -R' and 'rm -r' both work.
+ 	* dd now properly handles input beyond 1 block from stdin.
+ 	* Fixed a bug where tar unpacked everything a directories. Moved some code 
+ 	    from createPath into mkdir where it belonged, thereby making tar work properly.
+ 	* Fixed an off-by-one bug in cat.  Given a list of file it wouldn't cat out the
+ 	    last file in the list.
+ 	* Fixed 'ls -ln' so numeric group/uid are presented properly, and fixed 'ls -l' 
+ 	    so when uid/gid is not in /etc/{passwd,group} the numeric group/uid are 
+ 	    presented properly.  
+ 	* Also added a TODO.
+ 
+ 
+ 	-Erik Andersen, Nov 25, 1999
+ 
+ 0.36
+ 	* fixed dd so it properly defaults to stdin and stdout when no 
+ 	    if= and of= are set (fix thanks to Eric Delaunay).
+ 	* Don't try to close the file descriptor of a pipein tar. (fix also from
+ 	    Eric Delaunay).
+ 	* Made createPath be quiet (again thanks to Eric Delaunay).
+ 	* If BB_CONSOLE_CMD_IF_RC_SCRIPT_EXITS is defined, then whatever
+ 	    command you define it as will be run if the init script exits.
+ 	* Updated install.sh to make it more robust (thanks to Adam Di Carlo)
+ 	* NFS support added to mount by Eric Delaunay.  It costs 10k when compiled
+ 	    in, but that is still a big win for those that use NFS.
+ 	* Made 'rm -f' be silent for non-existant files (thanks to Eric Delaunay).
+ 	* changed zcat.c to gunzip.c.  It now obeys the principle of least surprise 
+ 	    and acts as god intended gunzip and zcat to act.  They answer --help and
+ 	    obey the '-c' flag.
+ 	* Fixed a bug in mv which caused it to not move files when the destination
+ 	    was a directory.
+ 	* Fixed a decimal-instead-of-octal bug causing mkdir to make directories
+ 	    with very wrong permissions.
+ 	* chmod would overwrite file permissions instead of modifying them.
+ 	    Now it properly modifies permissions.
+ 	* Init now sends warnings destined for the console to /dev/console to ensure
+ 	    they show up on whatever the active console it.  Otherwise important
+ 	    messages (for example that the system is rebooting) were not seen when
+ 	    switched to a different VT.
+ 
+ 	-Erik Andersen, Nov 17, 1999
+ 	
+ 0.35
+ 	* gzip now obeys the principle of least surprise and acts like god intended 
+ 	    (i.e. it accepts a file name, answers --help, and obeys the '-c' flag 
+ 	    and only then outputs to stdout).
+ 	* Fixed more.c to compile autowidth on sparc and set initial winsize 
+ 	    to 0,0 in case the TIOCGWINSZ ioctl fails.  Fix thanks to Eric Delaunay.
+ 	* Fixed tar so it now works as expected (it had TRUE/FALSE backwards)
+ 	* tar now accepts --help
+ 	* chmod, chown, and chgrp usage now works
+ 	* General usage (i.e. --help) cleanups for most apps
+ 	* umount now parses options correctly
+ 	* tar can now unpack tarballs containing device special files, 
+ 	    sockets, and fifos (though it can't pack them up) thanks 
+ 	    to Matt Porter.  Creating archives containing these is still
+ 	    left to the interested student.
+ 	* fixed up the license in more.c to properly point to Bruce Perens.
+ 
+ 	-Erik Andersen, Nov  11, 1999
+ 
+ 0.34
+ 	* ls -l now displays link names outside the current directory,
+ 	    Patch thanks to Eric Delaunay
+ 	* init now properly handles sparc serial consoles and does a
+ 	    better job of finding the real console device rather than using
+ 	    /dev/console which doesn't support job control. Patch also
+ 	    thanks to Eric Delaunay.
+ 	* more started to read from stdin after the last file was finished, and 
+ 	    options were not parsed correctly (fix thanks to Eric Delaunay).
+ 	* more will now use the terminal size if BB_FEATURE_AUTOWIDTH is on.
+ 	* rm wouldn't remove a symlink unless the symlink was valid.  This was
+ 	    a side effect of the busybox 0.32 recursiveAction() fix.  Things 
+ 	    should now work correctly.
+ 	* grep wouldn't grep stdin.  Now it does.
+ 	* sed wouldn't sed stdin.  Now it does.
+ 	* sed was appending a \n to the end of lines with replacements.
+ 	    Now it doesn't do that.
+ 	* ls -l now bypasses libc6 nss when displaying user/group names.
+ 	    Now uses my_getpwuid and my_getgrgid.
+ 
+ 	 -Erik Andersen, Nov  8, 1999
+ 
+ 0.33
+ 	* Fixed a bug where init could hang instead of rebooting.
+ 	* Removed some debugging noise from init.c
+ 	* Fixed ln so it works now (it was very broken).
+ 	* Fixed df so it won't segfault when there is no /etc/fstab,
+ 	* If BB_MTAB is not defined, df and mount will whine if /etc/fstab
+ 	    is not installed (since they cannot fixup "/dev/root" to 
+ 	    state the real root device name)
+ 	* merged some redundant code from mtab.c/df.c into utility.c
+ 
+ 	 -Erik Andersen, Nov  5, 1999
+ 
+ 0.32
+ 	* More changes -- many thanks to Lineo for paying me to work on
+ 	    busybox.  If you have any problems please let me know ASAP
+ 	    at andersen@lineo.com or andersee@debian.org
+ 	* usage() now prints the BusyBox version.  This will help folks
+ 	    realize that they are not in Kansas anymore.
+ 	* Fixed mkdir -m option so that it works.
+ 	* kill segfaulted w/o any arguments.  Now it doesn't do that.
+ 	* kill wasn't properly accepting signal names.  It does now.
+ 	* Added new apps chvt and deallocvt (I should probably add open)
+ 	* Major rewrite of init.c.  Code is now readable by mere mortals IMHO.
+ 	* Wrote sed -- weighs only 1.8k (5.8k with full regular expressions!).
+ 	* Fixed a stupid seg-fault in sync
+ 	* Fixed mount -- mount -a failed to parse and apply mount options
+ 	* Fixed umount -n (patch thanks to Matthew Grant <grantma@anathoth.gen.nz>)
+ 	* umount -a no longer umounts /proc
+ 	* Added BB_MTAB, allowing (at the cost of ~1.5k and the need for a rw /etc)
+ 	    folks to use a real /etc/mtab file instead of a symlink to /proc/mounts.
+ 	    mount, and umount will add/remove entries and df will now use /etc/mtab 
+ 	    if BB_MTAB is defined. 
+ 	* Fixed a nice bug in recursiveAction() which caused it to infinitely
+ 	    hunt through /proc/../fd/* creating new file descriptors if it
+ 	    followed the /dev/fd link over to /proc.  recursiveAction() now 
+ 	    lstat's the file when followLinks==FALSE so it won't follow links 
+ 	    as the name suggests.  Fix thanks to Matt Porter <porter@debian.org>.
+ 
+ 
+ 	 -Erik Andersen, Nov  4, 1999
+ 
+ 0.31
+ 	* I added a changelog for version 0.30. 
+ 	* adjusted find internals to make it smaller, and removed 
+ 	    some redundancy.
+ 	* Fixed a segfault in ps when /etc/passwd or /etc/group 
+ 	    are absent.  Now will warn you and carry on.
+ 	* Added in optional _real_ regular expression support (to be
+ 	    the basis for a future sed utility).  When compiled in
+ 	    it adds 3.9k, but makes grep much more capable.
+ 	* Checked out using nftw(3) for recursive stuff, but unfortunatly
+ 	    it wasn't supported before GNU libc 2.1, and some folks use
+ 	    glibc 2.0.7 since it is much smaller than that latest and greatest.
+ 
+ 	 -Erik Andersen, Oct 21, 1999
+ 
+ 0.30
+ 	Major changes -- lots of stuff rewritten. Many thanks to Lineo for
+ 	paying me to make these updates. If you have any problems with busybox, 
+ 	or notice any bugs -- please let me know so I can fix it.  These 
+ 	changes include:
+ 
+ 	Core Changes:
+ 	    * busybox can now invoke apps in two ways: via symlinks to the
+ 		busybox binary, and as 'busybox [function] [arguments]...'
+ 	    * When invoked as busybox, the list of currently compiled in 
+ 		functions is printed out (no this is not bloat -- the list
+ 		has to be there anyway to map invocation name to function).
+ 	    * busybox no longer parses command lines for apps or displays their
+ 		usage info.  Each app gets to handle (or not handle) this for
+ 		itself.
+ 	    * Eliminated monadic, dyadic, descend, block_device, and 
+ 		postprocess.  It was cumbersome to have so many programs
+ 		cobbled together in this way.  Without them, the app is much
+ 		more granular.
+ 	    * All shared code now lives in utility.c, and is properly
+ 		ifdef'ed to be only included for those apps requiring it.
+ 	    * Eliminated struct FileInfo (the basis of monadic, dyadic, etc)
+ 		so now each app has the function prototype of (da-dum):
+ 		    extern int foo_main(int argc, char** argv);
+ 		which speeds integration of new apps.
+ 	    * Adjusted the Makefile to make it easier to 
+ 		{en|dis}able debugging.
+ 	    * Changed default compiler optimization to -Os 
+ 		(optimize for smaller binaries).
+ 
+ 	App Changes:
+ 	    * To cope with the new app function prototype and the removal of
+ 		monadic, dyadic, etc, the following apps were re-written:
+ 		    * cat - Works same as always.
+ 		    * chgrp, chmod, chown - rewrite.  Combined into a single 
+ 			source file.  Absorbed patches from Enrique Zanardi <ezanard@debian.org>
+ 			that removes the dependency on libc6 libnss* libraries.
+ 		    * cp - Can now do 'cp -a' can can copy devices,
+ 			pipes, symlinks, as well as recursive or non-recursive dir copies.
+ 		    * fdflush - adjusted to remove dependancy on struct FileInfo.
+ 		    * find - Now includes some basic regexp matching 
+ 			which will be the basic of a future mini-sed.
+ 		    * ln - Same functionality.
+ 		    * mkdir - Added -p flag to feature set.
+ 		    * mv - rewrite.
+ 		    * rm - Added -f flag to feature set.
+ 		    * rmdir - Same functionality.
+ 		    * swapon, swapoff - Combined into a single binary. No longer
+ 			uses /etc/swaps.  swap{on|off} -a uses /etc/fstab instead.
+ 		    * touch - Same functionality.
+ 	    * date - adjusted with a patch from Matthew Grant <grantma@anathoth.gen.nz>
+ 		to accomodate glibc timezone support.  I then ripped out GNU getopt.
+ 	    * mkswap -- new version merged from util-linux.  Can now make >128Meg swaps.
+ 	    * Replaced the old and star, unstar, and tarcat with the tar 
+ 		implementation from sash.   Now tar behaves as god intended
+ 		it to (i.e. tar -xvf <file> and tar -cf <file> <dir> work).
+ 	    * dd -- rewritten.  Can with with files, stdin, stdout.
+ 	    * Added the following new apps:
+ 		    * loadfont -- added from debian boot floppies 
+ 		    * chroot -- added based on a patch from Paolo Molaro <lupus@lettere.unipd.it> 
+ 		    * grep -- I just wrote it.  Only matches simple strings
+ 		    * ps -- I just wrote it.  Has _no_ options at all, but works.
+ 		    * fsck_minix, mkfs_minix -- added from util-linux, but I ripped out
+ 			internationalization and such to make them smaller.
+ 		    * sfdisk -- Added from util-linux (minus internationalization and such).
+ 	    * Probably some other changes that I forgot to document...
+ 
+ 	 -Erik Andersen, Oct 20, 1999
+ 
+ 0.29	
+ 	This version was a messy pre-alpha.  stay away or it will bite you.
+ 	 -Erik Andersen, Sep 24, 1999
+ 	
+ 0.28	
+ 	mini-netcat (mnc) rewritten.
+ 	
+ 0.27
+ 	Mount now supports -a, and -t auto.
+ 	Mount now updates mtab correctly for 'ro'.
+ 	More checks screen rows size, outputs bytes percentage.
+ 	Printf added as module.
+ 0.26
+ 	Touch now creates files. -c option for no create.
+ 	
+diff --git a/coreutils/sort.c b/coreutils/sort.c
+index 127d683..0fe7bf9 100644
+--- a/coreutils/sort.c
++++ b/coreutils/sort.c
+@@ -1,309 +1,312 @@
+ /*
+  * Mini sort implementation for busybox
+  *
+  *
+  * Copyright (C) 1999 by Lineo, inc.
+  * Written by John Beppu <beppu@lineo.com>
+  *
+  * This program is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation; either version 2 of the License, or
+  * (at your option) any later version.
+  *
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  * General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+  *
+  */
+ 
+ #include "internal.h"
+ #include <sys/types.h>
+ #include <fcntl.h>
+ #include <dirent.h>
+ #include <stdio.h>
+ #include <errno.h>
+ 
+ static const char sort_usage[] =
+ "Usage: sort [OPTION]... [FILE]...\n\n"
+ ;
+ 
+ /* typedefs _______________________________________________________________ */
+ 
+ /* line node */
+ typedef struct Line {
+     char        *data;      /* line data */
+     struct Line *next;      /* pointer to next line node */
+ } Line;
+ 
+ /* singly-linked list of lines */
+ typedef struct {
+     int         len;        /* number of Lines */
+     Line        **sorted;   /* array fed to qsort */
+ 
+     Line        *head;      /* head of List */
+     Line        *current;   /* current Line */
+ } List;
+ 
+ /* comparison function */
+ typedef int (Compare)(const void *, const void *);
+ 
+ 
+ /* methods ________________________________________________________________ */
+ 
+ static const int max = 1024;
+ 
+ /* mallocate Line */
+ static Line *
+ line_alloc()
+ {
+     Line *self;
+     self = malloc(1 * sizeof(Line));
+     return self;
+ }
+ 
+ /* Initialize Line with string */
+ static Line *
+ line_init(Line *self, const char *string)
+ {
+     self->data = malloc((strlen(string) + 1) * sizeof(char));
+     if (self->data == NULL) { return NULL; }
+     strcpy(self->data, string);
+     self->next = NULL;
+     return self;
+ }
+ 
+ /* Construct Line from FILE* */
+ static Line *
+ line_newFromFile(FILE *src)
+ {
+     char    buffer[max];
+     Line    *self;
+ 
+     if (fgets(buffer, max, src)) {
+ 	self = line_alloc();
+ 	if (self == NULL) { return NULL; }
+ 	line_init(self, buffer);
+ 	return self;
+     }
+     return NULL;
+ }
+ 
+ /* Line destructor */
+ static Line *
+ line_release(Line *self)
+ {
+     if (self->data) { 
+ 	free(self->data); 
+ 	free(self);
+     }
+     return self;
+ }
+ 
+ 
+ /* Comparison */
+ 
+ /* ascii order */
+ static int
+ compare_ascii(const void *a, const void *b)
+ {
+     Line **doh;
+     Line *x, *y;
+ 
+     doh = (Line **) a;
+     x   = *doh;
+     doh = (Line **) b;
+     y   = *doh;
+ 
+     // fprintf(stdout, "> %p: %s< %p: %s", x, x->data, y, y->data);
+     return strcmp(x->data, y->data);
+ }
+ 
+ /* numeric order */
+ static int
+ compare_numeric(const void *a, const void *b)
+ {
+     Line    **doh;
+     Line    *x, *y;
+     int	    xint, yint;
+ 
+     doh  = (Line **) a;
+     x    = *doh;
+     doh  = (Line **) b;
+     y    = *doh;
+ 
+     xint = strtoul(x->data, NULL, 10);
+     yint = strtoul(y->data, NULL, 10);
+ 
+     return (xint - yint);
+ }
+ 
+ 
+ /* List */
+ 
+ /* */
+ static List *
+ list_init(List *self)
+ {
+     self->len     = 0;
+     self->sorted  = NULL;
+     self->head    = NULL;
+     self->current = NULL;
+     return self;
+ }
+ 
+ /* for simplicity, the List gains ownership of the line */
+ static List *
+ list_insert(List *self, Line *line)
+ {
+     if (line == NULL) { return NULL; }
+ 
+     /* first insertion */
+     if (self->head == NULL) {
+ 	self->head    = line;
+ 	self->current = line;
+ 
+     /* all subsequent insertions */
+     } else {
+ 	self->current->next = line; 
+ 	self->current       = line;
+     }
+     self->len++;
+     return self;
+ }
+ 
+ /* order the list according to compare() */
+ static List *
+ list_sort(List *self, Compare *compare)
+ {
+     int	    i;
+     Line    *line;
+ 
+     /* mallocate array of Line*s */
+     self->sorted = (Line **) malloc(self->len * sizeof(Line*));
+     if (self->sorted == NULL) { return NULL; }
+ 
+     /* fill array w/ List's contents */
+     i = 0;
+     line = self->head;
+     while (line) {
+ 	self->sorted[i++] = line;
+ 	line = line->next;
+     }
+ 
+     /* apply qsort */
+     qsort(self->sorted, self->len, sizeof(Line*), compare);
+     return self;
+ }
+ 
+ /* precondition:  list must be sorted */
+ static List *
+ list_writeToFile(List *self, FILE* dst)
+ {
+     int i;
+     Line **line = self->sorted;
+ 
+     if (self->sorted == NULL) { return NULL; }
+     for (i = 0; i < self->len; i++) {
+ 	fprintf(dst, "%s", line[i]->data);
+     }
+     return self;
+ }
+ 
+ /* deallocate */
+ static void
+ list_release(List *self)
+ {
+     Line *i;
+     Line *die;
+ 
+     i = self->head;
+     while (i) {
+ 	die = i;
+ 	i = die->next;
+ 	line_release(die);
+     }
+ }
+ 
+ 
+ /*
+  * I need a list
+  * to insert lines into
+  * then I need to sort this list
+  * and finally print it
+  */
+ 
+ int 
+ sort_main(int argc, char **argv)
+ {
+     int	    i;
+     char    opt;
+     List    list;
+     Line    *l;
+     Compare *compare;
+ 
+     /* init */
+     compare = compare_ascii;
+     list_init(&list);
+ 
+     /* parse argv[] */
+     for (i = 1; i < argc; i++) {
+ 	if (argv[i][0] == '-') {
+ 	    opt = argv[i][1];
+ 	    switch (opt) {
+ 		case 'g':
+-		    compare = compare_numeric;
++		    /* what's the diff between -g && -n? */
++		    compare = compare_numeric;	    
+ 		    break;
+ 		case 'h':
+ 		    usage(sort_usage);
+ 		    break;
++		case 'n':
++		    /* what's the diff between -g && -n? */
++		    compare = compare_numeric;	    
++		    break;
++		case 'r':
++		    /* reverse */
++		    break;
+ 		default:
+ 		    fprintf(stderr, "sort: invalid option -- %c\n", opt);
+ 		    usage(sort_usage);
+ 	    }
+ 	} else {
+ 	    break;
+ 	}
+     }
+ 
+-    /* go through remaining args (if any) */
++    /* this could be factored better */
++
++    /* work w/ stdin */
+     if (i >= argc) {
+ 	while ( (l = line_newFromFile(stdin))) {
+ 	    list_insert(&list, l);
+ 	}
+ 	list_sort(&list, compare);
+ 	list_writeToFile(&list, stdout);
+ 	list_release(&list);
++
++    /* work w/ what's left in argv[] */
+     } else {
++	FILE	*src;
++
+ 	for ( ; i < argc; i++) {
++	    src = fopen(argv[i], "r");
++	    if (src == NULL) { break; }
++	    while ( (l = line_newFromFile(src))) {
++		list_insert(&list, l);
++	    }
++	    fclose(src);
+ 	}
++	list_sort(&list, compare);
++	list_writeToFile(&list, stdout);
++	list_release(&list);
+     }
+ 
+     exit(0);
+ }
+ 
+-/* $Id: sort.c,v 1.7 1999/12/23 00:02:49 beppu Exp $ */
+-/* 
+- * $Log: sort.c,v $
+- * Revision 1.7  1999/12/23 00:02:49  beppu
+- * 	implemented numeric sort (sort -g)
+- *
+- * Revision 1.6  1999/12/22 23:02:12  beppu
+- * 	oops..  qsort(2) misunderstanding on my part.
+- * 	it's ok, now.
+- *
+- * Revision 1.5  1999/12/22 22:27:01  beppu
+- * playing w/ $Log: sort.c,v $
+- * playing w/ Revision 1.7  1999/12/23 00:02:49  beppu
+- * playing w/ 	implemented numeric sort (sort -g)
+- * playing w/
+- * playing w/ Revision 1.6  1999/12/22 23:02:12  beppu
+- * playing w/ 	oops..  qsort(2) misunderstanding on my part.
+- * playing w/ 	it's ok, now.
+- * playing w/
+- *
+- */
++/* $Id: sort.c,v 1.8 1999/12/23 22:46:10 beppu Exp $ */
+diff --git a/sort.c b/sort.c
+index 127d683..0fe7bf9 100644
+--- a/sort.c
++++ b/sort.c
+@@ -1,309 +1,312 @@
+ /*
+  * Mini sort implementation for busybox
+  *
+  *
+  * Copyright (C) 1999 by Lineo, inc.
+  * Written by John Beppu <beppu@lineo.com>
+  *
+  * This program is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation; either version 2 of the License, or
+  * (at your option) any later version.
+  *
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  * General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+  *
+  */
+ 
+ #include "internal.h"
+ #include <sys/types.h>
+ #include <fcntl.h>
+ #include <dirent.h>
+ #include <stdio.h>
+ #include <errno.h>
+ 
+ static const char sort_usage[] =
+ "Usage: sort [OPTION]... [FILE]...\n\n"
+ ;
+ 
+ /* typedefs _______________________________________________________________ */
+ 
+ /* line node */
+ typedef struct Line {
+     char        *data;      /* line data */
+     struct Line *next;      /* pointer to next line node */
+ } Line;
+ 
+ /* singly-linked list of lines */
+ typedef struct {
+     int         len;        /* number of Lines */
+     Line        **sorted;   /* array fed to qsort */
+ 
+     Line        *head;      /* head of List */
+     Line        *current;   /* current Line */
+ } List;
+ 
+ /* comparison function */
+ typedef int (Compare)(const void *, const void *);
+ 
+ 
+ /* methods ________________________________________________________________ */
+ 
+ static const int max = 1024;
+ 
+ /* mallocate Line */
+ static Line *
+ line_alloc()
+ {
+     Line *self;
+     self = malloc(1 * sizeof(Line));
+     return self;
+ }
+ 
+ /* Initialize Line with string */
+ static Line *
+ line_init(Line *self, const char *string)
+ {
+     self->data = malloc((strlen(string) + 1) * sizeof(char));
+     if (self->data == NULL) { return NULL; }
+     strcpy(self->data, string);
+     self->next = NULL;
+     return self;
+ }
+ 
+ /* Construct Line from FILE* */
+ static Line *
+ line_newFromFile(FILE *src)
+ {
+     char    buffer[max];
+     Line    *self;
+ 
+     if (fgets(buffer, max, src)) {
+ 	self = line_alloc();
+ 	if (self == NULL) { return NULL; }
+ 	line_init(self, buffer);
+ 	return self;
+     }
+     return NULL;
+ }
+ 
+ /* Line destructor */
+ static Line *
+ line_release(Line *self)
+ {
+     if (self->data) { 
+ 	free(self->data); 
+ 	free(self);
+     }
+     return self;
+ }
+ 
+ 
+ /* Comparison */
+ 
+ /* ascii order */
+ static int
+ compare_ascii(const void *a, const void *b)
+ {
+     Line **doh;
+     Line *x, *y;
+ 
+     doh = (Line **) a;
+     x   = *doh;
+     doh = (Line **) b;
+     y   = *doh;
+ 
+     // fprintf(stdout, "> %p: %s< %p: %s", x, x->data, y, y->data);
+     return strcmp(x->data, y->data);
+ }
+ 
+ /* numeric order */
+ static int
+ compare_numeric(const void *a, const void *b)
+ {
+     Line    **doh;
+     Line    *x, *y;
+     int	    xint, yint;
+ 
+     doh  = (Line **) a;
+     x    = *doh;
+     doh  = (Line **) b;
+     y    = *doh;
+ 
+     xint = strtoul(x->data, NULL, 10);
+     yint = strtoul(y->data, NULL, 10);
+ 
+     return (xint - yint);
+ }
+ 
+ 
+ /* List */
+ 
+ /* */
+ static List *
+ list_init(List *self)
+ {
+     self->len     = 0;
+     self->sorted  = NULL;
+     self->head    = NULL;
+     self->current = NULL;
+     return self;
+ }
+ 
+ /* for simplicity, the List gains ownership of the line */
+ static List *
+ list_insert(List *self, Line *line)
+ {
+     if (line == NULL) { return NULL; }
+ 
+     /* first insertion */
+     if (self->head == NULL) {
+ 	self->head    = line;
+ 	self->current = line;
+ 
+     /* all subsequent insertions */
+     } else {
+ 	self->current->next = line; 
+ 	self->current       = line;
+     }
+     self->len++;
+     return self;
+ }
+ 
+ /* order the list according to compare() */
+ static List *
+ list_sort(List *self, Compare *compare)
+ {
+     int	    i;
+     Line    *line;
+ 
+     /* mallocate array of Line*s */
+     self->sorted = (Line **) malloc(self->len * sizeof(Line*));
+     if (self->sorted == NULL) { return NULL; }
+ 
+     /* fill array w/ List's contents */
+     i = 0;
+     line = self->head;
+     while (line) {
+ 	self->sorted[i++] = line;
+ 	line = line->next;
+     }
+ 
+     /* apply qsort */
+     qsort(self->sorted, self->len, sizeof(Line*), compare);
+     return self;
+ }
+ 
+ /* precondition:  list must be sorted */
+ static List *
+ list_writeToFile(List *self, FILE* dst)
+ {
+     int i;
+     Line **line = self->sorted;
+ 
+     if (self->sorted == NULL) { return NULL; }
+     for (i = 0; i < self->len; i++) {
+ 	fprintf(dst, "%s", line[i]->data);
+     }
+     return self;
+ }
+ 
+ /* deallocate */
+ static void
+ list_release(List *self)
+ {
+     Line *i;
+     Line *die;
+ 
+     i = self->head;
+     while (i) {
+ 	die = i;
+ 	i = die->next;
+ 	line_release(die);
+     }
+ }
+ 
+ 
+ /*
+  * I need a list
+  * to insert lines into
+  * then I need to sort this list
+  * and finally print it
+  */
+ 
+ int 
+ sort_main(int argc, char **argv)
+ {
+     int	    i;
+     char    opt;
+     List    list;
+     Line    *l;
+     Compare *compare;
+ 
+     /* init */
+     compare = compare_ascii;
+     list_init(&list);
+ 
+     /* parse argv[] */
+     for (i = 1; i < argc; i++) {
+ 	if (argv[i][0] == '-') {
+ 	    opt = argv[i][1];
+ 	    switch (opt) {
+ 		case 'g':
+-		    compare = compare_numeric;
++		    /* what's the diff between -g && -n? */
++		    compare = compare_numeric;	    
+ 		    break;
+ 		case 'h':
+ 		    usage(sort_usage);
+ 		    break;
++		case 'n':
++		    /* what's the diff between -g && -n? */
++		    compare = compare_numeric;	    
++		    break;
++		case 'r':
++		    /* reverse */
++		    break;
+ 		default:
+ 		    fprintf(stderr, "sort: invalid option -- %c\n", opt);
+ 		    usage(sort_usage);
+ 	    }
+ 	} else {
+ 	    break;
+ 	}
+     }
+ 
+-    /* go through remaining args (if any) */
++    /* this could be factored better */
++
++    /* work w/ stdin */
+     if (i >= argc) {
+ 	while ( (l = line_newFromFile(stdin))) {
+ 	    list_insert(&list, l);
+ 	}
+ 	list_sort(&list, compare);
+ 	list_writeToFile(&list, stdout);
+ 	list_release(&list);
++
++    /* work w/ what's left in argv[] */
+     } else {
++	FILE	*src;
++
+ 	for ( ; i < argc; i++) {
++	    src = fopen(argv[i], "r");
++	    if (src == NULL) { break; }
++	    while ( (l = line_newFromFile(src))) {
++		list_insert(&list, l);
++	    }
++	    fclose(src);
+ 	}
++	list_sort(&list, compare);
++	list_writeToFile(&list, stdout);
++	list_release(&list);
+     }
+ 
+     exit(0);
+ }
+ 
+-/* $Id: sort.c,v 1.7 1999/12/23 00:02:49 beppu Exp $ */
+-/* 
+- * $Log: sort.c,v $
+- * Revision 1.7  1999/12/23 00:02:49  beppu
+- * 	implemented numeric sort (sort -g)
+- *
+- * Revision 1.6  1999/12/22 23:02:12  beppu
+- * 	oops..  qsort(2) misunderstanding on my part.
+- * 	it's ok, now.
+- *
+- * Revision 1.5  1999/12/22 22:27:01  beppu
+- * playing w/ $Log: sort.c,v $
+- * playing w/ Revision 1.7  1999/12/23 00:02:49  beppu
+- * playing w/ 	implemented numeric sort (sort -g)
+- * playing w/
+- * playing w/ Revision 1.6  1999/12/22 23:02:12  beppu
+- * playing w/ 	oops..  qsort(2) misunderstanding on my part.
+- * playing w/ 	it's ok, now.
+- * playing w/
+- *
+- */
++/* $Id: sort.c,v 1.8 1999/12/23 22:46:10 beppu Exp $ */

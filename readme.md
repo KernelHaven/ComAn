@@ -176,6 +176,19 @@ Usage: bash Reproduction.sh [-t SPL] [-r DIR] [-o DIR]
     -h                          show this message
 ```
 
-[1] Christian Kröher and Klaus Schmid. A Commit-Bases Analysis of Software
+## Publications
+The following publications use [a particular version of the ComAn tool-set](https://github.com/SSE-LinuxAnalysis/ComAn/releases/tag/1.0-pub) to
+identify, analyze, and evaluate the evolution of Software Product Lines (SPLs). In particular,
+we are interested in the intensity (the frequency and amount) of changes affecting the variability
+information of such SPLs. Based on the results provided by ComAn, we derive opportunities for improving
+the current state of SPL analyses, e.g., by explicitly considering information about the actual changes
+during SPL evolution.
+
+
+[1] Christian Kröher, Lea Gerling and Klaus Schmid. Identifying the Intensity of Variability Changes in
+    Software Product Line Evolution. In Proceedings of the 22nd International Systems and Software Product Line
+    Conference, 2018.
+    
+[2] Christian Kröher and Klaus Schmid. A Commit-Bases Analysis of Software
     Product Line Evolution: Two Case Studies. Report No. 2/2017, SSE 2/17/E,
     2017.

@@ -189,6 +189,6 @@ during SPL evolution.
     Software Product Line Evolution. In Proceedings of the 22nd International Systems and Software Product Line
     Conference, 2018.
     
-[2] Christian Kröher and Klaus Schmid. A Commit-Bases Analysis of Software
+[2] [Christian Kröher and Klaus Schmid. A Commit-Bases Analysis of Software
     Product Line Evolution: Two Case Studies. Report No. 2/2017, SSE 2/17/E,
-    2017.
+    2017.](https://sse.uni-hildesheim.de/media/fb4/informatik/AG_SSE/PDFs/publications/SPL-Evolution/TR-Evolution.pdf)
